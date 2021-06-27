@@ -1,0 +1,149 @@
+@import "./import";
+@import "./mixin";
+@import "./vars";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none !important;
+  font-family: Poppins;
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: none;
+}
+::-webkit-scrollbar-thumb {
+  background: $themeColor;
+}
+
+a,
+button {
+  user-select: none !important;
+}
+
+button * {
+  text-transform: capitalize !important;
+  font-family: $font !important;
+}
+
+body {
+  background: $bgColor;
+  color: #fff;
+  overflow-x: hidden !important;
+}
+
+h1,
+h2 {
+  font-weight: 100;
+}
+
+.container {
+  width: 1000px;
+  margin: auto;
+}
+
+// the nav bar over the whole application
+nav {
+  @include flex(space-around, center, stretch);
+  min-height: 10vh;
+  padding: 10px 0px;
+  background: $bgColor;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
+
+  h2 {
+    font-weight: 100;
+    a {
+      color: $themeColor;
+      font-family: $font;
+    }
+  }
+
+  .navLinks {
+    @include flex(space-around, center, stretch);
+    li {
+      list-style: none;
+      margin: 0px 10px;
+      a {
+        color: #fff;
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+
+  .bars {
+    display: none;
+  }
+
+  .nav_active {
+    color: $themeColor !important;
+  }
+}
+
+// for the small laptops and iPad's
+@media screen and (max-width: 1024px) {
+  .container {
+    width: 700px;
+  }
+}
+
+// for the mobile and tablets
+@media screen and (max-width: 768px) {
+  * {
+    cursor: default !important;
+  }
+
+  .container {
+    width: 95%;
+  }
+
+  // the nav bar
+  nav {
+    .bars {
+      display: block;
+      z-index: 11;
+      .line {
+        width: 40px;
+        height: 2px;
+        background: #fff;
+        margin: 5px 0px;
+        transition: 0.3s;
+      }
+    }
+
+    .navLinks {
+      @include flex(center, center, column);
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: 100vw;
+      background: $bgSecondary;
+      transform: translate(-100%);
+      transition: 0.3s ease;
+      li {
+        margin: 10px 0px;
+      }
+    }
+
+    .nav-active {
+      transform: translate(0) !important;
+    }
+    .toggle .line1 {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+    .toggle .line2 {
+      opacity: 0;
+    }
+    .toggle .line3 {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+  }
+}

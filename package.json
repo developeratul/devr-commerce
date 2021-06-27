@@ -1,0 +1,33 @@
+{
+  "name": "devr-com",
+  "version": "1.0.0",
+  "description": "A full-stack e-commerce application",
+  "main": "app.js",
+  "scripts": {
+    "server": "nodemon app.js",
+    "start": "node app.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
+    "setup": "npm install && cd client && npm install"
+  },
+  "keywords": [
+    "devr-com",
+    "e-commerce site",
+    "website",
+    "Full stack application"
+  ],
+  "author": "Ratul (devR)",
+  "license": "ISC",
+  "repository": {
+    "url": "https://github.com/ratul-devR/devr-commerce"
+  },
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "cloudinary": "^1.26.1",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.15"
+  }
+}

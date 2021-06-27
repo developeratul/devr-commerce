@@ -1,0 +1,296 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:regular,italic);
+@import url(https://fonts.googleapis.com/css?family=Josefin+Sans:regular);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none !important;
+  font-family: Poppins;
+  text-decoration: none;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7976fc;
+}
+
+a,
+button {
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+      -ms-user-select: none !important;
+          user-select: none !important;
+}
+
+button * {
+  text-transform: capitalize !important;
+  font-family: Josefin Sans !important;
+}
+
+body {
+  background: #0d1219;
+  color: #fff;
+  overflow-x: hidden !important;
+}
+
+h1,
+h2 {
+  font-weight: 100;
+}
+
+.container {
+  width: 1000px;
+  margin: auto;
+}
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: stretch;
+  min-height: 10vh;
+  padding: 10px 0px;
+  background: #0d1219;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+nav h2 {
+  font-weight: 100;
+}
+nav h2 a {
+  color: #7976fc;
+  font-family: Josefin Sans;
+}
+nav .navLinks {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: stretch;
+}
+nav .navLinks li {
+  list-style: none;
+  margin: 0px 10px;
+}
+nav .navLinks li a {
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+nav .bars {
+  display: none;
+}
+nav .nav_active {
+  color: #7976fc !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .container {
+    width: 700px;
+  }
+}
+@media screen and (max-width: 768px) {
+  * {
+    cursor: default !important;
+  }
+
+  .container {
+    width: 95%;
+  }
+
+  nav .bars {
+    display: block;
+    z-index: 11;
+  }
+  nav .bars .line {
+    width: 40px;
+    height: 2px;
+    background: #fff;
+    margin: 5px 0px;
+    transition: 0.3s;
+  }
+  nav .navLinks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 100vw;
+    background: #1a2634;
+    transform: translate(-100%);
+    transition: 0.3s ease;
+  }
+  nav .navLinks li {
+    margin: 10px 0px;
+  }
+  nav .nav-active {
+    transform: translate(0) !important;
+  }
+  nav .toggle .line1 {
+    transform: rotate(-45deg) translate(-5px, 6px);
+  }
+  nav .toggle .line2 {
+    opacity: 0;
+  }
+  nav .toggle .line3 {
+    transform: rotate(45deg) translate(-5px, -6px);
+  }
+}
+.register_page {
+  height: 90vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: stretch;
+}
+.register_page .register_rules {
+  flex: 1;
+  height: 100%;
+  background: url(../../assets/img/register_form_rules_bg.jpg);
+  background-size: cover;
+  background-position: center;
+  padding: 30px 0px;
+  overflow-y: scroll;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: stretch;
+}
+.register_page .register_rules .register_rule_container {
+  width: 80%;
+  max-width: 600px;
+  box-shadow: 0 0 10px #7976fc;
+  -webkit-backdrop-filter: blur(7px);
+          backdrop-filter: blur(7px);
+  padding: 30px 10px;
+  border-radius: 5px;
+}
+.register_page .register_rules .register_rule_container .rule_header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.register_page .register_rules .register_rule_container .rule_header h1,
+.register_page .register_rules .register_rule_container .rule_header h3 {
+  font-family: Josefin Sans;
+}
+.register_page .register_rules .register_rule_container .rule_header h1 {
+  margin-bottom: 5px;
+}
+.register_page .register_rules .register_rule_container .rule_list li {
+  list-style: inside decimal;
+  padding: 10px 0px;
+  font-family: Josefin Sans;
+}
+.register_page .register_form {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: stretch;
+  padding: 30px 0px;
+  overflow-y: scroll;
+}
+.register_page .register_form .form_container {
+  padding: 30px 10px;
+  background: #1a2634;
+  width: 80%;
+  max-width: 600px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #7976fc;
+}
+.register_page .register_form .form_container h1 {
+  font-family: Josefin Sans;
+  text-align: center;
+  color: #7976fc;
+  margin-bottom: 20px;
+}
+.register_page .register_form .form_container .form .single_field {
+  width: 90%;
+  margin: 5px auto;
+}
+.register_page .register_form .form_container .form .single_field input,
+.register_page .register_form .form_container .form .single_field select,
+.register_page .register_form .form_container .form .single_field button {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #1a2634;
+  border-radius: 5px;
+  background: #fff;
+}
+.register_page .register_form .form_container .form .single_field input:focus,
+.register_page .register_form .form_container .form .single_field select:focus {
+  border-color: #7976fc;
+}
+.register_page .register_form .form_container .form .single_field button {
+  border: none;
+  font-size: 1.1rem;
+  background: #7976fc;
+  color: #fff;
+}
+.register_page .register_form .form_container .form .form_footer {
+  margin-top: 20px;
+}
+.register_page .register_form .form_container .form .form_footer p {
+  text-align: center;
+  font-weight: 100;
+  letter-spacing: 0.5px;
+}
+.register_page .register_form .form_container .form .form_footer p a {
+  color: #7976fc;
+}
+
+@media screen and (max-width: 1024px) {
+  .register_page .register_rules {
+    flex: 1;
+  }
+  .register_page .register_rules .register_rule_container {
+    width: 95%;
+  }
+  .register_page .register_form .form_container {
+    width: 95%;
+  }
+  .register_page .register_form .form_container .form .single_field {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .register_page {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: stretch;
+    align-items: stretch;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  .register_page .register_rules {
+    flex: auto;
+    height: auto;
+    background-attachment: fixed;
+  }
+  .register_page .register_rules .register_rule_container .rule_header h1 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  .register_page .register_form {
+    flex: auto;
+    height: auto;
+  }
+}/*# sourceMappingURL=register.css.map */
