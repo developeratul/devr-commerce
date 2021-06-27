@@ -1,11 +1,12 @@
 import { combineReducers, createStore } from "redux";
 
-function reducer(state = {}, action) {
-  return state;
-}
+// reducers
+import authReducer from "./reducers/authReducer";
+
+const rootReducer = { authReducer };
 
 const store = createStore(
-  combineReducers({ reducer }),
+  combineReducers(rootReducer),
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

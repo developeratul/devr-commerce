@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import validator from "validator";
 import callApi from "../../lib/callApi";
+import { useHistory } from "react-router-dom";
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -15,15 +16,31 @@ const Form = () => {
     phone: "",
   });
   const [countryData, setCountryData] = useState([]);
+  const history = useHistory();
 
   // for registering a user
   const registerUser = async () => {
+    const { name, email, country, phone, password } = formData;
+
     try {
-      const api = await callApi("/get_auth/register", "POST", {
-        "Content-Type": "application/json",
+      const api = await callApi("/get_auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, country, phone, password }),
       });
 
-      toast.dark(api.body.message);
+      const { body, status } = api;
+
+      if (status === 200) {
+        history.push("/");
+        toast.dark(body.message);
+      } else if (status === 403) {
+        toast.error(body.message);
+      } else if (status === 500) {
+        toast.error(body.message);
+      }
     } catch (err) {
       console.log(err);
     }

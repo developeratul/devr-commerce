@@ -5,9 +5,6 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const mongoose = require("mongoose");
 
-// dependencies and configs
-const cloudinary = require("./cloudinary");
-
 // middlewares
 const { notFoundHandler, errorHandler } = require("./middlewares/errorHandler");
 
