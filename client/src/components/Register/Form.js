@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import validator from "validator";
-import callApi from "../../lib/callApi";
 import { useHistory } from "react-router-dom";
 
 const Form = () => {
@@ -14,24 +13,35 @@ const Form = () => {
     conPass: "",
     country: "",
     phone: "",
+    isSeller: "",
   });
   const [countryData, setCountryData] = useState([]);
   const history = useHistory();
 
   // for registering a user
   const registerUser = async () => {
-    const { name, email, country, phone, password } = formData;
+    const { name, email, country, phone, password, isSeller } = formData;
 
     try {
-      const api = await callApi("/get_auth/register", {
+      const res = await fetch("/get_auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ name, email, country, phone, password }),
+        credentials: "include",
+        body: JSON.stringify({
+          name,
+          email,
+          country,
+          phone,
+          password,
+          isSeller,
+        }),
       });
 
-      const { body, status } = api;
+      const body = await res.json();
+
+      const { status } = res;
 
       if (status === 200) {
         history.push("/");
@@ -43,6 +53,12 @@ const Form = () => {
       }
     } catch (err) {
       console.log(err);
+
+      if (err.message) {
+        toast.error(err.message);
+      } else {
+        toast.error(err);
+      }
     }
   };
 
@@ -169,6 +185,20 @@ const Form = () => {
               name="phone"
               value={formData.phone}
             />
+          </div>
+
+          <div className="single_field">
+            <select
+              name="isSeller"
+              onChange={HandleInputChange}
+              value={formData.isSeller}
+            >
+              <option value="" disabled>
+                Would you like to be a seller?
+              </option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
           </div>
 
           <div className="single_field">

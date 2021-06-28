@@ -1,10 +1,13 @@
 import { useRef } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Nav = () => {
   const burgerIconRef = useRef();
   const listNavRef = useRef();
+  const { user, isAuthenticated } = useSelector((state) => state.authReducer);
 
+  // for toggling the nav in mobile devices
   function ToggleNav() {
     const burger = burgerIconRef.current;
     const listNav = listNavRef.current;
@@ -26,17 +29,24 @@ const Nav = () => {
           </NavLink>
         </li>
 
-        <li>
-          <NavLink activeClassName="nav_active" to="/login">
-            Login
-          </NavLink>
-        </li>
+        {/* if the user is authenticated, login and register button will not be shown */}
+        {isAuthenticated ? (
+          <li>{user.name}</li>
+        ) : (
+          <>
+            <li>
+              <NavLink activeClassName="nav_active" to="/login">
+                Login
+              </NavLink>
+            </li>
 
-        <li>
-          <NavLink activeClassName="nav_active" to="/register">
-            Register
-          </NavLink>
-        </li>
+            <li>
+              <NavLink activeClassName="nav_active" to="/register">
+                Register
+              </NavLink>
+            </li>
+          </>
+        )}
       </ul>
 
       <div className="bars" ref={burgerIconRef} onClick={ToggleNav}>

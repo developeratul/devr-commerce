@@ -5,9 +5,16 @@ module.exports = {
   // * the registration controller
   registerUser: async function (req, res) {
     try {
-      const { name, email, password, phone, country } = req.body;
+      const { name, email, password, phone, country, isSeller } = req.body;
 
-      const newUser = new User({ name, email, password, country, phone });
+      const newUser = new User({
+        name,
+        email,
+        password,
+        country,
+        phone,
+        isSeller: isSeller === "true" ? true : false,
+      });
 
       const userExists = await User.findOne({ email });
 
@@ -27,10 +34,11 @@ module.exports = {
         const token = await newUser.generateToken();
         res.cookie("auth", token, {
           expires: new Date().now + 25892000000,
-          secret: process.env.COOKIE_SECRET,
-          signed: true,
+          maxAge: 25892000000,
         });
 
+        res.set("Access-Control-Expose-Headers", "Set-Cookie");
+        res.set("withCredentials", true);
         res.status(200).json({ message: "Registration Successful" });
       }
     } catch (err) {
@@ -39,6 +47,15 @@ module.exports = {
       } else {
         res.status(500).json({ message: err });
       }
+    }
+  },
+
+  // * for checking if the user is authenticated
+  checkAuthController: function (req, res) {
+    try {
+      res.send(req.user);
+    } catch (err) {
+      res.send(err);
     }
   },
 };

@@ -18,7 +18,8 @@
       width: 80%;
       max-width: 600px;
       box-shadow: 0 0 10px $themeColor;
-      backdrop-filter: blur(7px);
+      background: #2e2e2e34;
+      backdrop-filter: blur(5px);
       padding: 30px 10px;
       border-radius: 5px;
       .rule_header {
@@ -50,11 +51,11 @@
     flex: 1;
     height: 100%;
     @include flex(center, center, stretch);
-    padding: 30px 0px;
+    padding: 10px 0px;
     overflow-y: scroll;
 
     .form_container {
-      padding: 30px 10px;
+      padding: 20px 10px;
       background: $bgSecondary;
       width: 80%;
       max-width: 600px;
