@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+
 // models
 const User = require("../models/users");
 
@@ -41,7 +43,9 @@ module.exports = {
 
         res.set("Access-Control-Expose-Headers", "Set-Cookie");
         res.set("withCredentials", true);
-        res.status(200).json({ message: "Registration Successful" });
+        res
+          .status(200)
+          .json({ message: "Registration Successful", user: newUser });
       }
     } catch (err) {
       if (err.message) {
@@ -49,6 +53,51 @@ module.exports = {
       } else {
         res.status(500).json({ message: err });
       }
+    }
+  },
+
+  // * for logging in a user
+  loginUser: async function (req, res, next) {
+    try {
+      const { email, password } = req.body;
+
+      // checking if email exists (line:68)
+      if (email) {
+        const emailOk = await User.findOne({ email });
+
+        if (emailOk) {
+          // checking if password is correct
+          const passwordOk = await bcrypt.compare(password, emailOk.password);
+
+          if (passwordOk) {
+            const user = emailOk;
+
+            // generate token and store cookie
+            const token = await user.generateToken();
+            res.cookie("auth", token, {
+              expires: new Date().now + 25892000000,
+              maxAge: 25892000000,
+            });
+
+            // if everything is okk send response with the user and the message
+            res
+              .status(201)
+              .json({ user, message: `Welcome back ${user.name}` });
+          } else if (!passwordOk) {
+            res.status(409).json({ message: "Invalid credentials" });
+          }
+        } else if (!emailOk) {
+          res.status(409).json({ message: "Your account doesn't exists" });
+        }
+      } else {
+        res.status(409).json({ message: "Please enter your email" });
+      }
+    } catch (err) {
+      if (err.message) {
+        next(err.message);
+      }
+
+      next(err);
     }
   },
 
@@ -65,7 +114,7 @@ module.exports = {
   logOutUser: function (req, res, next) {
     try {
       req.user.tokens = req.user.tokens.filter(
-        (token) => token.token !== req.token
+        ({ token }) => token !== req.token
       );
       res.clearCookie("auth");
       req.user.save((err) => {

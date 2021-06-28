@@ -7,15 +7,14 @@ const {
   registerUser,
   checkAuthController,
   logOutUser,
+  loginUser,
 } = require("../controllers/authController");
 
 // for registering a new user
 router.post("/register", registerUser);
 
 // for logging in a user
-router.post("/login", (req, res) => {
-  res.send("The login route");
-});
+router.post("/login", loginUser);
 
 // for verifying if the user is logged in
 router.get("/", checkAuth, checkAuthController);

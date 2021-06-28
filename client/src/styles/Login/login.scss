@@ -1,1 +1,109 @@
 @import "../partials/common";
+
+$line_width: 70px;
+
+.login_page {
+  min-height: 90vh;
+  padding: 30px 0px;
+  display: grid;
+  place-items: center;
+  background: url(../../assets/img/register_form_rules_bg.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  backdrop-filter: blur(10px);
+  .login_form_container {
+    width: 500px;
+    margin: auto;
+    background: $bgColor;
+    padding: 30px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px $themeColor;
+    .form_header {
+      margin-bottom: 20px;
+      .title {
+        text-align: center;
+        font-family: $font;
+        font-weight: 100;
+        letter-spacing: 1px;
+      }
+      .dual_line_container {
+        width: $line_width;
+        margin: 10px auto 0 auto;
+        .line {
+          height: 2px;
+          background: $themeColor;
+          margin: 5px 0px;
+          width: 100%;
+        }
+        .line2 {
+          width: $line_width - 20;
+          margin: auto;
+        }
+      }
+    }
+
+    .form_fields_container {
+      margin-bottom: 20px;
+      .single_field {
+        width: 90%;
+        margin: 10px auto;
+        input {
+          width: 100%;
+          border: 2px solid $bgColor;
+          padding: 15px 10px;
+          border-radius: 5px;
+          &:focus {
+            border-color: $themeColor;
+          }
+        }
+        button {
+          padding: 15px 0px;
+          font-size: 1.1rem;
+          background: $themeColor;
+          color: #fff;
+        }
+      }
+    }
+
+    .form_footer {
+      p {
+        text-align: center;
+        letter-spacing: 0.5px;
+        a {
+          color: $themeColor;
+        }
+      }
+    }
+  }
+}
+
+// for the mobiles and tablets
+@media screen and (max-width: 768px) {
+  .login_page {
+    .login_form_container {
+      width: 100%;
+      .form_fields_container {
+        .single_field {
+          width: 95%;
+          input {
+            width: 100%;
+            padding: 10px;
+          }
+          button {
+            padding: 10px 0px;
+          }
+        }
+      }
+
+      .form_footer {
+        p {
+          a {
+            display: block;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

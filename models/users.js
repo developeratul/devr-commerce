@@ -20,17 +20,17 @@ dataSchema.pre("save", async function (next) {
   }
 });
 
-dataSchema.methods.generateToken = function () {
-  const token = jwt.sign({ id: this._id.toString() }, process.env.JWT_SECRET);
+dataSchema.methods.generateToken = async function () {
+  try {
+    const token = jwt.sign({ id: this._id.toString() }, process.env.JWT_SECRET);
 
-  this.tokens = this.tokens.concat({ token });
-  this.save((err) => {
-    if (err) {
-      throw new Error(err);
-    }
-  });
+    this.tokens = this.tokens.concat({ token });
+    await this.save();
 
-  return token;
+    return token;
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const User = new mongoose.model("USER", dataSchema);

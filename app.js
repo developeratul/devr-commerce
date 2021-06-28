@@ -9,7 +9,8 @@ const mongoose = require("mongoose");
 const { notFoundHandler, errorHandler } = require("./middlewares/errorHandler");
 
 // importing routes
-const authRouter = require("./routes/authentication");
+const authRouter = require("./routes/authRouter");
+const userRouter = require("./routes/userRouter");
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -41,6 +42,8 @@ mongoose
 // * application routes
 // all the routes about authentication are here
 app.use("/get_auth", authRouter);
+// for handling all the user stuffs
+app.use("/get_user", userRouter);
 
 // for production
 if (process.env.NODE_ENV === "production") {
@@ -63,4 +66,5 @@ if (process.env.NODE_ENV === "production") {
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-app.listen(port, () => console.log(`- Listening to server in port [${port}]`));
+// starting the server
+app.listen(port, () => console.log(`- Listening to port [${port}]`));

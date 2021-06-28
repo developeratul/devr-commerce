@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import validator from "validator";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logInUser } from "../../redux/actions/authActions";
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -17,6 +19,7 @@ const Form = () => {
   });
   const [countryData, setCountryData] = useState([]);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   // for registering a user
   const registerUser = async () => {
@@ -27,8 +30,8 @@ const Form = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          credentials: "include",
         },
-        credentials: "include",
         body: JSON.stringify({
           name,
           email,
@@ -45,6 +48,7 @@ const Form = () => {
 
       if (status === 200) {
         history.push("/");
+        dispatch(logInUser(body.user));
         toast.dark(body.message);
       } else if (status === 403) {
         toast.error(body.message);

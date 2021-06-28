@@ -86,6 +86,9 @@ nav .navLinks li a {
   color: #fff;
   letter-spacing: 0.5px;
 }
+nav .navLinks li .icon {
+  color: #fff;
+}
 nav .bars {
   display: none;
 }
