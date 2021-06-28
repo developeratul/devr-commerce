@@ -3,10 +3,11 @@ const User = require("../models/users");
 
 module.exports = {
   // * the registration controller
-  registerUser: async function (req, res) {
+  registerUser: async function (req, res, next) {
     try {
       const { name, email, password, phone, country, isSeller } = req.body;
 
+      // creating a new user instance
       const newUser = new User({
         name,
         email,
@@ -16,6 +17,7 @@ module.exports = {
         isSeller: isSeller === "true" ? true : false,
       });
 
+      // checking if the user email already exists (line:23)
       const userExists = await User.findOne({ email });
 
       if (userExists) {
@@ -24,9 +26,9 @@ module.exports = {
         // saving the user information's and handling error
         await newUser.save().catch((err) => {
           if (err.message) {
-            res.status(500).json({ message: err.message });
+            next(err.message);
           } else {
-            res.status(500).json({ message: err });
+            next(err);
           }
         });
 
@@ -54,6 +56,25 @@ module.exports = {
   checkAuthController: function (req, res) {
     try {
       res.send(req.user);
+    } catch (err) {
+      res.send(err);
+    }
+  },
+
+  // * for logging out a user
+  logOutUser: function (req, res, next) {
+    try {
+      req.user.tokens = req.user.tokens.filter(
+        (token) => token.token !== req.token
+      );
+      res.clearCookie("auth");
+      req.user.save((err) => {
+        if (err) {
+          next(err);
+        } else {
+          res.status(200).json({ message: `Logged out` });
+        }
+      });
     } catch (err) {
       res.send(err);
     }

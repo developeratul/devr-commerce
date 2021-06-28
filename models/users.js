@@ -8,6 +8,7 @@ const dataSchema = new mongoose.Schema({
   password: { type: String, required: true },
   country: { type: String, required: true },
   phone: { type: String, required: true },
+  photoUrl: { type: String },
   isSeller: { type: Boolean, required: true, enum: [true, false] },
   tokens: [{ token: { type: String } }],
 });

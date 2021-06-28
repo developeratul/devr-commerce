@@ -39,7 +39,7 @@ const App = () => {
         dispatch(logInUser(body));
       }
     } catch (err) {
-      console.log(err);
+      dispatch(logOutUser());
     }
   }
 
