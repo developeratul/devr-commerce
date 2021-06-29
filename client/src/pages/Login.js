@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/Login/login.css";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logInUser } from "../redux/actions/authActions";
+import config from "../config";
 
 const Login = () => {
   const [formInfo, setFormInfo] = useState({ email: "", password: "" });
@@ -51,6 +52,10 @@ const Login = () => {
       toast.error(err);
     }
   }
+
+  useEffect(() => {
+    document.title = `${config.applicationName} / Login`;
+  }, []);
 
   return (
     <div className="login_page">

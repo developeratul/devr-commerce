@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import notFoundImg from "../assets/img/not_found.png";
+import { useEffect } from "react";
+import config from "../config";
 
 const NotFound = () => {
+  useEffect(() => {
+    document.title = `${config.applicationName} / Not Found`;
+  }, []);
+
   return (
     <div className="not_found_page">
       <div className="container">

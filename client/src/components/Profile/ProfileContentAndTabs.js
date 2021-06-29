@@ -68,6 +68,10 @@ const ProfileContentAndTabs = ({ user }) => {
           >
             <Tab label="About" {...a11yProps(0)} />
             {user.isSeller ? <Tab label="Products" {...a11yProps(1)} /> : null}
+            {user.isSeller ? <Tab label="Reviews" {...a11yProps(2)} /> : null}
+            {user.isSeller ? (
+              <Tab label="Reviews as a Buyer" {...a11yProps(3)} />
+            ) : null}
           </Tabs>
         </AppBar>
 
@@ -79,9 +83,39 @@ const ProfileContentAndTabs = ({ user }) => {
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
             <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
+            <h1>About section</h1>
           </TabPanel>
 
           <TabPanel value={value} index={1} dir={theme.direction}>
+            <h1>Products</h1>
+          </TabPanel>
+          <TabPanel value={value} index={2} dir={theme.direction}>
+            <h1>Products</h1>
+          </TabPanel>
+          <TabPanel value={value} index={3} dir={theme.direction}>
             <h1>Products</h1>
           </TabPanel>
         </SwipeableViews>

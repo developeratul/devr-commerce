@@ -1,11 +1,13 @@
 import { useEffect } from "react";
+import "../styles/Register/register.css";
+import config from "../config";
+
 import Form from "../components/Register/Form";
 import Rules from "../components/Register/Rules";
-import "../styles/Register/register.css";
 
 const Register = () => {
   useEffect(() => {
-    document.title = "DevR Commerce / Register Account";
+    document.title = `${config.applicationName} / Register Account`;
   }, []);
 
   return (

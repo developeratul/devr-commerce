@@ -610,7 +610,6 @@ nav .nav_active {
   .register_page .register_rules {
     flex: auto;
     height: auto;
-    background-attachment: fixed;
   }
   .register_page .register_rules .register_rule_container .rule_header h1 {
     font-size: 1.2rem;

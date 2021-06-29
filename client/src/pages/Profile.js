@@ -30,6 +30,7 @@ const Profile = () => {
       if (res.status === 201) {
         setLoading(false);
         setCurrentUser(body);
+        document.title = `${body.name}'s Store`;
       } else if (res.status === 404) {
         history.push("/notFound");
         toast.error(body.message);
@@ -47,6 +48,7 @@ const Profile = () => {
     const abortController = new AbortController();
 
     fetchProfileInfo(abortController);
+    document.title = "Loading...";
 
     return () => abortController.abort();
   }, []);
