@@ -87,6 +87,7 @@ const App = () => {
             <Route path="/register" component={Register} />
             <Route path="/profile/:id" component={Profile} />
             <Route path="/cart" component={Cart} />
+            <Route path="/notFound" component={NotFound} />
             <Route path="*" component={NotFound} />
           </Switch>
         </Router>

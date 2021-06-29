@@ -1,0 +1,109 @@
+@import "../partials/common";
+
+.profile_page {
+  height: 90vh;
+  overflow: hidden;
+  // the loader
+  .loading_container {
+    @include flex(center, center, column);
+    padding: 50px 0px;
+  }
+
+  // the sidebar and other content container
+  .profile_content_container {
+    width: 100%;
+    height: 100%;
+    @include flex(center, center, stretch);
+    // the side bar in the profile page
+    .profile_side_bar {
+      flex: 0.8;
+      background: $bgSecondary;
+      height: 100%;
+      padding: 30px 0px;
+      overflow-x: hidden;
+      // the profile picture in the side bar
+      .profile_picture {
+        @include flex(center, center, column);
+        position: relative;
+        width: 160px;
+        margin: auto auto 30px auto;
+        .is_user_verified {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          .verified_icon {
+            color: $successColor;
+            font-size: 2.5rem;
+          }
+          .not_verified_icon {
+            color: $warningColor;
+            font-size: 2.5rem;
+          }
+        }
+      }
+
+      // the user intro information's in the side bar
+      .profile_user_info {
+        @include flex(center, center, column);
+        .profile_user_name_and_basic_info {
+          text-align: center;
+          margin-bottom: 20px;
+          h2 {
+            font-family: $font;
+            color: $themeColor;
+          }
+          p {
+            letter-spacing: 0.5px;
+            span {
+              color: $successColor;
+            }
+          }
+        }
+
+        .common_user_information {
+          padding: 10px;
+          width: 100%;
+          background: $bgColor;
+          p {
+            letter-spacing: 0.5px;
+            padding: 5px 0px;
+            p {
+              color: $successColor;
+              padding: 0 0;
+            }
+            span {
+              color: $themeColor;
+              font-family: $font;
+            }
+          }
+        }
+      }
+    }
+
+    // for all the tabs and other infos in the profile page
+    .profile_content_and_tabs {
+      flex: 2;
+      height: 100%;
+    }
+  }
+}
+
+// for the mobile and tablet's
+@media screen and (max-width: 768px) {
+  .profile_page {
+    .profile_content_container {
+      .profile_side_bar {
+        flex: auto;
+        width: 100%;
+        height: auto;
+        overflow-y: unset;
+      }
+
+      .profile_user_info {
+        flex: auto;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}

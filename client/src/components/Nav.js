@@ -10,10 +10,15 @@ import Badge from "@material-ui/core/Badge";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 
+// for styling the material-ui components
 const useStyles = makeStyles((theme) => ({
   small: {
     width: theme.spacing(4),
     height: theme.spacing(4),
+  },
+  menuPaper: {
+    backgroundColor: "#1a2634",
+    color: "#fff",
   },
 }));
 
@@ -71,8 +76,8 @@ const Nav = () => {
     setAnchorEl(null);
   };
 
-  const menuLinkStyle = {
-    color: "#000",
+  const menuLink = {
+    color: "#fff",
   };
 
   return (
@@ -89,17 +94,17 @@ const Nav = () => {
         </li>
 
         {/* if the user is authenticated, login and register button will not be shown */}
-        {/* instead his profile information's will be shown */}
+        {/* instead his profile information's, cart and the other stuffs will be shown */}
         {isAuthenticated ? (
           <>
             <li>
-              <IconButton color="secondary">
-                <NavLink to="/cart">
+              <NavLink to="/cart">
+                <IconButton color="secondary">
                   <Badge badgeContent={10} color="secondary">
                     <ShoppingCartOutlinedIcon className="icon" />
                   </Badge>
-                </NavLink>
-              </IconButton>
+                </IconButton>
+              </NavLink>
             </li>
 
             {/* user options */}
@@ -123,17 +128,21 @@ const Nav = () => {
                 keepMounted
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
+                classes={{ paper: classes.menuPaper }}
               >
-                <Link style={menuLinkStyle} to={`/profile/${user._id}`}>
-                  <MenuItem onClick={handleClose}>View My Profile</MenuItem>
+                <Link style={menuLink} to={`/profile/${user._id}`}>
+                  <MenuItem className="menuItem" onClick={handleClose}>
+                    View My Profile
+                  </MenuItem>
                 </Link>
-                <MenuItem onClick={handleClose}>
+                <MenuItem className="menuItem" onClick={handleClose}>
                   <div onClick={logOut}>Log into another account</div>
                 </MenuItem>
               </Menu>
             </li>
           </>
         ) : (
+          // if the user is not authenticated
           <>
             <li>
               <NavLink activeClassName="nav_active" to="/login">

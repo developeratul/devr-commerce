@@ -8,8 +8,42 @@ const dataSchema = new mongoose.Schema({
   password: { type: String, required: true },
   country: { type: String, required: true },
   phone: { type: String, required: true },
-  photoUrl: { type: String },
+  photoUrl: { type: String, default: "" },
+  memberSince: { type: String, default: new Date().toLocaleDateString() },
+  totalSales: { type: Number, default: 0 },
+
   isSeller: { type: Boolean, required: true, enum: [true, false] },
+  isVerified: { type: Boolean, enum: [true, false], default: false },
+
+  productCategory: {
+    type: String,
+    enum: [
+      "Tech",
+      "Toys",
+      "Films and Cd's",
+      "Car accessories",
+      "Grocery",
+      "Nonfood & Pharmacy",
+      "Style & Fashion",
+      "Sports Accessories",
+      "Electrical technologies",
+      "Cosmetics and Beauty",
+      "Home and furniture",
+      "Cloths and fabrics",
+      "Books and Educational accessories",
+      "Household appliances",
+      "Toys and baby products",
+      "Not specified yet",
+      "DIY garden and pet",
+    ],
+    default: "Not specified yet",
+  },
+
+  showEmail: { type: Boolean, enum: [true, false], default: true },
+  showPhone: { type: Boolean, enum: [true, false], default: true },
+
+  socialLinks: [{ title: String, url: String }],
+  // for storing the auth tokens
   tokens: [{ token: { type: String } }],
 });
 
