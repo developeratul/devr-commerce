@@ -78,11 +78,13 @@ const Form = () => {
     const { name, email, password, conPass, country, phone } = formData;
     const validation = {
       passwordLength: password.length >= 8,
+      nameLength: name.length <= 25,
       allFields: name && email && password && conPass && country && phone,
       passwordMatched: password === conPass,
       emailOk: validator.isEmail(email),
     };
-    const { passwordLength, passwordMatched, allFields, emailOk } = validation;
+    const { passwordLength, passwordMatched, allFields, emailOk, nameLength } =
+      validation;
 
     if (!allFields) {
       toast.error("Please fill all the fields properly");
@@ -92,7 +94,15 @@ const Form = () => {
       toast.error("Password must have 8 chars");
     } else if (!passwordMatched) {
       toast.error("Password doesn't matched");
-    } else if (passwordLength && allFields && passwordMatched && emailOk) {
+    } else if (!nameLength) {
+      toast.error("Name length cannot be greater than 25");
+    } else if (
+      passwordLength &&
+      allFields &&
+      passwordMatched &&
+      emailOk &&
+      nameLength
+    ) {
       registerUser(); // for registering a user in our database
     }
   }

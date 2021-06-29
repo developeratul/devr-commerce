@@ -5,7 +5,6 @@ import { useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
 // all these functions are from the material-ui
@@ -20,11 +19,7 @@ function TabPanel(props) {
       aria-labelledby={`full-width-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box>{children}</Box>}
     </div>
   );
 }
@@ -56,7 +51,7 @@ const ProfileContentAndTabs = ({ user }) => {
 
   return (
     <div className="profile_content_and_tabs">
-      <div className="tab_and_appBar_container">
+      <div className="tab_and_appBar_and_tabs_container">
         {/* the app bar */}
         <AppBar className="app_bar" position="sticky">
           <Tabs
@@ -69,9 +64,6 @@ const ProfileContentAndTabs = ({ user }) => {
             <Tab label="About" {...a11yProps(0)} />
             {user.isSeller ? <Tab label="Products" {...a11yProps(1)} /> : null}
             {user.isSeller ? <Tab label="Reviews" {...a11yProps(2)} /> : null}
-            {user.isSeller ? (
-              <Tab label="Reviews as a Buyer" {...a11yProps(3)} />
-            ) : null}
           </Tabs>
         </AppBar>
 
@@ -82,41 +74,17 @@ const ProfileContentAndTabs = ({ user }) => {
           onChangeIndex={handleChangeIndex}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
-            <h1>About section</h1>
+            <h1>Hello world</h1>
           </TabPanel>
 
           <TabPanel value={value} index={1} dir={theme.direction}>
-            <h1>Products</h1>
+            <h1>Hello world</h1>
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            <h1>Products</h1>
+            <h1>Hello world</h1>
           </TabPanel>
           <TabPanel value={value} index={3} dir={theme.direction}>
-            <h1>Products</h1>
+            <h1>Hello world</h1>
           </TabPanel>
         </SwipeableViews>
       </div>

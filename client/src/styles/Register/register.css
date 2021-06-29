@@ -57,12 +57,13 @@ nav {
   flex-wrap: wrap;
   flex-direction: stretch;
   min-height: 10vh;
+  padding: 5px 0px;
   background: #0d1219;
   position: sticky;
   top: 0;
   left: 0;
   z-index: 10;
-  border-bottom: 1px solid #7976fc;
+  border-bottom: 1px solid #1a2634;
 }
 nav h2 {
   font-weight: 100;

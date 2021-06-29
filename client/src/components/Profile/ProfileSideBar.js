@@ -1,6 +1,5 @@
 import { Avatar, Tooltip } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { motion } from "framer-motion";
 
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import WarningIcon from "@material-ui/icons/Warning";
@@ -21,11 +20,7 @@ const ProfileSideBar = ({ user }) => {
   const classes = useStyles();
 
   return (
-    <motion.div
-      initial={{ opacity: 0, x: "-10px" }}
-      animate={{ opacity: 1, x: "0px" }}
-      className="profile_side_bar"
-    >
+    <div className="profile_side_bar">
       <div className="profile_picture">
         <Avatar
           src={user.name}
@@ -86,13 +81,11 @@ const ProfileSideBar = ({ user }) => {
             Member since: <span>{user.memberSince}</span>
           </p>
           {user.isVerified ? (
-            <p>
-              <p>Verified and trusted by devR</p>
-            </p>
+            <p className="verifiedText">Verified and trusted by devR</p>
           ) : null}
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

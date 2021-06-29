@@ -9,15 +9,16 @@
     padding: 50px 0px;
   }
 
-  // the sidebar and other content container
+  // * the sidebar and other content container
   .profile_content_container {
     width: 100%;
     height: 100%;
     @include flex(center, center, stretch);
     // the side bar in the profile page
     .profile_side_bar {
-      flex: 0.8;
-      background: linear-gradient(to right, $bgColor, $bgSecondary);
+      flex: 0.9;
+      background: $bgColor;
+      border-right: 1px solid $bgSecondary;
       height: 100%;
       padding: 30px 0px;
       overflow-x: hidden;
@@ -41,7 +42,6 @@
           }
         }
       }
-
       // the user intro information's in the side bar
       .profile_user_info {
         @include flex(center, center, column);
@@ -59,41 +59,37 @@
             }
           }
         }
-
+        // common user info
         .common_user_information {
           padding: 10px;
           width: 100%;
           p {
             letter-spacing: 0.5px;
             padding: 5px 0px;
-            p {
-              color: $successColor;
-              padding: 0 0;
-            }
             span {
               color: $themeColor;
               font-family: $font;
             }
           }
+          .verifiedText {
+            color: $successColor;
+          }
         }
       }
     }
 
-    // for all the tabs and other infos in the profile page
+    // * for all the tabs and other infos in the profile page
     .profile_content_and_tabs {
       flex: 2;
       height: 100%;
-      .tab_and_appBar_container {
+      .tab_and_appBar_and_tabs_container {
         width: 100%;
         height: 100%;
         overflow-x: hidden;
-        background: linear-gradient(to left, $bgColor, $bgSecondary);
+        background: linear-gradient(to right, $bgColor, $bgSecondary);
         .app_bar {
-          background: linear-gradient(to left, $bgColor, $bgSecondary);
-        }
-
-        .tab_content_container {
-          background: red;
+          background: linear-gradient(to right, $bgColor, $bgSecondary);
+          z-index: 1;
         }
       }
     }
@@ -105,11 +101,11 @@
   .profile_page {
     .profile_content_container {
       .profile_side_bar {
-        flex: 1.5;
+        flex: 2;
       }
 
-      .profile_user_info {
-        flex: 2;
+      .profile_content_and_tabs {
+        flex: 3;
       }
     }
   }
@@ -127,7 +123,7 @@
         height: auto;
         overflow-y: unset;
         border: none;
-        border-bottom: 1px solid $themeColor;
+        border-bottom: 1px solid $bgSecondary;
         .profile_user_info {
           flex: auto;
           width: 100%;

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
+// components
 import InlineLoader from "../components/InlineLoader";
 import ProfileSideBar from "../components/Profile/ProfileSideBar";
 import ProfileContentAndTabs from "../components/Profile/ProfileContentAndTabs";

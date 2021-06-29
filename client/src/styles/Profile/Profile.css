@@ -57,12 +57,13 @@ nav {
   flex-wrap: wrap;
   flex-direction: stretch;
   min-height: 10vh;
+  padding: 5px 0px;
   background: #0d1219;
   position: sticky;
   top: 0;
   left: 0;
   z-index: 10;
-  border-bottom: 1px solid #7976fc;
+  border-bottom: 1px solid #1a2634;
 }
 nav h2 {
   font-weight: 100;
@@ -497,8 +498,9 @@ nav .nav_active {
   flex-direction: stretch;
 }
 .profile_page .profile_content_container .profile_side_bar {
-  flex: 0.8;
-  background: linear-gradient(to right, #0d1219, #1a2634);
+  flex: 0.9;
+  background: #0d1219;
+  border-right: 1px solid #1a2634;
   height: 100%;
   padding: 30px 0px;
   overflow-x: hidden;
@@ -555,37 +557,34 @@ nav .nav_active {
   letter-spacing: 0.5px;
   padding: 5px 0px;
 }
-.profile_page .profile_content_container .profile_side_bar .profile_user_info .common_user_information p p {
-  color: #00ff80;
-  padding: 0 0;
-}
 .profile_page .profile_content_container .profile_side_bar .profile_user_info .common_user_information p span {
   color: #7976fc;
   font-family: Josefin Sans;
+}
+.profile_page .profile_content_container .profile_side_bar .profile_user_info .common_user_information .verifiedText {
+  color: #00ff80;
 }
 .profile_page .profile_content_container .profile_content_and_tabs {
   flex: 2;
   height: 100%;
 }
-.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_container {
+.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container {
   width: 100%;
   height: 100%;
   overflow-x: hidden;
-  background: linear-gradient(to left, #0d1219, #1a2634);
+  background: linear-gradient(to right, #0d1219, #1a2634);
 }
-.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_container .app_bar {
-  background: linear-gradient(to left, #0d1219, #1a2634);
-}
-.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_container .tab_content_container {
-  background: red;
+.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .app_bar {
+  background: linear-gradient(to right, #0d1219, #1a2634);
+  z-index: 1;
 }
 
 @media screen and (max-width: 1024px) {
   .profile_page .profile_content_container .profile_side_bar {
-    flex: 1.5;
-  }
-  .profile_page .profile_content_container .profile_user_info {
     flex: 2;
+  }
+  .profile_page .profile_content_container .profile_content_and_tabs {
+    flex: 3;
   }
 }
 @media screen and (max-width: 768px) {
@@ -599,7 +598,7 @@ nav .nav_active {
     height: auto;
     overflow-y: unset;
     border: none;
-    border-bottom: 1px solid #7976fc;
+    border-bottom: 1px solid #1a2634;
   }
   .profile_page .profile_content_container .profile_side_bar .profile_user_info {
     flex: auto;

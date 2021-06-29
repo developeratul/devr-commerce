@@ -51,13 +51,13 @@ h2 {
 nav {
   @include flex(space-around, center, stretch);
   min-height: 10vh;
-  // padding: 5px 0px;
+  padding: 5px 0px;
   background: $bgColor;
   position: sticky;
   top: 0;
   left: 0;
   z-index: 10;
-  border-bottom: 1px solid $themeColor;
+  border-bottom: 1px solid $bgSecondary;
 
   h2 {
     font-weight: 100;
