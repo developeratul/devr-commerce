@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#1a2634",
     color: "#fff",
   },
+  linkFont: {
+    fontFamily: "Poppins",
+  },
 }));
 
 const Nav = () => {
@@ -109,6 +112,7 @@ const Nav = () => {
 
             {/* user options */}
             <li>
+              {/* onClicking on this button the menu should be popped out */}
               <IconButton
                 size="small"
                 aria-controls="simple-menu"
@@ -135,6 +139,13 @@ const Nav = () => {
                     View My Profile
                   </MenuItem>
                 </Link>
+
+                <Link style={menuLink} to={`/settings`}>
+                  <MenuItem className="menuItem" onClick={handleClose}>
+                    Account Settings
+                  </MenuItem>
+                </Link>
+
                 <MenuItem className="menuItem" onClick={handleClose}>
                   <div onClick={logOut}>Log into another account</div>
                 </MenuItem>

@@ -21,6 +21,7 @@
       height: 100%;
       padding: 30px 0px;
       overflow-x: hidden;
+      border-right: 1px solid $themeColor;
       // the profile picture in the side bar
       .profile_picture {
         @include flex(center, center, column);
@@ -84,6 +85,29 @@
     .profile_content_and_tabs {
       flex: 2;
       height: 100%;
+      .tab_and_appBar_container {
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        .app_bar {
+          background: $bgSecondary;
+        }
+      }
+    }
+  }
+}
+
+// for the laptop's and iPads
+@media screen and (max-width: 1024px) {
+  .profile_page {
+    .profile_content_container {
+      .profile_side_bar {
+        flex: 1.5;
+      }
+
+      .profile_user_info {
+        flex: 2;
+      }
     }
   }
 }
@@ -91,18 +115,28 @@
 // for the mobile and tablet's
 @media screen and (max-width: 768px) {
   .profile_page {
+    overflow-x: hidden;
+    overflow-y: scroll;
     .profile_content_container {
       .profile_side_bar {
         flex: auto;
         width: 100%;
         height: auto;
         overflow-y: unset;
+        border: none;
+        border-bottom: 1px solid $themeColor;
+        .profile_user_info {
+          flex: auto;
+          width: 100%;
+          height: auto;
+        }
       }
 
-      .profile_user_info {
+      .profile_content_and_tabs {
         flex: auto;
-        width: 100%;
-        height: auto;
+        // height: auto;
+        overflow-x: hidden;
+        overflow-y: unset;
       }
     }
   }

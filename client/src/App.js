@@ -18,6 +18,7 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
+import Settings from "./pages/Settings";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -87,6 +88,7 @@ const App = () => {
             <Route path="/register" component={Register} />
             <Route path="/profile/:id" component={Profile} />
             <Route path="/cart" component={Cart} />
+            <Route path="/settings" component={Settings} />
             <Route path="/notFound" component={NotFound} />
             <Route path="*" component={NotFound} />
           </Switch>

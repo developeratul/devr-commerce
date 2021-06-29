@@ -502,6 +502,7 @@ nav .nav_active {
   height: 100%;
   padding: 30px 0px;
   overflow-x: hidden;
+  border-right: 1px solid #7976fc;
 }
 .profile_page .profile_content_container .profile_side_bar .profile_picture {
   display: flex;
@@ -568,17 +569,44 @@ nav .nav_active {
   flex: 2;
   height: 100%;
 }
+.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_container {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_container .app_bar {
+  background: #1a2634;
+}
 
+@media screen and (max-width: 1024px) {
+  .profile_page .profile_content_container .profile_side_bar {
+    flex: 1.5;
+  }
+  .profile_page .profile_content_container .profile_user_info {
+    flex: 2;
+  }
+}
 @media screen and (max-width: 768px) {
+  .profile_page {
+    overflow-x: hidden;
+    overflow-y: scroll;
+  }
   .profile_page .profile_content_container .profile_side_bar {
     flex: auto;
     width: 100%;
     height: auto;
     overflow-y: unset;
+    border: none;
+    border-bottom: 1px solid #7976fc;
   }
-  .profile_page .profile_content_container .profile_user_info {
+  .profile_page .profile_content_container .profile_side_bar .profile_user_info {
     flex: auto;
     width: 100%;
     height: auto;
+  }
+  .profile_page .profile_content_container .profile_content_and_tabs {
+    flex: auto;
+    overflow-x: hidden;
+    overflow-y: unset;
   }
 }/*# sourceMappingURL=Profile.css.map */
