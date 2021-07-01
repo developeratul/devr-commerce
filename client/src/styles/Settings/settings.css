@@ -476,148 +476,102 @@ nav .nav_active {
     transform: rotate(45deg) translate(-5px, -6px);
   }
 }
-.register_page {
+.settings_page {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: stretch;
+  background: url(../../assets/img/coolBg.jpg);
+  background-position: center;
+  background-size: cover;
   height: 90vh;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.settings_page .settings_update_avatar {
+  flex: 1;
+  height: 100%;
+  background: #0d121915;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  border-right: 1px solid #7976fc;
+  overflow-x: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.settings_page .settings_update_avatar .update_avatar_content_container {
+  width: 90%;
+  margin: auto;
+  max-width: 300px;
+}
+.settings_page .settings_update_avatar .update_avatar_content_container .imgContainer {
+  width: 160px;
+  margin: auto auto 30px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: stretch;
+}
+.settings_page .settings_update_avatar .update_avatar_content_container .image_button_control {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  flex-direction: stretch;
+  flex-direction: column;
 }
-.register_page .register_rules {
-  flex: 1;
-  height: 100%;
-  background: url(../../assets/img/register_form_rules_bg.jpg);
-  background-size: cover;
-  background-position: center;
-  padding: 30px 0px;
-  overflow-y: scroll;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  flex-direction: stretch;
-}
-.register_page .register_rules .register_rule_container {
-  width: 80%;
-  max-width: 600px;
-  box-shadow: 0 0 10px #7976fc;
-  background: #2e2e2e34;
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
-  padding: 30px 10px;
-  border-radius: 5px;
-}
-.register_page .register_rules .register_rule_container .rule_header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.register_page .register_rules .register_rule_container .rule_header h1,
-.register_page .register_rules .register_rule_container .rule_header h3 {
-  font-family: Josefin Sans;
-}
-.register_page .register_rules .register_rule_container .rule_header h1 {
-  margin-bottom: 5px;
-}
-.register_page .register_rules .register_rule_container .rule_list li {
-  list-style: inside decimal;
-  padding: 10px 0px;
-  font-family: Josefin Sans;
-}
-.register_page .register_form {
-  flex: 1;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  flex-direction: stretch;
-  padding: 30px 0px;
-  overflow-y: scroll;
-}
-.register_page .register_form .form_container {
-  padding: 20px 10px;
-  background: #1a2634;
-  width: 80%;
-  max-width: 600px;
-  border-radius: 5px;
-  box-shadow: 0 0 5px #7976fc;
-}
-.register_page .register_form .form_container h1 {
-  font-family: Josefin Sans;
-  text-align: center;
-  color: #7976fc;
-  margin-bottom: 20px;
-}
-.register_page .register_form .form_container .form .single_field {
-  width: 90%;
-  margin: 5px auto;
-}
-.register_page .register_form .form_container .form .single_field input,
-.register_page .register_form .form_container .form .single_field select,
-.register_page .register_form .form_container .form .single_field button {
+.settings_page .settings_update_avatar .update_avatar_content_container .image_button_control .singleButton {
   width: 100%;
-  padding: 10px;
-  border: 2px solid #1a2634;
-  border-radius: 5px;
-  background: #fff;
+  margin-bottom: 10px;
 }
-.register_page .register_form .form_container .form .single_field input:focus,
-.register_page .register_form .form_container .form .single_field select:focus {
-  border-color: #7976fc;
-}
-.register_page .register_form .form_container .form .single_field button {
-  border: none;
-  font-size: 1.1rem;
+.settings_page .settings_update_avatar .update_avatar_content_container .image_button_control .singleButton .upload_button {
   background: #7976fc;
+  text-transform: capitalize;
   color: #fff;
 }
-.register_page .register_form .form_container .form .form_footer {
-  margin-top: 20px;
-}
-.register_page .register_form .form_container .form .form_footer p {
-  text-align: center;
-  font-weight: 100;
-  letter-spacing: 0.5px;
-}
-.register_page .register_form .form_container .form .form_footer p a {
-  color: #7976fc;
+.settings_page .settings_update_other_info {
+  flex: 2;
+  height: 100%;
+  overflow-x: hidden;
+  background: #0d121915;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
 }
 
 @media screen and (max-width: 1024px) {
-  .register_page .register_rules {
+  .settings_page .settings_update_avatar {
     flex: 1;
   }
-  .register_page .register_rules .register_rule_container {
-    width: 95%;
-  }
-  .register_page .register_form .form_container {
-    width: 95%;
-  }
-  .register_page .register_form .form_container .form .single_field {
-    width: 100%;
+  .settings_page .settings_update_other_info {
+    flex: 1.5;
   }
 }
-@media screen and (max-width: 768px) {
-  .register_page {
-    width: 100%;
+@media screen and (max-width: 1024px) {
+  .settings_page {
+    overflow-y: scroll;
+    padding: 30px 0px;
+  }
+  .settings_page .settings_update_avatar {
+    flex: none;
     height: auto;
-    display: flex;
-    justify-content: stretch;
-    align-items: stretch;
-    flex-wrap: wrap;
-    flex-direction: column;
+    margin: auto;
+    width: 90%;
+    box-shadow: 0 0 5px #7976fc;
+    border-radius: 5px;
+    border: none;
+    padding: 30px 0px;
+    margin-bottom: 30px;
   }
-  .register_page .register_rules {
-    flex: auto;
+  .settings_page .settings_update_other_info {
+    flex: none;
     height: auto;
+    width: 90%;
+    box-shadow: 0 0 5px #7976fc;
+    border-radius: 5px;
+    border: none;
   }
-  .register_page .register_rules .register_rule_container .rule_header h1 {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-  }
-  .register_page .register_form {
-    flex: auto;
-    height: auto;
-  }
-}/*# sourceMappingURL=register.css.map */
+}/*# sourceMappingURL=settings.css.map */

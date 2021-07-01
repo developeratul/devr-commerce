@@ -23,7 +23,7 @@ const ProfileSideBar = ({ user }) => {
     <div className="profile_side_bar">
       <div className="profile_picture">
         <Avatar
-          src={user.name}
+          src={user.photoUrl}
           alt={`${user.name}'s profile picture`}
           className={classes.large}
         />

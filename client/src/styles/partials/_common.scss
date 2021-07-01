@@ -50,8 +50,8 @@ h2 {
 // the nav bar over the whole application
 nav {
   @include flex(space-around, center, stretch);
-  min-height: 10vh;
-  padding: 5px 0px;
+  min-height: $navHeight;
+  padding: 3px 0px;
   background: $bgColor;
   position: sticky;
   top: 0;

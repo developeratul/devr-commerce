@@ -48,11 +48,7 @@ module.exports = {
           .json({ message: "Registration Successful", user: newUser });
       }
     } catch (err) {
-      if (err.message) {
-        res.status(500).json({ message: err.message });
-      } else {
-        res.status(500).json({ message: err });
-      }
+      next(err);
     }
   },
 
@@ -102,11 +98,11 @@ module.exports = {
   },
 
   // * for checking if the user is authenticated
-  checkAuthController: function (req, res) {
+  checkAuthController: function (req, res, next) {
     try {
       res.send(req.user);
     } catch (err) {
-      res.send(err);
+      next(err);
     }
   },
 

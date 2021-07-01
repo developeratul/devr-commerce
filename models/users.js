@@ -2,13 +2,18 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+// the user schema
 const dataSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
   country: { type: String, required: true },
   phone: { type: String, required: true },
+  about: { type: String, default: "" },
+
   photoUrl: { type: String, default: "" },
+  photoId: { type: String, default: "" },
+
   memberSince: { type: String, default: new Date().toLocaleDateString() },
   totalSales: { type: Number, default: 0 },
 
@@ -39,14 +44,15 @@ const dataSchema = new mongoose.Schema({
     default: "Not specified yet",
   },
 
-  showEmail: { type: Boolean, enum: [true, false], default: true },
-  showPhone: { type: Boolean, enum: [true, false], default: true },
+  showEmail: { type: Boolean, enum: [true, false], default: false },
+  showPhone: { type: Boolean, enum: [true, false], default: false },
 
   socialLinks: [{ title: String, url: String }],
   // for storing the auth tokens
   tokens: [{ token: { type: String } }],
 });
 
+// hashing the password before saving
 dataSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 12);
@@ -54,6 +60,7 @@ dataSchema.pre("save", async function (next) {
   }
 });
 
+// generating jwt token and returning it
 dataSchema.methods.generateToken = async function () {
   try {
     const token = jwt.sign({ id: this._id.toString() }, process.env.JWT_SECRET);
@@ -67,6 +74,7 @@ dataSchema.methods.generateToken = async function () {
   }
 };
 
+// the user collection
 const User = new mongoose.model("USER", dataSchema);
 
 module.exports = User;

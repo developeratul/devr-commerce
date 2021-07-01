@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 // components
 import InlineLoader from "../components/InlineLoader";
 import ProfileSideBar from "../components/Profile/ProfileSideBar";
-import ProfileContentAndTabs from "../components/Profile/ProfileContentAndTabs";
+import ProfileContentAndTabs from "../components/Profile/ProfileContentAndTabs"; //dsa dsa
 
 const Profile = () => {
   const [currentUser, setCurrentUser] = useState({});
@@ -18,7 +18,7 @@ const Profile = () => {
   // for fetching the data of the user according to the id
   async function fetchProfileInfo(abortController) {
     try {
-      const res = await fetch(`/get_user/${id}`, {
+      const res = await fetch(`/get_user/user_id/${id}`, {
         method: "GET",
         signal: abortController.signal,
         headers: {

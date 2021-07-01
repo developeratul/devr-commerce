@@ -1,8 +1,9 @@
 @import "../partials/common";
 
 .profile_page {
-  height: 90vh;
+  height: $contentHeight;
   overflow: hidden;
+
   // the loader
   .loading_container {
     @include flex(center, center, column);

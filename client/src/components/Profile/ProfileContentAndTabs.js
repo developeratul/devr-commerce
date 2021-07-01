@@ -62,7 +62,7 @@ const ProfileContentAndTabs = ({ user }) => {
             aria-label="full width tabs example"
           >
             <Tab label="About" {...a11yProps(0)} />
-            {user.isSeller ? <Tab label="Products" {...a11yProps(1)} /> : null}
+            {user.isSeller ? <Tab label="Store" {...a11yProps(1)} /> : null}
             {user.isSeller ? <Tab label="Reviews" {...a11yProps(2)} /> : null}
           </Tabs>
         </AppBar>

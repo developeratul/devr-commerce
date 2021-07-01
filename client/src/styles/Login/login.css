@@ -57,7 +57,7 @@ nav {
   flex-wrap: wrap;
   flex-direction: stretch;
   min-height: 10vh;
-  padding: 5px 0px;
+  padding: 3px 0px;
   background: #0d1219;
   position: sticky;
   top: 0;

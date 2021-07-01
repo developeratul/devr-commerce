@@ -8,9 +8,9 @@ function errorHandler(err, req, res, next) {
     next("There was an unexpected error");
   } else {
     if (err.message) {
-      res.status(500).send(err.message);
+      res.status(err.code || 500).send(err.message);
     } else {
-      res.status(500).send(err);
+      res.status(err.code || 500).send(err);
     }
   }
 }

@@ -21,8 +21,8 @@ import NotFound from "./pages/NotFound";
 import Settings from "./pages/Settings";
 
 const App = () => {
-  const dispatch = useDispatch();
   const [responseEnded, setResponseEnded] = useState(false);
+  const dispatch = useDispatch();
 
   // for checking if the user is authenticated
   async function checkAuth() {
@@ -47,9 +47,11 @@ const App = () => {
 
       if (res.status === 200) {
         dispatch(logInUser(body));
+      } else if (res.status === 401) {
+        dispatch(logOutUser());
       }
     } catch (err) {
-      dispatch(logOutUser());
+      alert("we are having unexpected server error please come back later");
     }
   }
 
@@ -60,7 +62,7 @@ const App = () => {
   return (
     <>
       {/* till we don't get any response from the server, this loader should be rendered
-    instead of the routes */}
+      instead of the routes */}
       {!responseEnded ? (
         <FullPageLoader />
       ) : (
@@ -83,13 +85,21 @@ const App = () => {
           <Nav />
 
           <Switch>
+            {/* Home page */}
             <Route path="/" exact component={Home} />
+            {/* The login page */}
             <Route path="/login" component={Login} />
+            {/* The registration / signup page */}
             <Route path="/register" component={Register} />
+            {/* The profile page */}
             <Route path="/profile/:id" component={Profile} />
+            {/* The shopping cart of the authenticated user */}
             <Route path="/cart" component={Cart} />
+            {/* the settings page of the authenticated user */}
             <Route path="/settings" component={Settings} />
+            {/* 404 not found page */}
             <Route path="/notFound" component={NotFound} />
+            {/* if a route doesn't exists */}
             <Route path="*" component={NotFound} />
           </Switch>
         </Router>
