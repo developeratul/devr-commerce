@@ -14,7 +14,7 @@
     height: 100%;
     background: #0d121915;
     backdrop-filter: blur(5px);
-    border-right: 1px solid $themeColor;
+    border-right: 1px solid $bgSecondary;
     overflow-x: hidden;
     @include flex(center, center, column);
     .update_avatar_content_container {

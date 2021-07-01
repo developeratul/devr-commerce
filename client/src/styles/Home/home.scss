@@ -1,1 +1,70 @@
 @import "../partials/common";
+
+.home_page {
+  // not auth view
+  .home_header {
+    padding: 50px 0 150px 0;
+    min-height: 60vh;
+    background: linear-gradient(to top, $bgColor, $themeColor);
+    .header_content_wrapper {
+      @include flex(space-between, center, stretch);
+      .header_img {
+        width: 450px;
+        img {
+          width: 100%;
+        }
+      }
+
+      .header_desc {
+        width: 450px;
+        h1 {
+          font-family: $font;
+          margin-bottom: 10px;
+        }
+
+        a {
+          margin-top: 10px;
+          display: inline-block;
+          background: #489cff;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+  // auth view
+}
+
+@media screen and (max-width: 1024px) {
+  .home_page {
+    .home_header {
+      .header_content_wrapper {
+        .header_img {
+          width: 350px;
+        }
+
+        .header_desc {
+          width: 300px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .home_page {
+    .home_header {
+      .header_content_wrapper {
+        .header_img {
+          width: 100%;
+          max-width: 300px;
+        }
+
+        .header_desc {
+          width: 100%;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
