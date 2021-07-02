@@ -2,6 +2,7 @@
 
 // dependencies
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 
 // utils
 const { cloudinary } = require("../utils/cloudinary");
@@ -14,7 +15,6 @@ module.exports = {
   getUser: async function (req, res, next) {
     try {
       const { id } = req.params;
-      console.log(id);
 
       // checking if the id is valid for mongoose query operation
       if (mongoose.Types.ObjectId.isValid(id)) {
@@ -39,8 +39,6 @@ module.exports = {
     try {
       const { userId } = req.body;
 
-      console.log(req.body);
-
       // uploading in cloudinary
       const cloudinaryRes = await cloudinary.uploader.upload(req.file.path, {
         folder: "devR-Commerce/users",
@@ -62,6 +60,55 @@ module.exports = {
         user.save();
 
         res.status(200).json({ message: "Avatar Updated", user });
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  // * for updating user account information like email, username etc
+  updateAccountInformation: async function (req, res, next) {
+    try {
+      const { name, email, phone, about, country, showEmail, showPhone, id } =
+        req.body;
+
+      await User.findById(id, (err, user) => {
+        if (err) {
+          res.send(err);
+        }
+
+        user.name = name;
+        user.email = email;
+        user.phone = phone;
+        if (about) user.about = about;
+        user.country = country;
+        user.showEmail = showEmail;
+        user.showPhone = showPhone;
+
+        user.save();
+
+        res.status(201).json({ message: "Account updated successfully", user });
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  // * for updating user security information (password)
+  updateSecurityInformation: async function (req, res, next) {
+    try {
+      const { password, id } = req.body;
+
+      await User.findById(id, (err, user) => {
+        if (err) {
+          next(err);
+        }
+
+        user.password = password;
+        user.save();
+        res
+          .status(201)
+          .json({ message: "Password updated successfully", user });
       });
     } catch (err) {
       next(err);

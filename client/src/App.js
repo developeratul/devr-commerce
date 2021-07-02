@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // actions
 import { logInUser, logOutUser } from "./redux/actions/authActions";
@@ -22,6 +22,8 @@ import Settings from "./pages/Settings";
 
 const App = () => {
   const [responseEnded, setResponseEnded] = useState(false);
+  const userInfo = useSelector((state) => state.authReducer);
+  const { isAuthenticated, isLoading } = userInfo;
   const dispatch = useDispatch();
 
   // for checking if the user is authenticated
@@ -81,25 +83,20 @@ const App = () => {
             limit={2}
           />
 
-          {/* nav bar */}
           <Nav />
 
           <Switch>
-            {/* Home page */}
             <Route path="/" exact component={Home} />
-            {/* The login page */}
             <Route path="/login" component={Login} />
-            {/* The registration / signup page */}
             <Route path="/register" component={Register} />
-            {/* The profile page */}
             <Route path="/profile/:id" component={Profile} />
-            {/* The shopping cart of the authenticated user */}
-            <Route path="/cart" component={Cart} />
-            {/* the settings page of the authenticated user */}
-            <Route path="/settings" component={Settings} />
-            {/* 404 not found page */}
-            <Route path="/notFound" component={NotFound} />
-            {/* if a route doesn't exists */}
+            {/* if the user is not authenticated, he is unable to access the cart and settings page */}
+            {isAuthenticated && !isLoading ? (
+              <>
+                <Route path="/cart" component={Cart} />
+                <Route path="/settings" component={Settings} />
+              </>
+            ) : null}
             <Route path="*" component={NotFound} />
           </Switch>
         </Router>

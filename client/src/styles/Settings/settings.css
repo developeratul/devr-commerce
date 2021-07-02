@@ -478,7 +478,7 @@ nav .nav_active {
 }
 .settings_page {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   flex-direction: stretch;
@@ -541,16 +541,74 @@ nav .nav_active {
   -webkit-backdrop-filter: blur(5px);
           backdrop-filter: blur(5px);
 }
+.settings_page .settings_update_other_info .app_bar {
+  background: #0d1219;
+  color: #fff !important;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings {
+  padding: 30px 0px;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .title {
+  text-align: center;
+  font-family: Josefin Sans;
+  color: #7976fc;
+  margin-bottom: 20px;
+  font-size: 2rem;
+  text-shadow: 0 0 5px #000;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container {
+  width: 90%;
+  margin: auto;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field input,
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field textarea,
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field select {
+  width: 100%;
+  padding: 15px 10px;
+  background: #1a2634;
+  border: 1px solid #1a2634;
+  color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 0 5px #7976fc;
+  font-size: 1.05rem;
+  resize: vertical;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field input:focus,
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field textarea:focus,
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field select:focus {
+  border-color: #7976fc;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field input::-moz-placeholder, .settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field textarea::-moz-placeholder, .settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field select::-moz-placeholder {
+  color: #7976fc;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field input:-ms-input-placeholder, .settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field textarea:-ms-input-placeholder, .settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field select:-ms-input-placeholder {
+  color: #7976fc;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field input::placeholder,
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field textarea::placeholder,
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field select::placeholder {
+  color: #7976fc;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field button {
+  background: #7976fc;
+  width: 100%;
+  color: #fff;
+  padding: 15px 0;
+}
 
 @media screen and (max-width: 1024px) {
   .settings_page .settings_update_avatar {
-    flex: 1;
-  }
-  .settings_page .settings_update_other_info {
     flex: 1.5;
   }
+  .settings_page .settings_update_other_info {
+    flex: 2;
+  }
 }
-@media screen and (max-width: 1024px) {
+@media screen and (max-width: 768px) {
   .settings_page {
     overflow-y: scroll;
     padding: 30px 0px;
@@ -569,9 +627,8 @@ nav .nav_active {
   .settings_page .settings_update_other_info {
     flex: none;
     height: auto;
-    width: 90%;
-    box-shadow: 0 0 5px #7976fc;
-    border-radius: 5px;
+    width: 100%;
+    border-radius: 0;
     border: none;
   }
 }/*# sourceMappingURL=settings.css.map */

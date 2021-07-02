@@ -56,10 +56,6 @@ const UpdateAvatar = ({ user }) => {
 
       const body = await res.json();
 
-      if (res.headersSent) {
-        console.log("headers sent");
-      }
-
       if (res.ok) {
         dispatch(updateUser(body.user));
         history.push(`/profile/${user._id}`);
@@ -114,20 +110,6 @@ const UpdateAvatar = ({ user }) => {
               Save Changes
             </Button>
           </div>
-
-          {previewSource ? (
-            <div
-              onClick={() => {
-                setPreviewSource("");
-                setFileInput("");
-              }}
-              className="singleButton"
-            >
-              <Button variant="contained" color="secondary" fullWidth>
-                Remove Image
-              </Button>
-            </div>
-          ) : null}
         </div>
       </div>
     </div>
