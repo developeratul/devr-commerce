@@ -549,6 +549,27 @@ nav .nav_active {
 .profile_page .profile_content_container .profile_side_bar .profile_user_info .profile_user_name_and_basic_info p span {
   color: #00ff80;
 }
+.profile_page .profile_content_container .profile_side_bar .profile_user_info .profile_user_name_and_basic_info .follow_user_or_report_section {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: stretch;
+}
+.profile_page .profile_content_container .profile_side_bar .profile_user_info .profile_user_name_and_basic_info .follow_user_or_report_section .single_option button,
+.profile_page .profile_content_container .profile_side_bar .profile_user_info .profile_user_name_and_basic_info .follow_user_or_report_section .single_option a {
+  font-family: Josefin Sans;
+  text-transform: capitalize;
+  letter-spacing: 0.5px;
+  background: #7976fc;
+  color: #fff;
+  padding: 5px 20px;
+  margin: 0 10px;
+}
+.profile_page .profile_content_container .profile_side_bar .profile_user_info .profile_user_name_and_basic_info .follow_user_or_report_section .report_user button {
+  background: #1a2634;
+}
 .profile_page .profile_content_container .profile_side_bar .profile_user_info .common_user_information {
   padding: 10px;
   width: 100%;

@@ -12,6 +12,9 @@
         "originalname",
         "scrollable",
         "tabpanel",
-        "toastify"
+        "toastify",
+        "unfollow",
+        "unfollowed",
+        "unfollowing"
     ]
 }

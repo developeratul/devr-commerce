@@ -2,7 +2,6 @@
 
 // dependencies
 const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
 
 // utils
 const { cloudinary } = require("../utils/cloudinary");
@@ -69,8 +68,21 @@ module.exports = {
   // * for updating user account information like email, username etc
   updateAccountInformation: async function (req, res, next) {
     try {
-      const { name, email, phone, about, country, showEmail, showPhone, id } =
-        req.body;
+      const {
+        name,
+        email,
+        phone,
+        about,
+        country,
+        showEmail,
+        showPhone,
+        id,
+        facebook,
+        linkedIn,
+        twitter,
+        vimeo,
+        dribble,
+      } = req.body;
 
       await User.findById(id, (err, user) => {
         if (err) {
@@ -80,10 +92,16 @@ module.exports = {
         user.name = name;
         user.email = email;
         user.phone = phone;
-        if (about) user.about = about;
+        user.about = about;
         user.country = country;
         user.showEmail = showEmail;
         user.showPhone = showPhone;
+
+        user.facebook = facebook;
+        user.linkedIn = linkedIn;
+        user.twitter = twitter;
+        user.vimeo = vimeo;
+        user.dribble = dribble;
 
         user.save();
 
@@ -114,4 +132,71 @@ module.exports = {
       next(err);
     }
   },
+
+  // * for following a user
+  followUser: async function (req, res, next) {
+    try {
+      const { authUser, gettingFollowUserId } = req.body;
+
+      User.findByIdAndUpdate(
+        gettingFollowUserId,
+        {
+          $push: { followers: authUser._id },
+        },
+        { new: true },
+        (err, result) => {
+          if (err) {
+            res.status(403).send(err);
+          }
+
+          User.findByIdAndUpdate(
+            authUser._id,
+            {
+              $push: { followings: gettingFollowUserId },
+            },
+            { new: true }
+          )
+            .then((result) => res.status(200).json({ success: "Followed" }))
+            .catch((err) => res.status(402).send(err));
+        }
+      );
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  // * for unFollowing a user
+  unFollowUser: async function (req, res, next) {
+    try {
+      const { authUser, gettingFollowUserId } = req.body;
+
+      User.findByIdAndUpdate(
+        gettingFollowUserId,
+        {
+          $pull: { followers: authUser._id },
+        },
+        { new: true },
+        (err, result) => {
+          if (err) {
+            res.status(403).send(err);
+          }
+
+          User.findByIdAndUpdate(
+            authUser._id,
+            {
+              $pull: { followings: gettingFollowUserId },
+            },
+            { new: true }
+          )
+            .then((result) => res.status(200).json({ success: "UnFollowed" }))
+            .catch((err) => res.status(402).send(err));
+        }
+      );
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  // * for reporting about a user
+  reportUser: async function (req, res, next) {},
 };

@@ -9,6 +9,8 @@ const multer = require("../utils/multer");
 const { getUser, uploadAvatar } = require("../controllers/userController");
 const { updateAccountInformation } = require("../controllers/userController");
 const { updateSecurityInformation } = require("../controllers/userController");
+const { followUser, reportUser } = require("../controllers/userController");
+const { unFollowUser } = require("../controllers/userController");
 
 // for getting the data of a user according to the id
 router.get("/user_id/:id", getUser);
@@ -26,5 +28,14 @@ router.post(
   checkAuth,
   updateSecurityInformation
 );
+
+// for following a user
+router.post("/follow_user", followUser);
+
+// for unFollowing a user
+router.post("/unfollow_user", unFollowUser);
+
+// for reporting about a user
+router.post("/report_user", reportUser);
 
 module.exports = router;

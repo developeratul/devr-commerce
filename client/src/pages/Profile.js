@@ -52,7 +52,7 @@ const Profile = () => {
     document.title = "Loading...";
 
     return () => abortController.abort();
-  }, []);
+  }, [id]);
 
   return (
     <div className="profile_page">

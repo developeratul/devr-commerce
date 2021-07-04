@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // actions
 import { logInUser, logOutUser } from "./redux/actions/authActions";
@@ -22,8 +22,6 @@ import Settings from "./pages/Settings";
 
 const App = () => {
   const [responseEnded, setResponseEnded] = useState(false);
-  const userInfo = useSelector((state) => state.authReducer);
-  const { isAuthenticated, isLoading } = userInfo;
   const dispatch = useDispatch();
 
   // for checking if the user is authenticated
@@ -53,7 +51,7 @@ const App = () => {
         dispatch(logOutUser());
       }
     } catch (err) {
-      alert("we are having unexpected server error please come back later");
+      dispatch(logOutUser());
     }
   }
 
@@ -69,7 +67,6 @@ const App = () => {
         <FullPageLoader />
       ) : (
         <Router>
-          {/* toast container */}
           <ToastContainer
             position="top-center"
             autoClose={5000}
@@ -90,13 +87,9 @@ const App = () => {
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/profile/:id" component={Profile} />
-            {/* if the user is not authenticated, he is unable to access the cart and settings page */}
-            {isAuthenticated && !isLoading ? (
-              <>
-                <Route path="/cart" component={Cart} />
-                <Route path="/settings" component={Settings} />
-              </>
-            ) : null}
+            <Route path="/cart" component={Cart} />
+            <Route path="/settings" component={Settings} />
+            <Route path="/notfound" component={NotFound} />
             <Route path="*" component={NotFound} />
           </Switch>
         </Router>

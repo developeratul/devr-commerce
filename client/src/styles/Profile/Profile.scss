@@ -59,6 +59,28 @@
               color: $successColor;
             }
           }
+
+          .follow_user_or_report_section {
+            margin-top: 20px;
+            @include flex(center, center, stretch);
+            .single_option {
+              button,
+              a {
+                font-family: $font;
+                text-transform: capitalize;
+                letter-spacing: 0.5px;
+                background: $themeColor;
+                color: #fff;
+                padding: 5px 20px;
+                margin: 0 10px;
+              }
+            }
+            .report_user {
+              button {
+                background: $bgSecondary;
+              }
+            }
+          }
         }
         // common user info
         .common_user_information {

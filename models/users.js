@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Schema.Types;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -10,6 +11,16 @@ const dataSchema = new mongoose.Schema({
   country: { type: String, required: true },
   phone: { type: String, required: true },
   about: { type: String, default: "" },
+
+  facebook: { type: String, default: "" },
+  linkedIn: { type: String, default: "" },
+  twitter: { type: String, default: "" },
+  vimeo: { type: String, default: "" },
+  dribble: { type: String, default: "" },
+
+  reports: [{ type: ObjectId, ref: "USER" }],
+  followers: [{ type: ObjectId, ref: "USER" }],
+  followings: [{ type: ObjectId, ref: "USER" }],
 
   photoUrl: { type: String, default: "" },
   photoId: { type: String, default: "" },

@@ -13,14 +13,35 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
     phone: user.phone,
     about: user.about,
     country: user.country,
-    showEmail: user.showEmail.toString(),
-    showPhone: user.showPhone.toString(),
+
+    facebook: user.facebook,
+    linkedIn: user.linkedIn,
+    twitter: user.twitter,
+    vimeo: user.vimeo,
+    dribble: user.dribble,
+
+    showEmail: user.showEmail && user.showEmail.toString(),
+    showPhone: user.showPhone && user.showPhone.toString(),
   });
   const [countryData, setCountryData] = useState([]);
+
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const { name, email, phone, about, country, showEmail, showPhone } = formData;
+  const {
+    name,
+    email,
+    phone,
+    about,
+    country,
+    showEmail,
+    showPhone,
+    facebook,
+    linkedIn,
+    twitter,
+    vimeo,
+    dribble,
+  } = formData;
 
   function InputChange(event) {
     const { name, value } = event.target;
@@ -50,6 +71,11 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
           showEmail,
           showPhone,
           about,
+          facebook,
+          linkedIn,
+          twitter,
+          vimeo,
+          dribble,
           id: user._id,
         }),
       });
@@ -70,7 +96,7 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
   function Validate() {
     const validation = {
       nameLength: name.length <= 25,
-      allFields: name && email && country && phone && showEmail && showPhone,
+      allFields: name && email && country && phone,
       emailOk: validator.isEmail(email),
     };
     const { nameLength, allFields, emailOk } = validation;
@@ -169,6 +195,56 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
+          </div>
+
+          <div className="single_field">
+            <input
+              type="text"
+              onChange={InputChange}
+              name="facebook"
+              value={formData.facebook}
+              placeholder="Your facebook URL"
+            />
+          </div>
+
+          <div className="single_field">
+            <input
+              type="text"
+              onChange={InputChange}
+              name="linkedIn"
+              value={formData.linkedIn}
+              placeholder="Your linkedIn URL"
+            />
+          </div>
+
+          <div className="single_field">
+            <input
+              type="text"
+              onChange={InputChange}
+              name="twitter"
+              value={formData.twitter}
+              placeholder="Your twitter URL"
+            />
+          </div>
+
+          <div className="single_field">
+            <input
+              type="text"
+              onChange={InputChange}
+              name="vimeo"
+              value={formData.vimeo}
+              placeholder="Your vimeo URL"
+            />
+          </div>
+
+          <div className="single_field">
+            <input
+              type="text"
+              onChange={InputChange}
+              name="dribble"
+              value={formData.dribble}
+              placeholder="Your dribble URL"
+            />
           </div>
 
           <div className="single_field">
