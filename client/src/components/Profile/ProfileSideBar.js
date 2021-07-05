@@ -50,7 +50,6 @@ const ProfileSideBar = ({ user }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          authUser: authUser.user,
           gettingFollowUserId: user._id,
         }),
       });
@@ -72,7 +71,6 @@ const ProfileSideBar = ({ user }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          authUser: authUser.user,
           gettingFollowUserId: user._id,
         }),
       });
@@ -85,7 +83,11 @@ const ProfileSideBar = ({ user }) => {
     }
   }
 
+  // onclick action
   function ChangeFollow() {
+    // if the user is already following the user,
+    // the unfollow function should be called
+    // otherwise the follow function should be called
     if (!isFollowing) {
       follow();
     } else {
@@ -145,9 +147,9 @@ const ProfileSideBar = ({ user }) => {
               )}
             </div>
 
-            <div className="report_user single_option">
+            {/* <div className="report_user single_option">
               <Button>Report</Button>
-            </div>
+            </div> */}
           </div>
         </div>
 

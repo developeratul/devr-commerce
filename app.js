@@ -11,6 +11,7 @@ const { notFoundHandler, errorHandler } = require("./middlewares/errorHandler");
 // importing routes
 const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
+const productRouter = require("./routes/productRouter");
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -44,6 +45,8 @@ mongoose
 app.use("/get_auth", authRouter);
 // for handling all the user stuffs
 app.use("/get_user", userRouter);
+// for handling the product stuffs
+app.use("/get_product", productRouter);
 
 // for production
 if (process.env.NODE_ENV === "production") {

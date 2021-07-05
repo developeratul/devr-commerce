@@ -18,7 +18,6 @@ const dataSchema = new mongoose.Schema({
   vimeo: { type: String, default: "" },
   dribble: { type: String, default: "" },
 
-  reports: [{ type: ObjectId, ref: "USER" }],
   followers: [{ type: ObjectId, ref: "USER" }],
   followings: [{ type: ObjectId, ref: "USER" }],
 

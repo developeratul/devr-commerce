@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 // components
 import InlineLoader from "../components/InlineLoader";
 import ProfileSideBar from "../components/Profile/ProfileSideBar";
-import ProfileContentAndTabs from "../components/Profile/ProfileContentAndTabs"; //dsa dsa
+import ProfileContentAndTabs from "../components/Profile/ProfileContentAndTabs";
 
 const Profile = () => {
   const [currentUser, setCurrentUser] = useState({});

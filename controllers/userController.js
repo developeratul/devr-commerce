@@ -136,7 +136,8 @@ module.exports = {
   // * for following a user
   followUser: async function (req, res, next) {
     try {
-      const { authUser, gettingFollowUserId } = req.body;
+      const { gettingFollowUserId } = req.body;
+      const authUser = req.user;
 
       User.findByIdAndUpdate(
         gettingFollowUserId,
@@ -168,7 +169,8 @@ module.exports = {
   // * for unFollowing a user
   unFollowUser: async function (req, res, next) {
     try {
-      const { authUser, gettingFollowUserId } = req.body;
+      const { gettingFollowUserId } = req.body;
+      const authUser = req.user;
 
       User.findByIdAndUpdate(
         gettingFollowUserId,
@@ -196,7 +198,4 @@ module.exports = {
       next(err);
     }
   },
-
-  // * for reporting about a user
-  reportUser: async function (req, res, next) {},
 };

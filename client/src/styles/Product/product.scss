@@ -1,0 +1,54 @@
+@import "../partials/common";
+
+.product_page {
+  // the floating button for the authenticated sellers
+  .product_page_floating_button {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 20px;
+    z-index: 5;
+    button {
+      background: $themeColor;
+      svg {
+        fill: #fff;
+      }
+    }
+  }
+
+  // the create product modal for the authenticated seller
+  .create_product_modal {
+    display: none;
+    visibility: hidden;
+    width: 100vw;
+    height: 100vh;
+    padding: 100px 0 50px 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    @include flex(center, center, stretch);
+    background: #0d121980;
+    backdrop-filter: blur(5px);
+    overflow-x: hidden;
+    .close_modal_button {
+      position: fixed;
+      top: 0;
+      left: 0;
+      margin: 20px;
+      button {
+        background: $bgSecondary;
+        svg {
+          fill: red;
+        }
+      }
+    }
+    .create_product_modal_content_container {
+      width: 100%;
+      background: $bgSecondary;
+      padding: 20px 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 5px $themeColor;
+    }
+  }
+}

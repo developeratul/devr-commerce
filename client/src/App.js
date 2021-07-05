@@ -19,6 +19,7 @@ import Profile from "./pages/Profile";
 import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 import Settings from "./pages/Settings";
+import Product from "./pages/Product";
 
 const App = () => {
   const [responseEnded, setResponseEnded] = useState(false);
@@ -89,6 +90,7 @@ const App = () => {
             <Route path="/profile/:id" component={Profile} />
             <Route path="/cart" component={Cart} />
             <Route path="/settings" component={Settings} />
+            <Route path="/products" component={Product} />
             <Route path="/notfound" component={NotFound} />
             <Route path="*" component={NotFound} />
           </Switch>

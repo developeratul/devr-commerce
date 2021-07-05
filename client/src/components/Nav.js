@@ -90,9 +90,15 @@ const Nav = () => {
       </h2>
 
       <ul className="navLinks" ref={listNavRef}>
+        {/* universals */}
         <li>
           <NavLink activeClassName="nav_active" to="/" exact>
             Home
+          </NavLink>
+        </li>
+        <li>
+          <NavLink activeClassName="nav_active" to="/products">
+            Products
           </NavLink>
         </li>
 
