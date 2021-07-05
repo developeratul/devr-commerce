@@ -46,9 +46,41 @@
     .create_product_modal_content_container {
       width: 100%;
       background: $bgSecondary;
-      padding: 20px 10px;
+      padding: 30px 10px;
       border-radius: 5px;
       box-shadow: 0 0 5px $themeColor;
+      .title {
+        color: $themeColor;
+        text-align: center;
+        margin-bottom: 30px;
+        font-family: $font;
+      }
+      .form_container {
+        width: 100%;
+        .single_field {
+          width: 90%;
+          margin: 10px auto;
+          input,
+          select,
+          textarea {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #fff;
+            background: #fff;
+            border-radius: 3px;
+            resize: vertical;
+            &:focus {
+              border-color: $themeColor;
+            }
+          }
+          button {
+            width: 100%;
+            background: $themeColor;
+            color: #fff;
+            padding: 10px 0px;
+          }
+        }
+      }
     }
   }
 }

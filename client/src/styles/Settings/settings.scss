@@ -68,6 +68,12 @@
       .fields_container {
         width: 90%;
         margin: auto;
+        .not_a_seller_view {
+          h2 {
+            font-family: $font;
+            margin-bottom: 20px;
+          }
+        }
         .single_field {
           width: 100%;
           margin-bottom: 15px;

@@ -9,6 +9,10 @@
   text-decoration: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -559,6 +563,10 @@ nav .nav_active {
 .settings_page .settings_update_other_info .tab_panel_single_settings .fields_container {
   width: 90%;
   margin: auto;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .not_a_seller_view h2 {
+  font-family: Josefin Sans;
+  margin-bottom: 20px;
 }
 .settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field {
   width: 100%;

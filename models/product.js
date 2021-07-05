@@ -4,15 +4,19 @@ const ObjectId = mongoose.Types.ObjectId;
 const dataSchema = new mongoose.Schema({
   title: { type: String, required: true },
   desc: { type: String, required: true },
+
   uploadTime: {
     type: String,
     default: `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`,
   },
+  uploadDate: { type: String, default: new Date().toLocaleDateString() },
+
   images: [{ photoId: String, photoUrl: String }],
   price: { type: String, required: true },
   max_quantity: { type: String, required: true },
-  shippingCountries: { type: Array, required: true },
-  userId: { type: ObjectId, ref: "USER", required: true },
+
+  // storing the user id to populate his information's
+  user: { type: ObjectId, ref: "USER", required: true },
 
   product_category: {
     type: String,
@@ -37,8 +41,7 @@ const dataSchema = new mongoose.Schema({
     ],
   },
 
-  //   * add shipping options once I have completed working on the store settings page
-  //   shipping_options: []
+  shipping_options: { type: Array, required: true },
 });
 
 const Product = new mongoose.model("PRODUCT", dataSchema);

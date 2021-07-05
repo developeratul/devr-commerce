@@ -1,6 +1,7 @@
 import "../styles/Product/product.css";
 import { useSelector } from "react-redux";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
+import config from "../config";
 
 // components
 import FloatingButton from "../components/Product/FloatingButton";
@@ -11,35 +12,20 @@ const Product = () => {
 
   const createProductModalRef = useRef();
 
+  useEffect(() => {
+    document.title = `${config.applicationName} / Products`;
+  }, []);
+
   return (
     <div className="product_page">
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
-      <h1>Hello world</h1>
       <h1>Hello world</h1>
 
       {/* if the user is authenticated and if he is a seller than he is able to click on that button */}
       {isAuthenticated && user.isSeller && (
-        <FloatingButton createProductModalRef={createProductModalRef} />
-      )}
-      {isAuthenticated && user.isSeller && (
-        <CreateProductModal createProductModalRef={createProductModalRef} />
+        <>
+          <FloatingButton createProductModalRef={createProductModalRef} />
+          <CreateProductModal createProductModalRef={createProductModalRef} />
+        </>
       )}
     </div>
   );

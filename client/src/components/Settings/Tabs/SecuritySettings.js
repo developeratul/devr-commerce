@@ -31,7 +31,7 @@ const SecuritySettings = ({ TabPanel, value, theme, user }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id: user._id, password: newPass }),
+        body: JSON.stringify({ password: newPass }),
       });
 
       const body = await res.json();

@@ -32,7 +32,7 @@ const ProfileSideBar = ({ user }) => {
   function checkFollowingStatus() {
     if (user.followers) {
       for (let i = 0; i < user.followers.length; i++) {
-        if (user.followers[i] === authUser.user._id) {
+        if (user.followers[i]._id === authUser.user._id) {
           setIsFollowing(true);
         } else {
           setIsFollowing(false);
@@ -157,36 +157,37 @@ const ProfileSideBar = ({ user }) => {
           <p>
             This guy is a seller: <span>{user.isSeller ? "Yes" : "no"}</span>
           </p>
-          {/* if this guy is a seller */}
           {user.isSeller ? (
             <p>
               Total sales: <span>{user.totalSales}</span>
             </p>
           ) : null}
-          {/* what type of products does he sells */}
-          {user.isSeller && user.productCategory ? (
+
+          {user.isSeller && user.productCategory && (
             <p>
               Product Category: <span>{user.productCategory}</span>
             </p>
-          ) : null}
-          {/* if this guy want to show his email */}
-          {user.showEmail && user.isSeller ? (
+          )}
+
+          {user.showEmail && (
             <p>
               Email: <span>{user.email}</span>
             </p>
-          ) : null}
-          {/* if the user wants to show his phone number */}
-          {user.showPhone && user.isSeller ? (
+          )}
+
+          {user.showPhone && (
             <p>
               Phone: <span>{user.phone}</span>
             </p>
-          ) : null}
+          )}
+
           <p>
             Member since: <span>{user.memberSince}</span>
           </p>
-          {user.isVerified ? (
+
+          {user.isVerified && (
             <p className="verifiedText">Verified and trusted by devR</p>
-          ) : null}
+          )}
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ const FloatingButton = ({ createProductModalRef }) => {
     const modal = createProductModalRef.current;
 
     modal.style.visibility = "visible";
+    modal.style.display = "flex";
     document.body.style.overflow = "hidden";
   }
 

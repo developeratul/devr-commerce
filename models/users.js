@@ -12,6 +12,8 @@ const dataSchema = new mongoose.Schema({
   phone: { type: String, required: true },
   about: { type: String, default: "" },
 
+  products: [{ type: mongoose.Types.ObjectId, ref: "PRODUCT" }],
+
   facebook: { type: String, default: "" },
   linkedIn: { type: String, default: "" },
   twitter: { type: String, default: "" },
@@ -56,6 +58,8 @@ const dataSchema = new mongoose.Schema({
 
   showEmail: { type: Boolean, enum: [true, false], default: false },
   showPhone: { type: Boolean, enum: [true, false], default: false },
+
+  shipping_options: { type: Array },
 
   socialLinks: [{ title: String, url: String }],
   // for storing the auth tokens

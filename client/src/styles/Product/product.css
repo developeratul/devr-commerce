@@ -9,6 +9,10 @@
   text-decoration: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 ::-webkit-scrollbar {
   width: 5px;
 }
@@ -524,7 +528,41 @@ nav .nav_active {
 .product_page .create_product_modal .create_product_modal_content_container {
   width: 100%;
   background: #1a2634;
-  padding: 20px 10px;
+  padding: 30px 10px;
   border-radius: 5px;
   box-shadow: 0 0 5px #7976fc;
+}
+.product_page .create_product_modal .create_product_modal_content_container .title {
+  color: #7976fc;
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: Josefin Sans;
+}
+.product_page .create_product_modal .create_product_modal_content_container .form_container {
+  width: 100%;
+}
+.product_page .create_product_modal .create_product_modal_content_container .form_container .single_field {
+  width: 90%;
+  margin: 10px auto;
+}
+.product_page .create_product_modal .create_product_modal_content_container .form_container .single_field input,
+.product_page .create_product_modal .create_product_modal_content_container .form_container .single_field select,
+.product_page .create_product_modal .create_product_modal_content_container .form_container .single_field textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #fff;
+  background: #fff;
+  border-radius: 3px;
+  resize: vertical;
+}
+.product_page .create_product_modal .create_product_modal_content_container .form_container .single_field input:focus,
+.product_page .create_product_modal .create_product_modal_content_container .form_container .single_field select:focus,
+.product_page .create_product_modal .create_product_modal_content_container .form_container .single_field textarea:focus {
+  border-color: #7976fc;
+}
+.product_page .create_product_modal .create_product_modal_content_container .form_container .single_field button {
+  width: 100%;
+  background: #7976fc;
+  color: #fff;
+  padding: 10px 0px;
 }/*# sourceMappingURL=product.css.map */

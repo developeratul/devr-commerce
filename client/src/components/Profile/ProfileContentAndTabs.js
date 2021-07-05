@@ -62,8 +62,8 @@ const ProfileContentAndTabs = ({ user }) => {
             aria-label="full width tabs example"
           >
             <Tab label="About" {...a11yProps(0)} />
-            {user.isSeller ? <Tab label="Store" {...a11yProps(1)} /> : null}
-            {user.isSeller ? <Tab label="Reviews" {...a11yProps(2)} /> : null}
+            <Tab label="Store" {...a11yProps(1)} />
+            <Tab label="Reviews" {...a11yProps(2)} />
           </Tabs>
         </AppBar>
 
@@ -81,9 +81,6 @@ const ProfileContentAndTabs = ({ user }) => {
             <h1>Hello world</h1>
           </TabPanel>
           <TabPanel value={value} index={2} dir={theme.direction}>
-            <h1>Hello world</h1>
-          </TabPanel>
-          <TabPanel value={value} index={3} dir={theme.direction}>
             <h1>Hello world</h1>
           </TabPanel>
         </SwipeableViews>

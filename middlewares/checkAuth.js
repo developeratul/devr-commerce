@@ -6,7 +6,9 @@ const checkAuth = async (req, res, next) => {
     const token = req.cookies.auth;
     const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
 
-    const user = await User.findOne({ _id: verifyToken.id });
+    const user = await User.findOne({ _id: verifyToken.id }).populate(
+      "products"
+    );
 
     if (!user) {
       throw new Error("User not found");

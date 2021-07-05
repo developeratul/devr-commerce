@@ -9,6 +9,7 @@ import Box from "@material-ui/core/Box";
 
 import AccountSettings from "./Tabs/AccountSettings";
 import SecuritySettings from "./Tabs/SecuritySettings";
+import StoreSettings from "./Tabs/StoreSettings";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -90,8 +91,8 @@ const UpdateOtherInfo = ({ user }) => {
           value={value}
         />
 
-        {/* All the security password settings will be here */}
-        <SecuritySettings
+        {/* All the store settings will be here */}
+        <StoreSettings
           user={user}
           TabPanel={TabPanel}
           theme={theme.direction}

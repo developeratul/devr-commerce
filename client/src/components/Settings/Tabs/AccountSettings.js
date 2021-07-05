@@ -76,7 +76,6 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
           twitter,
           vimeo,
           dribble,
-          id: user._id,
         }),
       });
 

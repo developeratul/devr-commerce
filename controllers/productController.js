@@ -1,6 +1,9 @@
 // utils
-const Product = require("../models/product");
 const { cloudinary } = require("../utils/cloudinary");
+
+// models
+const Product = require("../models/product");
+const User = require("../models/users");
 
 module.exports = {
   // * for uploading a product
@@ -26,12 +29,18 @@ module.exports = {
       // creating a new product instance
       const newProduct = new Product({
         ...req.body,
-        userId: req.user._id,
+        user: req.user._id,
         images: allImagesSeparatedInObject,
       });
 
       // saving the product in my database
-      await newProduct.save();
+      const savedProduct = await newProduct.save();
+
+      // creating relation between these two collections: Product and User
+      await User.updateOne(
+        { _id: req.user._id },
+        { $push: { products: savedProduct._id } }
+      );
 
       res
         .status(200)

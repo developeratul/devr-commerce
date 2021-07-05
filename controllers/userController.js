@@ -17,7 +17,10 @@ module.exports = {
 
       // checking if the id is valid for mongoose query operation
       if (mongoose.Types.ObjectId.isValid(id)) {
-        const user = await User.findOne({ _id: id });
+        const user = await User.findOne({ _id: id })
+          .populate("products")
+          .populate("followers")
+          .populate("followings");
 
         // checking if the user exists
         if (user) {
@@ -76,13 +79,13 @@ module.exports = {
         country,
         showEmail,
         showPhone,
-        id,
         facebook,
         linkedIn,
         twitter,
         vimeo,
         dribble,
       } = req.body;
+      const id = req.user;
 
       await User.findById(id, (err, user) => {
         if (err) {
@@ -115,7 +118,8 @@ module.exports = {
   // * for updating user security information (password)
   updateSecurityInformation: async function (req, res, next) {
     try {
-      const { password, id } = req.body;
+      const { password } = req.body;
+      const id = req.user._id;
 
       await User.findById(id, (err, user) => {
         if (err) {
@@ -128,6 +132,35 @@ module.exports = {
           .status(201)
           .json({ message: "Password updated successfully", user });
       });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  // * for updating the store information's of the user
+  updateStoreInformation: async function (req, res, next) {
+    try {
+      const id = req.user._id;
+      const type = req.body;
+
+      // if the user is not a seller at first make him seller
+      if (type === "make_him_seller") {
+        const { isSeller } = req.body;
+
+        await User.findById(id, (err, user) => {
+          if (err) {
+            next(err);
+          }
+
+          user.isSeller = isSeller;
+
+          user.save();
+
+          res.status(201).json({ user, message: "Now you are a seller" });
+        });
+      }
+
+      // then he will be able to edit the other settings
     } catch (err) {
       next(err);
     }
