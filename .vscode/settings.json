@@ -1,21 +1,25 @@
 {
-    "cSpell.words": [
-        "Iker",
-        "MERN",
-        "Swipeable",
-        "bussiness",
-        "cloudinary",
-        "devr",
-        "dropzone",
-        "haspopup",
-        "labelledby",
-        "middlewares",
-        "originalname",
-        "scrollable",
-        "tabpanel",
-        "toastify",
-        "unfollow",
-        "unfollowed",
-        "unfollowing"
-    ]
+  "cSpell.words": [
+    "Iker",
+    "MERN",
+    "Swipeable",
+    "bussiness",
+    "cloudinary",
+    "devr",
+    "dropzone",
+    "haspopup",
+    "labelledby",
+    "middlewares",
+    "originalname",
+    "scrollable",
+    "tabpanel",
+    "toastify",
+    "unfollow",
+    "unfollowed",
+    "unfollowing"
+  ],
+
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  }
 }

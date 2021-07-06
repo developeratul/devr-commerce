@@ -1,5 +1,5 @@
 // this modal will contain all the things which are required to create a product
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 import { useSelector } from "react-redux";
@@ -20,19 +20,26 @@ const CreateProductModal = ({ createProductModalRef, user }) => {
   });
   // for containing the uploaded files
   const [fileAra, setFileAra] = useState([]);
+
+  const [previewFileObject, setPreviewFileObject] = useState([]);
   const productCategories = useSelector((state) => state.getProductCategories);
 
   // handling the drop-zone drop
   const onDrop = useCallback((acceptedFiles) => {
-    setFileAra(acceptedFiles);
+    console.log(acceptedFiles);
+
+    if (acceptedFiles.length > 10) {
+      toast.error("You can not add upto 10 images");
+    } else if (acceptedFiles.length <= 10) {
+      setFileAra(acceptedFiles);
+    }
   }, []);
 
   // for handling the file upload drop-zone
-  const { fileRejections, getRootProps, getInputProps, isDragActive } =
-    useDropzone({
-      onDrop,
-      accept: "image/jpeg, image/png image/jpg",
-    });
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: "image/jpeg, image/png",
+  });
 
   // for closing the modal
   function CloseModal() {
@@ -58,13 +65,6 @@ const CreateProductModal = ({ createProductModalRef, user }) => {
 
     setInput((pre) => ({ ...pre, [name]: value }));
   }
-
-  // ! if the uploaded file is not acceptable
-  useEffect(() => {
-    if (fileRejections.length > 0) {
-      toast.error(fileRejections[0].errors[0].message);
-    }
-  }, [fileRejections]);
 
   return (
     <div className="create_product_modal" ref={createProductModalRef}>
@@ -170,15 +170,15 @@ const CreateProductModal = ({ createProductModalRef, user }) => {
                     <input {...getInputProps()} />
 
                     {isDragActive ? (
-                      <p>Drop your files here</p>
+                      <p>Drop your files here...</p>
                     ) : (
-                      <p>Drag and Drop you product images or Click here</p>
+                      <p>Drag and Drop your product images or Click here</p>
                     )}
                   </div>
                 </div>
               ) : (
                 <div className="image_container">
-                  {fileAra.map((file) => (
+                  {fileAra.map((file, index) => (
                     <p>{file.path}</p>
                   ))}
                 </div>

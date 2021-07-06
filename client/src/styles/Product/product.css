@@ -589,4 +589,10 @@ nav .nav_active {
   background: #7976fc;
   color: #fff;
   padding: 10px 0px;
+}
+
+@media screen and (max-width: 768px) {
+  .product_page .create_product_modal .create_product_modal_content_container .form_container .single_field {
+    width: 100%;
+  }
 }/*# sourceMappingURL=product.css.map */
