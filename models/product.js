@@ -12,8 +12,8 @@ const dataSchema = new mongoose.Schema({
   uploadDate: { type: String, default: new Date().toLocaleDateString() },
 
   images: [{ photoId: String, photoUrl: String }],
-  price: { type: String, required: true },
-  max_quantity: { type: String, required: true },
+  price: { type: Number, required: true },
+  max_quantity: { type: Number, required: true },
 
   // storing the user id to populate his information's
   user: { type: ObjectId, ref: "USER", required: true },

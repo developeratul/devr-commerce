@@ -607,6 +607,48 @@ nav .nav_active {
   color: #fff;
   padding: 15px 0;
 }
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .add_shipping_option_section {
+  margin-bottom: 30px;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .add_shipping_option_section h2 {
+  margin-bottom: 20px;
+  font-family: Josefin Sans;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .add_shipping_option_section .previous_options {
+  padding: 50px 0 20px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: stretch;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .add_shipping_option_section .previous_options .single_shipping_option {
+  width: 45%;
+  background: #1a2634;
+  border-radius: 3px;
+  margin: 10px 0px;
+  padding: 10px;
+  height: 200px;
+  overflow: scroll;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .add_shipping_option_section .previous_options .single_shipping_option .actions {
+  text-align: right;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .add_shipping_option_section .previous_options .single_shipping_option .actions svg {
+  color: #7976fc;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .add_shipping_option_section .previous_options .single_shipping_option p span {
+  padding: 0px 5px;
+  font-family: Josefin Sans;
+  color: #00ff80;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .add_shipping_option_section .previous_options .single_shipping_option h1 {
+  color: #7976fc;
+  font-size: 1.5rem;
+}
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .add_shipping_option_section .previous_options .no_message h2 {
+  text-align: center;
+}
 
 @media screen and (max-width: 1024px) {
   .settings_page .settings_update_avatar {
@@ -638,5 +680,13 @@ nav .nav_active {
     width: 100%;
     border-radius: 0;
     border: none;
+  }
+  .settings_page .settings_update_other_info .tab_panel_single_settings .fields_container {
+    width: 95%;
+  }
+  .settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field input,
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field textarea,
+.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .single_field select {
+    font-size: 1rem;
   }
 }/*# sourceMappingURL=settings.css.map */

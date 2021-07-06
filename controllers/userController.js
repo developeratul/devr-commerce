@@ -141,26 +141,44 @@ module.exports = {
   updateStoreInformation: async function (req, res, next) {
     try {
       const id = req.user._id;
-      const type = req.body;
 
-      // if the user is not a seller at first make him seller
-      if (type === "make_him_seller") {
-        const { isSeller } = req.body;
+      const { shippingOptions } = req.body;
 
-        await User.findById(id, (err, user) => {
-          if (err) {
-            next(err);
-          }
+      await User.findById(id, (err, user) => {
+        if (err) {
+          next(err);
+        }
 
-          user.isSeller = isSeller;
+        user.shipping_options = shippingOptions;
 
-          user.save();
+        user.save();
 
-          res.status(201).json({ user, message: "Now you are a seller" });
-        });
-      }
+        res
+          .status(200)
+          .json({ message: "Store settings updated successfully", user });
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
 
-      // then he will be able to edit the other settings
+  // * for making the user a seller
+  makeHimSeller: async function (req, res, next) {
+    try {
+      const id = req.user._id;
+      const { isSeller } = req.body;
+
+      await User.findById(id, (err, user) => {
+        if (err) {
+          next(err);
+        }
+
+        user.isSeller = isSeller;
+
+        user.save();
+
+        res.status(200).json({ message: "Now you are a seller!", user });
+      });
     } catch (err) {
       next(err);
     }

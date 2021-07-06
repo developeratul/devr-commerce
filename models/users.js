@@ -59,9 +59,8 @@ const dataSchema = new mongoose.Schema({
   showEmail: { type: Boolean, enum: [true, false], default: false },
   showPhone: { type: Boolean, enum: [true, false], default: false },
 
-  shipping_options: { type: Array },
+  shipping_options: [{ title: String, charge: Number, countries: Array }],
 
-  socialLinks: [{ title: String, url: String }],
   // for storing the auth tokens
   tokens: [{ token: { type: String } }],
 });

@@ -14,6 +14,8 @@ const { updateStoreInformation } = require("../controllers/userController");
 
 const { followUser, unFollowUser } = require("../controllers/userController");
 
+const { makeHimSeller } = require("../controllers/userController");
+
 // for getting the data of a user according to the id
 router.get("/user_id/:id", getUser);
 
@@ -30,6 +32,9 @@ router.post(
   checkAuth,
   updateSecurityInformation
 );
+
+// for making the user a seller
+router.post("/make_him_seller", checkAuth, makeHimSeller);
 
 // for updating the store information's of a user
 router.post("/update_store_information", checkAuth, updateStoreInformation);

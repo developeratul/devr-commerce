@@ -103,6 +103,51 @@
             padding: 15px 0;
           }
         }
+
+        .add_shipping_option_section {
+          margin-bottom: 30px;
+          h2 {
+            margin-bottom: 20px;
+            font-family: $font;
+          }
+
+          .previous_options {
+            padding: 50px 0 20px 0;
+            @include flex(space-around, center, stretch);
+            .single_shipping_option {
+              width: 45%;
+              background: $bgSecondary;
+              border-radius: 3px;
+              margin: 10px 0px;
+              padding: 10px;
+              height: 200px;
+              overflow: scroll;
+              .actions {
+                text-align: right;
+                svg {
+                  color: $themeColor;
+                }
+              }
+              p {
+                span {
+                  padding: 0px 5px;
+                  font-family: $font;
+                  color: $successColor;
+                }
+              }
+              h1 {
+                color: $themeColor;
+                font-size: 1.5rem;
+              }
+            }
+
+            .no_message {
+              h2 {
+                text-align: center;
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -144,6 +189,18 @@
       width: 100%;
       border-radius: 0;
       border: none;
+      .tab_panel_single_settings {
+        .fields_container {
+          width: 95%;
+          .single_field {
+            input,
+            textarea,
+            select {
+              font-size: 1rem;
+            }
+          }
+        }
+      }
     }
   }
 }
