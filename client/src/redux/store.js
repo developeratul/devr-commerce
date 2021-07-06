@@ -2,8 +2,9 @@ import { combineReducers, createStore } from "redux";
 
 // reducers
 import authReducer from "./reducers/authReducer";
+import getProductCategories from "./reducers/productCategories";
 
-const rootReducer = { authReducer };
+const rootReducer = { authReducer, getProductCategories };
 
 const store = createStore(
   combineReducers(rootReducer),

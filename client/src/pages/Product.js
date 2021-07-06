@@ -24,7 +24,10 @@ const Product = () => {
       {isAuthenticated && user.isSeller && (
         <>
           <FloatingButton createProductModalRef={createProductModalRef} />
-          <CreateProductModal createProductModalRef={createProductModalRef} />
+          <CreateProductModal
+            user={user}
+            createProductModalRef={createProductModalRef}
+          />
         </>
       )}
     </div>
