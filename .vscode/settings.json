@@ -17,9 +17,5 @@
     "unfollow",
     "unfollowed",
     "unfollowing"
-  ],
-
-  "[javascript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
-  }
+  ]
 }

@@ -17,6 +17,7 @@ const dataSchema = new mongoose.Schema({
 
   // storing the user id to populate his information's
   user: { type: ObjectId, ref: "USER", required: true },
+  shipping_options: [],
 
   product_category: {
     type: String,
@@ -40,8 +41,6 @@ const dataSchema = new mongoose.Schema({
       "DIY garden and pet",
     ],
   },
-
-  shipping_options: { type: Array, required: true },
 });
 
 const Product = new mongoose.model("PRODUCT", dataSchema);

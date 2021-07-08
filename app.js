@@ -19,8 +19,8 @@ const port = process.env.PORT || 8000;
 // common middlewares
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(express.json({ limit: "20mb" }));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // database connection
 const dbUrl = process.env.DB;
