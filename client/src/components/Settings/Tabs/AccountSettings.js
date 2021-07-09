@@ -17,8 +17,7 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
     facebook: user.facebook,
     linkedIn: user.linkedIn,
     twitter: user.twitter,
-    vimeo: user.vimeo,
-    dribble: user.dribble,
+    portfolio: user.portfolio,
 
     showEmail: user.showEmail && user.showEmail.toString(),
     showPhone: user.showPhone && user.showPhone.toString(),
@@ -39,8 +38,7 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
     facebook,
     linkedIn,
     twitter,
-    vimeo,
-    dribble,
+    portfolio,
   } = formData;
 
   function InputChange(event) {
@@ -74,8 +72,7 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
           facebook,
           linkedIn,
           twitter,
-          vimeo,
-          dribble,
+          portfolio,
         }),
       });
 
@@ -97,8 +94,9 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
       nameLength: name.length <= 25,
       allFields: name && email && country && phone,
       emailOk: validator.isEmail(email),
+      about_length: about.length <= 500,
     };
-    const { nameLength, allFields, emailOk } = validation;
+    const { nameLength, allFields, emailOk, about_length } = validation;
 
     if (!allFields) {
       toast.error("Please fill all the fields properly");
@@ -106,7 +104,9 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
       toast.error("Your email is invalid");
     } else if (!nameLength) {
       toast.error("Name length cannot be greater than 25");
-    } else if (allFields && emailOk && nameLength) {
+    } else if (!about_length) {
+      toast.error("About length can not have more than 500 chars");
+    } else if (allFields && emailOk && nameLength && about_length) {
       updateAccountInformation(); // for registering a user in our database
     }
   }
@@ -230,19 +230,9 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
             <input
               type="text"
               onChange={InputChange}
-              name="vimeo"
-              value={formData.vimeo}
-              placeholder="Your vimeo URL"
-            />
-          </div>
-
-          <div className="single_field">
-            <input
-              type="text"
-              onChange={InputChange}
-              name="dribble"
-              value={formData.dribble}
-              placeholder="Your dribble URL"
+              name="portfolio"
+              value={formData.portfolio}
+              placeholder="Your portfolio URL"
             />
           </div>
 

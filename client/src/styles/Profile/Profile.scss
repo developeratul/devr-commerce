@@ -3,6 +3,7 @@
 .profile_page {
   height: $contentHeight;
   overflow: hidden;
+  width: 100vw;
 
   // the loader
   .loading_container {
@@ -17,7 +18,7 @@
     @include flex(center, center, stretch);
     // the side bar in the profile page
     .profile_side_bar {
-      flex: 0.9;
+      width: 30vw;
       background: $bgColor;
       border-right: 1px solid $bgSecondary;
       height: 100%;
@@ -81,21 +82,96 @@
               }
             }
           }
+
+          .user_links {
+            @include flex(center, center, stretch);
+            margin-top: 10px;
+            .single_link {
+              margin: 0px 5px;
+            }
+
+            .portfolio {
+              a {
+                color: #fff;
+              }
+            }
+            .facebook {
+              a {
+                color: #16a6fb;
+              }
+            }
+            .twitter {
+              a {
+                color: #009ded;
+              }
+            }
+            .linkedIn {
+              a {
+                color: #0a66c2;
+              }
+            }
+          }
         }
         // common user info
         .common_user_information {
           padding: 10px;
           width: 100%;
-          p {
-            letter-spacing: 0.5px;
-            padding: 5px 0px;
-            span {
+          .user_bio {
+            white-space: pre-wrap;
+            color: #aeb1b4;
+            margin-bottom: 20px;
+            .section_title {
+              display: block;
               color: $themeColor;
+              margin-bottom: 5px;
+            }
+            .no_bio {
+              color: $warningColor;
               font-family: $font;
+              display: block;
+              text-align: center;
+              letter-spacing: 0.5px;
             }
           }
-          .verifiedText {
-            color: $successColor;
+
+          .user_phone_and_email {
+            .single {
+              @include flex(flex-start, center, stretch);
+              span {
+                padding-right: 10px;
+              }
+            }
+
+            .email {
+              span {
+                svg {
+                  fill: #2578af;
+                }
+              }
+            }
+            .phone {
+              span {
+                svg {
+                  fill: #75ef62;
+                }
+              }
+            }
+          }
+
+          .platform_information_of_user {
+            margin-top: 30px;
+            @include flex(center, center, stretch);
+            background: $bgSecondary;
+            padding: 10px;
+            border-radius: 3px;
+            .single_information {
+              width: 50%;
+              margin: 5px 0px;
+              text-align: center;
+              span {
+                color: $successColor;
+              }
+            }
           }
         }
       }
@@ -103,7 +179,7 @@
 
     // * for all the tabs and other infos in the profile page
     .profile_content_and_tabs {
-      flex: 2;
+      width: 70vw;
       height: 100%;
       .tab_and_appBar_and_tabs_container {
         width: 100%;
@@ -113,6 +189,57 @@
         .app_bar {
           background: linear-gradient(to right, $bgColor, $bgSecondary);
           z-index: 1;
+        }
+
+        .tab {
+          .no_message {
+            width: 100%;
+            padding: 50px 0px;
+            @include flex(center, center, stretch);
+            h2 {
+              color: #aeb1b4;
+              font-family: $font;
+            }
+          }
+
+          .user_container {
+            @include flex(center, center, stretch);
+            .single_user {
+              width: 280px;
+              margin: 10px;
+              padding: 20px 10px;
+              background: #0d121962;
+              backdrop-filter: blur(20px);
+              border-radius: 3px;
+              .user_img {
+                width: 150px;
+                margin: auto;
+              }
+              .user_desc {
+                margin-top: 10px;
+                text-align: center;
+                h2 {
+                  a {
+                    font-family: $font;
+                    color: $themeColor;
+                  }
+                }
+                p {
+                  span {
+                    color: $successColor;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        // the follower tab
+        .follower_tab {
+        }
+
+        // the following tab
+        .following_tab {
         }
       }
     }
@@ -124,11 +251,20 @@
   .profile_page {
     .profile_content_container {
       .profile_side_bar {
-        flex: 2;
+        width: 40vw;
       }
 
       .profile_content_and_tabs {
-        flex: 3;
+        width: 60vw;
+        .tab_and_appBar_and_tabs_container {
+          .tab {
+            .user_container {
+              .single_user {
+                width: 250px;
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -141,7 +277,6 @@
     overflow-y: scroll;
     .profile_content_container {
       .profile_side_bar {
-        flex: auto;
         width: 100%;
         height: auto;
         overflow-y: unset;
@@ -155,10 +290,19 @@
       }
 
       .profile_content_and_tabs {
-        flex: auto;
-        // height: auto;
+        width: 100%;
         overflow-x: hidden;
         overflow-y: unset;
+        .tab_and_appBar_and_tabs_container {
+          .tab {
+            .user_container {
+              .single_user {
+                width: 90%;
+                margin: 10px 0;
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -7,6 +7,10 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 
+// tabs
+import Followers from "./Tabs/Followers";
+import Followings from "./Tabs/Followings";
+
 // all these functions are from the material-ui
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,9 +65,16 @@ const ProfileContentAndTabs = ({ user }) => {
             variant="fullWidth"
             aria-label="full width tabs example"
           >
-            <Tab label="About" {...a11yProps(0)} />
-            <Tab label="Store" {...a11yProps(1)} />
-            <Tab label="Reviews" {...a11yProps(2)} />
+            <Tab label="Store" {...a11yProps(0)} />
+            <Tab
+              label={`${user.followers && user.followers.length} Followers`}
+              {...a11yProps(1)}
+            />
+            <Tab
+              label={`${user.followings && user.followings.length} Following`}
+              {...a11yProps(2)}
+            />
+            <Tab label="Reviews" {...a11yProps(3)} />
           </Tabs>
         </AppBar>
 
@@ -77,10 +88,20 @@ const ProfileContentAndTabs = ({ user }) => {
             <h1>Hello world</h1>
           </TabPanel>
 
-          <TabPanel value={value} index={1} dir={theme.direction}>
-            <h1>Hello world</h1>
-          </TabPanel>
-          <TabPanel value={value} index={2} dir={theme.direction}>
+          <Followers
+            TabPanel={TabPanel}
+            user={user}
+            theme={theme}
+            value={value}
+          />
+          <Followings
+            TabPanel={TabPanel}
+            user={user}
+            theme={theme}
+            value={value}
+          />
+
+          <TabPanel value={value} index={3} dir={theme.direction}>
             <h1>Hello world</h1>
           </TabPanel>
         </SwipeableViews>

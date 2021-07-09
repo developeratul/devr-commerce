@@ -4,9 +4,20 @@ import { useHistory, Link } from "react-router-dom";
 
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import WarningIcon from "@material-ui/icons/Warning";
-import { useSelector } from "react-redux";
+
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../../redux/actions/authActions";
+
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+
+// icons
+import FacebookIcon from "@material-ui/icons/Facebook";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import WebIcon from "@material-ui/icons/Web";
+import DraftsOutlinedIcon from "@material-ui/icons/DraftsOutlined";
+import PhoneEnabledOutlinedIcon from "@material-ui/icons/PhoneEnabledOutlined";
 
 // for styling the material-ui Avatar component
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +37,7 @@ const ProfileSideBar = ({ user }) => {
   const authUser = useSelector((state) => state.authReducer);
   const { isAuthenticated } = authUser;
   const history = useHistory();
+  const dispatch = useDispatch();
 
   // for checking the following status
   // if this guy is already followed
@@ -54,8 +66,11 @@ const ProfileSideBar = ({ user }) => {
         }),
       });
 
+      const body = await res.json();
+
       if (res.status === 200) {
         setIsFollowing(true);
+        dispatch(updateUser(body.user));
       }
     } catch (err) {
       console.log(err);
@@ -75,8 +90,11 @@ const ProfileSideBar = ({ user }) => {
         }),
       });
 
+      const body = await res.json();
+
       if (res.status === 200) {
         setIsFollowing(false);
+        dispatch(updateUser(body.user));
       }
     } catch (err) {
       console.log(err);
@@ -134,6 +152,53 @@ const ProfileSideBar = ({ user }) => {
             from: <span>{user.country}</span>
           </p>
 
+          <div className="user_links">
+            <div className="single_link portfolio">
+              {user.portfolio && (
+                <a
+                  href={user.portfolio}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <WebIcon />
+                </a>
+              )}
+            </div>
+            <div className="single_link twitter">
+              {user.twitter && (
+                <a
+                  href={user.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <TwitterIcon />
+                </a>
+              )}
+            </div>
+            <div className="single_link facebook">
+              {user.facebook && (
+                <a
+                  href={user.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FacebookIcon />
+                </a>
+              )}
+            </div>
+            <div className="single_link linkedIn">
+              {user.linkedIn && (
+                <a
+                  href={user.linkedIn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LinkedInIcon />
+                </a>
+              )}
+            </div>
+          </div>
+
           <div className="follow_user_or_report_section">
             <div className="follow_user single_option">
               {user._id === authUser.user._id ? (
@@ -146,48 +211,58 @@ const ProfileSideBar = ({ user }) => {
                 </Button>
               )}
             </div>
-
-            {/* <div className="report_user single_option">
-              <Button>Report</Button>
-            </div> */}
           </div>
         </div>
 
         <div className="common_user_information">
-          <p>
-            This guy is a seller: <span>{user.isSeller ? "Yes" : "no"}</span>
-          </p>
-          {user.isSeller ? (
-            <p>
-              Total sales: <span>{user.totalSales}</span>
-            </p>
-          ) : null}
-
-          {user.isSeller && user.productCategory && (
-            <p>
-              Product Category: <span>{user.productCategory}</span>
-            </p>
-          )}
-
-          {user.showEmail && (
-            <p>
-              Email: <span>{user.email}</span>
-            </p>
-          )}
-
-          {user.showPhone && (
-            <p>
-              Phone: <span>{user.phone}</span>
-            </p>
-          )}
-
-          <p>
-            Member since: <span>{user.memberSince}</span>
+          <p className="user_bio">
+            {user.about ? (
+              <>
+                <span className="section_title">About</span>
+                {user.about}
+              </>
+            ) : (
+              <span className="no_bio">404 Bio not found</span>
+            )}
           </p>
 
-          {user.isVerified && (
-            <p className="verifiedText">Verified and trusted by devR</p>
-          )}
+          <div className="user_phone_and_email">
+            {user.showEmail && (
+              <div className="email single">
+                <span>
+                  <DraftsOutlinedIcon />
+                </span>{" "}
+                {user.email}
+              </div>
+            )}
+            {user.showPhone && (
+              <div className="phone single">
+                <span>
+                  <PhoneEnabledOutlinedIcon />
+                </span>{" "}
+                {user.phone}
+              </div>
+            )}
+          </div>
+
+          <div className="platform_information_of_user">
+            <div className="single_information">
+              {user.isSeller ? <span>Seller</span> : <span>Not a Seller</span>}
+            </div>
+            {user.isSeller && (
+              <div className="single_information">
+                <span>{user.totalSales} sales</span>
+              </div>
+            )}
+            <div className="single_information">
+              Since: <span>{user.memberSince}</span>
+            </div>
+            {user.isVerified && (
+              <div className="single_information">
+                <span>DevR Verified</span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
