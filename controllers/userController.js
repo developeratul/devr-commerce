@@ -82,8 +82,7 @@ module.exports = {
         facebook,
         linkedIn,
         twitter,
-        vimeo,
-        dribble,
+        portfolio,
       } = req.body;
       const id = req.user;
 
@@ -103,8 +102,7 @@ module.exports = {
         user.facebook = facebook;
         user.linkedIn = linkedIn;
         user.twitter = twitter;
-        user.vimeo = vimeo;
-        user.dribble = dribble;
+        user.portfolio = portfolio;
 
         user.save();
 
@@ -208,7 +206,7 @@ module.exports = {
             },
             { new: true }
           )
-            .then((result) => res.status(200).json({ success: "Followed" }))
+            .then((result) => res.status(200).json({ user: result }))
             .catch((err) => res.status(402).send(err));
         }
       );
@@ -241,7 +239,7 @@ module.exports = {
             },
             { new: true }
           )
-            .then((result) => res.status(200).json({ success: "UnFollowed" }))
+            .then((result) => res.status(200).json({ user: result }))
             .catch((err) => res.status(402).send(err));
         }
       );

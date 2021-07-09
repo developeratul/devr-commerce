@@ -14,11 +14,12 @@ const dataSchema = new mongoose.Schema({
 
   products: [{ type: mongoose.Types.ObjectId, ref: "PRODUCT" }],
 
+  site_admin: { type: Boolean, default: false },
+
   facebook: { type: String, default: "" },
   linkedIn: { type: String, default: "" },
   twitter: { type: String, default: "" },
-  vimeo: { type: String, default: "" },
-  dribble: { type: String, default: "" },
+  portfolio: { type: String, default: "" },
 
   followers: [{ type: ObjectId, ref: "USER" }],
   followings: [{ type: ObjectId, ref: "USER" }],
