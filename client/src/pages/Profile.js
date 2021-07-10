@@ -7,10 +7,15 @@ import { toast } from "react-toastify";
 import InlineLoader from "../components/InlineLoader";
 import ProfileSideBar from "../components/Profile/ProfileSideBar";
 import ProfileContentAndTabs from "../components/Profile/ProfileContentAndTabs";
+import EditProductModal from "../components/EditProductModal";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loading, setLoading] = useState(true);
+  const { modalShouldRender } = useSelector(
+    (state) => state.editProductModalReducer
+  );
 
   const { id } = useParams();
   const history = useHistory();
@@ -55,18 +60,21 @@ const Profile = () => {
   }, [id]);
 
   return (
-    <div className="profile_page">
-      {loading ? (
-        <div className="loading_container">
-          <InlineLoader />
-        </div>
-      ) : (
-        <div className="profile_content_container">
-          <ProfileSideBar user={currentUser} />
-          <ProfileContentAndTabs user={currentUser} />
-        </div>
-      )}
-    </div>
+    <>
+      {modalShouldRender && <EditProductModal />}
+      <div className="profile_page">
+        {loading ? (
+          <div className="loading_container">
+            <InlineLoader />
+          </div>
+        ) : (
+          <div className="profile_content_container">
+            <ProfileSideBar user={currentUser} />
+            <ProfileContentAndTabs user={currentUser} />
+          </div>
+        )}
+      </div>
+    </>
   );
 };
 

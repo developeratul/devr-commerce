@@ -8,7 +8,11 @@ const checkAuth = require("../middlewares/checkAuth");
 const multer = require("../utils/multer");
 
 // controllers
-const { postProduct } = require("../controllers/productController");
+const {
+  postProduct,
+  deleteProduct,
+  updateProduct,
+} = require("../controllers/productController");
 
 // for uploading a product
 router.post(
@@ -17,5 +21,11 @@ router.post(
   multer.array("assets", 10),
   postProduct
 );
+
+// for deleting a product
+router.delete("/delete_product", checkAuth, deleteProduct);
+
+// for updating a product
+router.post("/update_product", checkAuth, updateProduct);
 
 module.exports = router;

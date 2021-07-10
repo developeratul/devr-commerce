@@ -96,6 +96,91 @@ nav {
   }
 }
 
+// the edit product modal
+.edit_product_modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  @include flex(center, center, stretch);
+  background: #0d12194b;
+  backdrop-filter: blur(5px);
+  z-index: 100;
+  padding: 100px 0 50px 0;
+  overflow-x: hidden;
+  .close_modal_button_container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    button {
+      color: $warningColor;
+      margin: 10px;
+    }
+  }
+
+  .model_content_box {
+    width: 100%;
+    background: $bgSecondary;
+    padding: 30px 10px;
+    box-shadow: 0 0 5px $themeColor;
+    border-radius: 3px;
+    .modal_title {
+      text-align: center;
+      color: $themeColor;
+      margin-bottom: 30px;
+      font-family: $font;
+    }
+    .form_container {
+      .single_field {
+        width: 95%;
+        margin: 10px auto;
+        input,
+        select,
+        textarea,
+        button {
+          width: 100%;
+          padding: 10px;
+          resize: vertical;
+        }
+        input,
+        select,
+        textarea {
+          border: 2px solid #fff;
+          border-radius: 3px;
+          &:focus {
+            border-color: $themeColor;
+          }
+        }
+        button {
+          background: $themeColor;
+          color: #fff;
+        }
+
+        .image_container {
+          @include flex(center, center, stretch);
+          .single_image {
+            width: 300px;
+            height: 300px;
+            margin: 5px;
+            border-radius: 3px;
+            position: relative;
+            .remove_button {
+              position: absolute;
+              top: 0;
+              left: 0;
+              button {
+                color: $themeColor;
+                background: none;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 // the not found page
 .not_found_page {
   display: grid;

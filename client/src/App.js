@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // actions
 import { logInUser, logOutUser } from "./redux/actions/authActions";
@@ -10,6 +10,7 @@ import { logInUser, logOutUser } from "./redux/actions/authActions";
 // components
 import Nav from "./components/Nav";
 import FullPageLoader from "./components/FullPageLoader";
+// import EditProductModal from "./components/EditProductModal";
 
 // pages
 import Home from "./pages/Home";
@@ -83,6 +84,8 @@ const App = () => {
           />
 
           <Nav />
+
+          {/* {user.isSeller && isAuthenticated && <EditProductModal />} */}
 
           <Switch>
             <Route path="/" exact component={Home} />

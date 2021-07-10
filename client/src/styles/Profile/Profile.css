@@ -129,6 +129,131 @@ nav .nav_active {
   color: #7976fc !important;
 }
 
+.edit_product_modal {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: stretch;
+          flex-direction: stretch;
+  background: #0d12194b;
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  z-index: 100;
+  padding: 100px 0 50px 0;
+  overflow-x: hidden;
+}
+
+.edit_product_modal .close_modal_button_container {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.edit_product_modal .close_modal_button_container button {
+  color: #ff2e2e;
+  margin: 10px;
+}
+
+.edit_product_modal .model_content_box {
+  width: 100%;
+  background: #1a2634;
+  padding: 30px 10px;
+  -webkit-box-shadow: 0 0 5px #7976fc;
+          box-shadow: 0 0 5px #7976fc;
+  border-radius: 3px;
+}
+
+.edit_product_modal .model_content_box .modal_title {
+  text-align: center;
+  color: #7976fc;
+  margin-bottom: 30px;
+  font-family: Josefin Sans;
+}
+
+.edit_product_modal .model_content_box .form_container .single_field {
+  width: 95%;
+  margin: 10px auto;
+}
+
+.edit_product_modal .model_content_box .form_container .single_field input,
+.edit_product_modal .model_content_box .form_container .single_field select,
+.edit_product_modal .model_content_box .form_container .single_field textarea,
+.edit_product_modal .model_content_box .form_container .single_field button {
+  width: 100%;
+  padding: 10px;
+  resize: vertical;
+}
+
+.edit_product_modal .model_content_box .form_container .single_field input,
+.edit_product_modal .model_content_box .form_container .single_field select,
+.edit_product_modal .model_content_box .form_container .single_field textarea {
+  border: 2px solid #fff;
+  border-radius: 3px;
+}
+
+.edit_product_modal .model_content_box .form_container .single_field input:focus,
+.edit_product_modal .model_content_box .form_container .single_field select:focus,
+.edit_product_modal .model_content_box .form_container .single_field textarea:focus {
+  border-color: #7976fc;
+}
+
+.edit_product_modal .model_content_box .form_container .single_field button {
+  background: #7976fc;
+  color: #fff;
+}
+
+.edit_product_modal .model_content_box .form_container .single_field .image_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: stretch;
+          flex-direction: stretch;
+}
+
+.edit_product_modal .model_content_box .form_container .single_field .image_container .single_image {
+  width: 300px;
+  height: 300px;
+  margin: 5px;
+  border-radius: 3px;
+  position: relative;
+}
+
+.edit_product_modal .model_content_box .form_container .single_field .image_container .single_image .remove_button {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.edit_product_modal .model_content_box .form_container .single_field .image_container .single_image .remove_button button {
+  color: #7976fc;
+  background: none;
+}
+
 .not_found_page {
   display: -ms-grid;
   display: grid;
@@ -984,6 +1109,7 @@ nav .nav_active {
 
 .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product .product_desc {
   margin-bottom: 5px;
+  height: 50px;
 }
 
 .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product .product_desc a {
@@ -1000,9 +1126,16 @@ nav .nav_active {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product .product_options .product_info p {
+  color: #aeb1b4;
 }
 
 .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product .product_options button {

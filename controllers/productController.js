@@ -64,5 +64,53 @@ module.exports = {
     }
   },
 
+  // * for deleting a product
+  deleteProduct: async function (req, res, next) {
+    try {
+      const { productId } = req.body;
+      const userId = req.user._id;
+
+      const theProduct = await Product.findOne({ _id: productId });
+
+      // putting all the product image id under an array so I can use this array to delete all these images
+      const allProductImageIdInArray = theProduct.images.map(
+        (singleImage) => singleImage.photoId
+      );
+
+      // deleting all product images
+      const multiplePicturePromise = allProductImageIdInArray.map((picture) =>
+        cloudinary.uploader.destroy(picture, {
+          folder: `devR-Commerce/products/${req.user.name}`,
+        })
+      );
+
+      await Promise.all(multiplePicturePromise);
+
+      await Product.findOneAndRemove({ _id: productId }, (err) => {
+        if (err) {
+          next(err);
+        }
+      });
+
+      await User.updateOne({ _id: userId }, { $pull: { products: productId } });
+
+      const updatedUser = await User.findOne({ _id: userId });
+
+      res.status(200).json({
+        message: "The product was deleted",
+        user: updatedUser,
+      });
+    } catch (err) {
+      next(err);
+    }
+  },
+
   // * for updating a product
+  updateProduct: async function (req, res, next) {
+    try {
+      const { productId } = req.body;
+    } catch (err) {
+      next(err);
+    }
+  },
 };

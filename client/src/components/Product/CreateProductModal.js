@@ -64,7 +64,7 @@ const CreateProductModal = ({ createProductModalRef, user }) => {
       product_category: "",
     });
     set_shipping_options([]);
-    previewFileObject([]);
+    setPreviewFileObject([]);
     setFileAra([]);
   }
 
