@@ -204,6 +204,37 @@
 
           .user_container {
             @include flex(center, center, stretch);
+
+            .single_product {
+              width: 280px;
+              padding: 10px;
+              margin: 10px;
+              background: $bgColor;
+              border-radius: 3px;
+              .product_image {
+                width: 100%;
+                height: 200px;
+                margin: 0 0 10px 0;
+              }
+              .product_desc {
+                margin-bottom: 5px;
+                a {
+                  color: #fff;
+                  transition: 0.3s;
+                  &:hover {
+                    color: $themeColor;
+                  }
+                }
+              }
+              .product_options {
+                display: flex;
+                justify-content: flex-end;
+                button {
+                  color: $themeColor;
+                }
+              }
+            }
+
             .single_user {
               width: 280px;
               margin: 10px;
@@ -232,14 +263,23 @@
               }
             }
           }
-        }
 
-        // the follower tab
-        .follower_tab {
-        }
-
-        // the following tab
-        .following_tab {
+          .store_product_container {
+            .some_seller_informations {
+              @include flex(center, center, stretch);
+              margin-bottom: 10px;
+              table {
+                background: $bgColor;
+                width: 100%;
+                text-align: center;
+                border-collapse: collapse;
+                border-color: $themeColor;
+                td {
+                  padding: 10px 0px;
+                }
+              }
+            }
+          }
         }
       }
     }

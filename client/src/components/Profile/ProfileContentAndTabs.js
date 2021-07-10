@@ -10,6 +10,7 @@ import Box from "@material-ui/core/Box";
 // tabs
 import Followers from "./Tabs/Followers";
 import Followings from "./Tabs/Followings";
+import Store from "./Tabs/Store";
 
 // all these functions are from the material-ui
 function TabPanel(props) {
@@ -66,14 +67,8 @@ const ProfileContentAndTabs = ({ user }) => {
             aria-label="full width tabs example"
           >
             <Tab label="Store" {...a11yProps(0)} />
-            <Tab
-              label={`${user.followers && user.followers.length} Followers`}
-              {...a11yProps(1)}
-            />
-            <Tab
-              label={`${user.followings && user.followings.length} Following`}
-              {...a11yProps(2)}
-            />
+            <Tab label="Followers" {...a11yProps(1)} />
+            <Tab label="Following" {...a11yProps(2)} />
             <Tab label="Reviews" {...a11yProps(3)} />
           </Tabs>
         </AppBar>
@@ -84,10 +79,7 @@ const ProfileContentAndTabs = ({ user }) => {
           index={value}
           onChangeIndex={handleChangeIndex}
         >
-          <TabPanel value={value} index={0} dir={theme.direction}>
-            <h1>Hello world</h1>
-          </TabPanel>
-
+          <Store TabPanel={TabPanel} user={user} theme={theme} value={value} />
           <Followers
             TabPanel={TabPanel}
             user={user}

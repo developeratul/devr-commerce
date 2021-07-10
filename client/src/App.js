@@ -20,6 +20,7 @@ import Cart from "./pages/Cart";
 import NotFound from "./pages/NotFound";
 import Settings from "./pages/Settings";
 import Product from "./pages/Product";
+import SingleProduct from "./pages/SingleProduct";
 
 const App = () => {
   const [responseEnded, setResponseEnded] = useState(false);
@@ -88,6 +89,7 @@ const App = () => {
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/profile/:id" component={Profile} />
+            <Route path="/product/:id" component={SingleProduct} />
             <Route path="/cart" component={Cart} />
             <Route path="/settings" component={Settings} />
             <Route path="/products" component={Product} />

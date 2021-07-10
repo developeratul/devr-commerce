@@ -63,6 +63,8 @@ const CreateProductModal = ({ createProductModalRef, user }) => {
       max_quantity: "",
       product_category: "",
     });
+    set_shipping_options([]);
+    previewFileObject([]);
     setFileAra([]);
   }
 

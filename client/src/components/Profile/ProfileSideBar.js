@@ -249,14 +249,6 @@ const ProfileSideBar = ({ user }) => {
             <div className="single_information">
               {user.isSeller ? <span>Seller</span> : <span>Not a Seller</span>}
             </div>
-            {user.isSeller && (
-              <div className="single_information">
-                <span>{user.totalSales} sales</span>
-              </div>
-            )}
-            <div className="single_information">
-              Since: <span>{user.memberSince}</span>
-            </div>
             {user.isVerified && (
               <div className="single_information">
                 <span>DevR Verified</span>
