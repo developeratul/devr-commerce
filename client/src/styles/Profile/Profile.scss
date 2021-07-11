@@ -1,7 +1,7 @@
 @import "../partials/common";
 
 .profile_page {
-  height: $contentHeight;
+  height: 90vh;
   overflow: hidden;
   width: 100vw;
 
@@ -206,9 +206,9 @@
             @include flex(center, center, stretch);
 
             .single_product {
-              width: 280px;
+              width: 300px;
               padding: 10px;
-              margin: 10px;
+              margin: 5px;
               background: $bgColor;
               border-radius: 3px;
               .product_image {
@@ -233,7 +233,7 @@
                 align-items: center;
                 .product_info {
                   p {
-                    color: #aeb1b4;
+                    color: $successColor;
                   }
                 }
                 button {
@@ -293,6 +293,12 @@
   }
 }
 
+@media screen and (max-height: 545px) {
+  .profile_page {
+    height: 85vh;
+  }
+}
+
 // for the laptop's and iPads
 @media screen and (max-width: 1024px) {
   .profile_page {
@@ -306,6 +312,12 @@
         .tab_and_appBar_and_tabs_container {
           .tab {
             .user_container {
+              .single_product {
+                width: 260px;
+                @media screen and (max-width: 908px) {
+                  width: 300px;
+                }
+              }
               .single_user {
                 width: 250px;
               }
@@ -343,6 +355,13 @@
         .tab_and_appBar_and_tabs_container {
           .tab {
             .user_container {
+              .single_product {
+                width: 100%;
+                max-width: 300px;
+                @media screen and (max-width: 610px) {
+                  margin: 5px 0px;
+                }
+              }
               .single_user {
                 width: 90%;
                 margin: 10px 0;

@@ -54,7 +54,7 @@ h2 {
 // the nav bar over the whole application
 nav {
   @include flex(space-around, center, stretch);
-  min-height: $navHeight;
+  min-height: 10vh;
   padding: 3px 0px;
   background: $bgColor;
   position: sticky;
@@ -444,6 +444,14 @@ nav {
     100% {
       stroke-dashoffset: 275;
     }
+  }
+}
+
+@media screen and (max-height: 545px) {
+  nav {
+    height: 15vh;
+    padding: 10px 0px;
+    overflow-x: hidden;
   }
 }
 

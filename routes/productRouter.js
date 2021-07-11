@@ -12,7 +12,11 @@ const {
   postProduct,
   deleteProduct,
   updateProduct,
+  getProduct,
 } = require("../controllers/productController");
+
+// for getting a single product data according to the id
+router.get("/product_id/:id", getProduct);
 
 // for uploading a product
 router.post(

@@ -672,6 +672,14 @@ nav .nav_active {
   }
 }
 
+@media screen and (max-height: 545px) {
+  nav {
+    height: 15vh;
+    padding: 10px 0px;
+    overflow-x: hidden;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   .container {
     width: 700px;
@@ -1094,9 +1102,9 @@ nav .nav_active {
 }
 
 .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product {
-  width: 280px;
+  width: 300px;
   padding: 10px;
-  margin: 10px;
+  margin: 5px;
   background: #0d1219;
   border-radius: 3px;
 }
@@ -1135,7 +1143,7 @@ nav .nav_active {
 }
 
 .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product .product_options .product_info p {
-  color: #aeb1b4;
+  color: #00ff80;
 }
 
 .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product .product_options button {
@@ -1202,6 +1210,12 @@ nav .nav_active {
   padding: 10px 0px;
 }
 
+@media screen and (max-height: 545px) {
+  .profile_page {
+    height: 85vh;
+  }
+}
+
 @media screen and (max-width: 1024px) {
   .profile_page .profile_content_container .profile_side_bar {
     width: 40vw;
@@ -1209,6 +1223,18 @@ nav .nav_active {
   .profile_page .profile_content_container .profile_content_and_tabs {
     width: 60vw;
   }
+  .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product {
+    width: 260px;
+  }
+}
+
+@media screen and (max-width: 1024px) and (max-width: 908px) {
+  .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
   .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_user {
     width: 250px;
   }
@@ -1238,6 +1264,19 @@ nav .nav_active {
     overflow-x: hidden;
     overflow-y: unset;
   }
+  .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 768px) and (max-width: 610px) {
+  .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product {
+    margin: 5px 0px;
+  }
+}
+
+@media screen and (max-width: 768px) {
   .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_user {
     width: 90%;
     margin: 10px 0;

@@ -120,7 +120,7 @@ const Store = ({ TabPanel, value, theme, user }) => {
 
                         <div className="product_options">
                           <div className="product_info">
-                            <p>{product.uploadDate}</p>
+                            <p>{product.price} $</p>
                           </div>
 
                           <div className="product_controls">

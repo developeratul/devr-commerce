@@ -13,6 +13,7 @@ import { useSelector } from "react-redux";
 const Profile = () => {
   const [currentUser, setCurrentUser] = useState({});
   const [loading, setLoading] = useState(true);
+
   const { modalShouldRender } = useSelector(
     (state) => state.editProductModalReducer
   );

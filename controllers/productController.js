@@ -1,3 +1,5 @@
+const mongoose = require("mongoose");
+
 // utils
 const { cloudinary } = require("../utils/cloudinary");
 
@@ -6,6 +8,30 @@ const Product = require("../models/product");
 const User = require("../models/users");
 
 module.exports = {
+  // * for getting the informations of a single product according the id
+  getProduct: async function (req, res, next) {
+    try {
+      const { id } = req.params;
+
+      if (!mongoose.isValidObjectId(id)) {
+        res.status(404).json({ message: "Product not found" });
+      }
+
+      const product = await Product.findOne({ _id: id });
+      const user = await User.findOne({ _id: product.user }).populate(
+        "products"
+      );
+
+      if (!product) {
+        res.status(404).json({ message: "Product not found" });
+      }
+
+      res.status(200).json({ product, user });
+    } catch (err) {
+      next(err);
+    }
+  },
+
   // * for uploading a product
   async postProduct(req, res, next) {
     try {
@@ -78,10 +104,8 @@ module.exports = {
       );
 
       // deleting all product images
-      const multiplePicturePromise = allProductImageIdInArray.map((picture) =>
-        cloudinary.uploader.destroy(picture, {
-          folder: `devR-Commerce/products/${req.user.name}`,
-        })
+      const multiplePicturePromise = allProductImageIdInArray.map((pictureId) =>
+        cloudinary.uploader.destroy(pictureId)
       );
 
       await Promise.all(multiplePicturePromise);
@@ -108,7 +132,25 @@ module.exports = {
   // * for updating a product
   updateProduct: async function (req, res, next) {
     try {
-      const { productId } = req.body;
+      const { productId, shipping_options } = req.body;
+      const { title, desc, price, max_quantity, product_category } = req.body;
+
+      await Product.findById(productId, (err, product) => {
+        if (err) {
+          next(err);
+        }
+
+        product.title = title;
+        product.desc = desc;
+        product.price = price;
+        product.max_quantity = max_quantity;
+        product.product_category = product_category;
+        product.shipping_options = shipping_options;
+
+        product.save();
+
+        res.status(200).json({ message: "Post updated successfully" });
+      });
     } catch (err) {
       next(err);
     }
