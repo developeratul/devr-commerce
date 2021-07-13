@@ -9,6 +9,7 @@ import { Avatar, IconButton, Menu, MenuItem } from "@material-ui/core";
 import Badge from "@material-ui/core/Badge";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { makeStyles } from "@material-ui/core/styles";
+import useTotalCartQuantity from "../hooks/useTotalCartQuantity";
 
 // for styling the material-ui components
 const useStyles = makeStyles((theme) => ({
@@ -32,6 +33,8 @@ const Nav = () => {
   const { user, isAuthenticated } = useSelector((state) => state.authReducer);
   const history = useHistory();
   const dispatch = useDispatch();
+
+  let total_cart_items = useTotalCartQuantity();
 
   const classes = useStyles();
 
@@ -109,7 +112,7 @@ const Nav = () => {
             <li>
               <NavLink to="/cart">
                 <IconButton color="secondary">
-                  <Badge badgeContent={10} color="secondary">
+                  <Badge badgeContent={total_cart_items} color="secondary">
                     <ShoppingCartOutlinedIcon className="icon" />
                   </Badge>
                 </IconButton>

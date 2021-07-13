@@ -1,4 +1,6 @@
 require("dotenv").config();
+
+// dependencies
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -12,11 +14,12 @@ const { notFoundHandler, errorHandler } = require("./middlewares/errorHandler");
 const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
 const productRouter = require("./routes/productRouter");
+const cartRouter = require("./routes/cartRouter");
 
 const app = express();
 const port = process.env.PORT || 8000;
 
-// common middlewares
+// app middlewares
 app.use(cors({ origin: "http://localhost:3000" }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json());
@@ -47,6 +50,8 @@ app.use("/get_auth", authRouter);
 app.use("/get_user", userRouter);
 // for handling the product stuffs
 app.use("/get_product", productRouter);
+// for handling the cart stuffs
+app.use("/get_cart", cartRouter);
 
 // for production
 if (process.env.NODE_ENV === "production") {

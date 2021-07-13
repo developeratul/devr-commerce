@@ -33,6 +33,8 @@ const dataSchema = new mongoose.Schema({
   isSeller: { type: Boolean, required: true, enum: [true, false] },
   isVerified: { type: Boolean, enum: [true, false], default: false },
 
+  cart_items: { type: Array },
+
   productCategory: {
     type: String,
     enum: [

@@ -1,6 +1,5 @@
 const initialState = {
   isAuthenticated: false,
-  isLoading: true,
   user: {},
 };
 
@@ -10,29 +9,17 @@ const authReducer = (state = initialState, action) => {
     case "LOGIN_USER":
       const user = action.payload;
 
-      return {
-        isAuthenticated: true,
-        isLoading: false,
-        user,
-      };
+      return { isAuthenticated: true, user };
 
     // * for logging out
     case "LOG_OUT":
-      return {
-        isAuthenticated: false,
-        isLoading: false,
-        user: {},
-      };
+      return { isAuthenticated: false, user: {} };
 
     // * for updating the user information's
     // this action is called when the updated any information about him
     // using the settings
     case "UPDATE_USER":
-      return {
-        isAuthenticated: true,
-        isLoading: false,
-        user: action.payload,
-      };
+      return { isAuthenticated: true, user: action.payload };
 
     default: {
       return state;

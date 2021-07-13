@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // actions
 import { logInUser, logOutUser } from "./redux/actions/authActions";
+import { getPreviousCartItems } from "./redux/actions/cartActions";
 
 // components
 import Nav from "./components/Nav";
@@ -58,8 +59,36 @@ const App = () => {
     }
   }
 
+  // for getting the cart items from the user collection in the DB
+  async function getCartItemsFromDB(abortController) {
+    try {
+      const res = await fetch("/get_cart/get_cart_items", {
+        method: "GET",
+        signal: abortController.signal,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const body = await res.json();
+
+      if (res.status === 200) {
+        dispatch(getPreviousCartItems(body));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
+    const abortController = new AbortController();
+
     checkAuth();
+    getCartItemsFromDB(abortController);
+
+    return function () {
+      abortController.abort();
+    };
   }, []);
 
   return (

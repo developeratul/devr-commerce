@@ -5,6 +5,9 @@ import { openModal } from "../../../redux/actions/editProductModalActions";
 
 import { IconButton } from "@material-ui/core";
 
+// actions
+import { addToCart } from "../../../redux/actions/cartActions";
+
 // icons
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { toast } from "react-toastify";
@@ -46,6 +49,15 @@ const Store = ({ TabPanel, value, theme, user }) => {
         console.log(err);
       }
     }
+  }
+
+  function AddToCart(product) {
+    if (!authUser.isAuthenticated) {
+      history.push("/login");
+      toast.info("You have to login in order to perform this action");
+    }
+
+    dispatch(addToCart(product));
   }
 
   function openModalByDispatching(product) {
@@ -141,7 +153,7 @@ const Store = ({ TabPanel, value, theme, user }) => {
                                 </IconButton>
                               </>
                             ) : (
-                              <IconButton>
+                              <IconButton onClick={() => AddToCart(product)}>
                                 <ShoppingCartOutlinedIcon />
                               </IconButton>
                             )}
