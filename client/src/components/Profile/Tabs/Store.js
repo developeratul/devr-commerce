@@ -60,6 +60,7 @@ const Store = ({ TabPanel, value, theme, user }) => {
     dispatch(addToCart(product));
   }
 
+  // ! was getting an error when I was directly calling dispatch so that's whyI have separated it in another function
   function openModalByDispatching(product) {
     dispatch(openModal(product));
   }

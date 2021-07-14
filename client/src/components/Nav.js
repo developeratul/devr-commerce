@@ -61,8 +61,8 @@ const Nav = () => {
       const body = await res.json();
 
       if (res.status === 200) {
-        history.push("/login");
         dispatch(logOutUser());
+        history.push("/login");
         toast.dark(body.message);
       }
     } catch (err) {

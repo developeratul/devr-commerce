@@ -52,9 +52,43 @@ const cartReducer = (state = initialState, action) => {
       return newCart;
     }
 
+    // * for changing the quantity of a cart item
+    case "CHANGE_QUANTITY": {
+      const cartItem = action.cartItem;
+      const quantity = action.quantity;
+
+      const cart_items = state.map((item) => {
+        if (item._id === cartItem._id) {
+          item.quantity = quantity;
+          item.total_price = item.quantity * item.price;
+        }
+
+        return item;
+      });
+
+      updateCartInDB(cart_items);
+      return cart_items;
+    }
+
+    // * for removing an item
+    case "REMOVE_ITEM": {
+      const cartItem = action.cartItem;
+
+      const cart_items = state.filter((item) => item._id !== cartItem._id);
+
+      updateCartInDB(cart_items);
+
+      return cart_items;
+    }
+
     // * for getting the previous cart items from DB
     case "GET_PREVIOUS_CART_ITEMS": {
       return action.payload;
+    }
+
+    case "EMPTY_CART": {
+      updateCartInDB([]);
+      return [];
     }
 
     default:
