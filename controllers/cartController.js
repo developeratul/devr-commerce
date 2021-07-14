@@ -29,16 +29,17 @@ module.exports = {
       const userId = req.user._id;
 
       const user = await User.findOne({ _id: userId });
+
       const user_cart = user.cart_items;
 
-      const userCartItemIds = user_cart.map((i) => i._id);
+      const allProducts = await Product.find({});
+      const availableProductIds = allProducts.map((i) => i._id);
 
-      // // checking which products are available in the user's cart
-      // // const availableCartItems = Product.find({
-      // //   _id: { $in: userCartItemIds },
-      // // });
+      const itemsToSend = availableProductIds.filter((productId) =>
+        user_cart.some((item) => item._id === productId)
+      );
 
-      // // const availableCartItemIds = availableCartItems.map((i) => i._id);
+      console.log(itemsToSend);
 
       res.status(200).send(user_cart);
     } catch (err) {

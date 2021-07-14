@@ -79,6 +79,32 @@
         }
       }
     }
+
+    .cart_total_and_checkout_and_other {
+      margin-top: 20px;
+      @include flex(space-between, center, stretch);
+      .actions {
+        @include flex(space-between, center, stretch);
+        .single_action_button {
+          margin-right: 10px;
+          button {
+            background: $themeColor;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 3px;
+          }
+          &:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+
+      .sub_total {
+        span {
+          color: $successColor;
+        }
+      }
+    }
   }
 
   .Empty_cart {
@@ -102,6 +128,11 @@
         margin-bottom: 10px;
       }
     }
+  }
+
+  .inline_loader_container {
+    padding: 50px 0;
+    @include flex(center, center, stretch);
   }
 }
 
@@ -128,6 +159,13 @@
               width: 100%;
             }
           }
+        }
+      }
+
+      .cart_total_and_checkout_and_other {
+        @include flex(center, center, column-reverse);
+        .sub_total {
+          margin-bottom: 20px;
         }
       }
     }

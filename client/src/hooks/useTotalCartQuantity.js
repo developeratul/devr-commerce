@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 
 // for getting the total quantity of the cart items
 const useTotalCartQuantity = () => {
-  const cart_items = useSelector((state) => state.cartReducer);
+  const { cart_items } = useSelector((state) => state.cartReducer);
 
   let total = 0;
 
