@@ -17,12 +17,15 @@ const Form = () => {
     phone: "",
     isSeller: "",
   });
+  const [responseSentToServer, setResponseSentToServer] = useState(false);
   const [countryData, setCountryData] = useState([]);
   const history = useHistory();
   const dispatch = useDispatch();
 
   // for registering a user
   const registerUser = async () => {
+    setResponseSentToServer(true);
+
     const { name, email, country, phone, password, isSeller } = formData;
 
     try {
@@ -50,10 +53,13 @@ const Form = () => {
         history.push("/");
         dispatch(logInUser(body.user));
         toast.dark(body.message);
+        setResponseSentToServer(false);
       } else if (status === 403) {
         toast.error(body.message);
+        setResponseSentToServer(false);
       } else if (status === 500) {
         toast.error(body.message);
+        setResponseSentToServer(false);
       }
     } catch (err) {
       console.log(err);
@@ -216,7 +222,11 @@ const Form = () => {
           </div>
 
           <div className="single_field">
-            <Button onClick={Validate} variant="contained">
+            <Button
+              onClick={Validate}
+              disabled={responseSentToServer}
+              variant="contained"
+            >
               Register Account
             </Button>
           </div>

@@ -149,7 +149,7 @@ module.exports = {
 
         product.save();
 
-        res.status(200).json({ message: "Post updated successfully" });
+        res.status(200).json({ message: "Product updated successfully" });
       });
     } catch (err) {
       next(err);

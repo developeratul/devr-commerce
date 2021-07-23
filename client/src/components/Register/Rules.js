@@ -16,7 +16,9 @@ const Rules = () => {
             Authority will not be held responsible if you lose money while
             transacting here.
           </li>
-          <li>Finally Stay on my site and enjoy fake shopping :P.</li>
+          <li>Purchase Product from the verified sellers only</li>
+          <li>They are trusted by us</li>
+          <li>Finally Stay on my site and enjoy shopping.</li>
           <li>
             It's totally secured no sensitive information's will be stored.
           </li>

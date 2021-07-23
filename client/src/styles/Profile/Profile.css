@@ -1146,8 +1146,12 @@ nav .nav_active {
   color: #00ff80;
 }
 
-.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product .product_options button {
+.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product .product_options .product_controls button {
   color: #7976fc;
+}
+
+.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product .product_options .product_controls .added_to_cart_message_button {
+  color: #00ff80;
 }
 
 .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_user {

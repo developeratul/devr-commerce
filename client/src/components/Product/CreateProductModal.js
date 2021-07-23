@@ -18,6 +18,7 @@ const CreateProductModal = ({ createProductModalRef, user }) => {
     max_quantity: "",
     product_category: "",
   });
+  const [responseSentToServer, setResponseSentToServer] = useState(false);
   const [shipping_options, set_shipping_options] = useState([]);
   // for containing the uploaded files
   const [fileAra, setFileAra] = useState([]);
@@ -79,6 +80,8 @@ const CreateProductModal = ({ createProductModalRef, user }) => {
 
   // for uploading a product
   async function uploadProduct() {
+    setResponseSentToServer(true);
+
     try {
       const formData = new FormData();
       let shipping_options_separated_in_array = [];
@@ -116,6 +119,7 @@ const CreateProductModal = ({ createProductModalRef, user }) => {
       if (res.status === 200) {
         history.push(`/profile/${user._id}`);
         toast.dark(body.message);
+        setResponseSentToServer(false);
       }
     } catch (err) {
       console.log(err);
@@ -305,7 +309,11 @@ const CreateProductModal = ({ createProductModalRef, user }) => {
             </div>
 
             <div className="single_field">
-              <Button onClick={Validate} variant="contained">
+              <Button
+                onClick={Validate}
+                disabled={responseSentToServer}
+                variant="contained"
+              >
                 Post Product
               </Button>
             </div>

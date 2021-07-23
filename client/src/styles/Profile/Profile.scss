@@ -236,8 +236,13 @@
                     color: $successColor;
                   }
                 }
-                button {
-                  color: $themeColor;
+                .product_controls {
+                  button {
+                    color: $themeColor;
+                  }
+                  .added_to_cart_message_button {
+                    color: $successColor;
+                  }
                 }
               }
             }

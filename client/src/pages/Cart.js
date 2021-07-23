@@ -6,6 +6,8 @@ import NotFound from "./NotFound";
 import EmptyCart from "../components/Cart/EmptyCart";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
+
+// hooks
 import useCartSubtotal from "../hooks/useCartSubtotal";
 
 import {

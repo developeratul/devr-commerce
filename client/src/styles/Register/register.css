@@ -803,9 +803,8 @@ nav .nav_active {
   max-width: 600px;
   -webkit-box-shadow: 0 0 10px #7976fc;
           box-shadow: 0 0 10px #7976fc;
-  background: #2e2e2e34;
-  -webkit-backdrop-filter: blur(5px);
-          backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(30px);
+          backdrop-filter: blur(30px);
   padding: 30px 10px;
   border-radius: 5px;
 }

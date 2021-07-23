@@ -10,6 +10,7 @@ import config from "../config";
 
 const Login = () => {
   const [formInfo, setFormInfo] = useState({ email: "", password: "" });
+  const [responseSentToServer, setResponseSentToServer] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -23,6 +24,7 @@ const Login = () => {
   // for logging in a user
   async function loginUser() {
     const { email, password } = formInfo;
+    setResponseSentToServer(true);
 
     try {
       const res = await fetch("/get_auth/login", {
@@ -38,9 +40,11 @@ const Login = () => {
 
       if (res.status === 201) {
         history.push("/");
+        setResponseSentToServer(false);
         dispatch(logInUser(body.user));
         toast.dark(body.message);
       } else if (res.status === 409) {
+        setResponseSentToServer(false);
         toast.error(body.message);
       }
     } catch (err) {
@@ -92,7 +96,12 @@ const Login = () => {
             </div>
 
             <div className="single_field">
-              <Button onClick={loginUser} variant="contained" fullWidth>
+              <Button
+                onClick={loginUser}
+                disabled={responseSentToServer}
+                variant="contained"
+                fullWidth
+              >
                 Log In
               </Button>
             </div>

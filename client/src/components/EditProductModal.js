@@ -3,6 +3,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../redux/actions/editProductModalActions";
+import { toast } from "react-toastify";
 
 const EditProductModal = () => {
   const { product } = useSelector((state) => state.editProductModalReducer);
@@ -103,8 +104,12 @@ const EditProductModal = () => {
                 <option value="" disabled>
                   Edit Product Category
                 </option>
-                {productCategories.map((category) => {
-                  return <option value={`${category}`}>{category}</option>;
+                {productCategories.map((category, index) => {
+                  return (
+                    <option key={index} value={`${category}`}>
+                      {category}
+                    </option>
+                  );
                 })}
               </select>
             </div>
@@ -122,9 +127,9 @@ const EditProductModal = () => {
                 <option value="" disabled>
                   Edit Shipping options
                 </option>
-                {user.shipping_options.map((option, index) => {
+                {user.shipping_options.map((option) => {
                   return (
-                    <option value={option._id} key={index}>
+                    <option value={option._id} key={option._id}>
                       {option.title}
                     </option>
                   );
@@ -133,11 +138,11 @@ const EditProductModal = () => {
             </div>
             <div className="single_field">
               <div className="image_container">
-                {oldImages.map((image, index) => {
+                {oldImages.map((image) => {
                   return (
                     <div
                       className="single_image"
-                      key={index}
+                      key={image._id}
                       style={{
                         background: `url(${image.photoUrl})`,
                         backgroundSize: "cover",
@@ -146,7 +151,13 @@ const EditProductModal = () => {
                     >
                       <div className="remove_button">
                         <Tooltip title="Remove this image">
-                          <IconButton>
+                          <IconButton
+                            onClick={() => {
+                              setOldImages(
+                                oldImages.filter((img) => img._id !== image._id)
+                              );
+                            }}
+                          >
                             <CloseIcon />
                           </IconButton>
                         </Tooltip>
@@ -155,6 +166,46 @@ const EditProductModal = () => {
                   );
                 })}
               </div>
+            </div>
+
+            <div className="single_field">
+              <input
+                accept="image/png image/jpg image/jpeg"
+                id="contained-button-file"
+                multiple
+                disabled={oldImages.length >= 10}
+                type="file"
+                style={{ display: "none" }}
+                onChange={(event) => {
+                  if (!(event.target.files.length + oldImages.length > 10)) {
+                    const temp = [];
+
+                    for (let i = 0; i < event.target.files.length; i++) {
+                      const imageUrl = URL.createObjectURL(
+                        event.target.files[i]
+                      );
+                      temp.push({
+                        _id: Date.now().toString() + i,
+                        photoUrl: imageUrl,
+                      });
+                    }
+
+                    setOldImages((pre) => [...pre, ...temp]);
+                  } else {
+                    toast.error("You cannot add more than 10 images");
+                  }
+                }}
+              />
+              <label htmlFor="contained-button-file">
+                <Button
+                  disabled={oldImages.length >= 10}
+                  variant="contained"
+                  color="primary"
+                  component="span"
+                >
+                  Upload Images
+                </Button>
+              </label>
             </div>
 
             <div className="single_field">

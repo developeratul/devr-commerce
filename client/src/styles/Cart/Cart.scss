@@ -22,19 +22,20 @@
         }
         @include flex(space-between, center, stretch);
         .item_img {
-          width: 18%;
+          width: 15%;
           img {
             width: 100%;
             border-radius: 5px;
           }
         }
         .item_desc {
-          width: 80%;
+          width: 83%;
           @include flex(flex-between, center, stretch);
           .item_name_and_price {
-            width: 70%;
+            width: 67%;
             h2 {
               padding-bottom: 10px;
+              font-size: 1.2rem;
               a {
                 color: #fff;
                 transition: 0.3s;

@@ -1,16 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { openModal } from "../../../redux/actions/editProductModalActions";
-
-import { IconButton } from "@material-ui/core";
 
 // actions
 import { addToCart } from "../../../redux/actions/cartActions";
 
 // icons
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
-import { toast } from "react-toastify";
+import { IconButton } from "@material-ui/core";
+import CheckIcon from "@material-ui/icons/Check";
 
 // icons
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -18,6 +18,7 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 
 const Store = ({ TabPanel, value, theme, user }) => {
   const authUser = useSelector((state) => state.authReducer);
+  const { cart_items } = useSelector((state) => state.cartReducer);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -51,6 +52,7 @@ const Store = ({ TabPanel, value, theme, user }) => {
     }
   }
 
+  // for adding an item into the cart
   function AddToCart(product) {
     if (!authUser.isAuthenticated) {
       history.push("/login");
@@ -107,9 +109,15 @@ const Store = ({ TabPanel, value, theme, user }) => {
             {user.isSeller ? (
               user.products.length ? (
                 <div className="store_container user_container">
-                  {user.products.map((product, index) => {
+                  {user.products.map((product) => {
+                    const productExistsInCart = cart_items.find(
+                      (item) => item._id === product._id
+                    )
+                      ? true
+                      : false;
+
                     return (
-                      <div className="single_product" key={index}>
+                      <div className="single_product" key={product._id}>
                         <div
                           className="product_image"
                           style={{
@@ -154,9 +162,22 @@ const Store = ({ TabPanel, value, theme, user }) => {
                                 </IconButton>
                               </>
                             ) : (
-                              <IconButton onClick={() => AddToCart(product)}>
-                                <ShoppingCartOutlinedIcon />
-                              </IconButton>
+                              <>
+                                {!productExistsInCart ? (
+                                  <IconButton
+                                    onClick={() => AddToCart(product)}
+                                  >
+                                    <ShoppingCartOutlinedIcon />
+                                  </IconButton>
+                                ) : (
+                                  <IconButton
+                                    disabled
+                                    className="added_to_cart_message_button"
+                                  >
+                                    <CheckIcon />
+                                  </IconButton>
+                                )}
+                              </>
                             )}
                           </div>
                         </div>
