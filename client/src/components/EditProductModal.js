@@ -1,13 +1,17 @@
-import { IconButton, Tooltip, Button } from "@material-ui/core";
+import { IconButton, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../redux/actions/editProductModalActions";
-import { toast } from "react-toastify";
+// import { updateUser } from "../redux/actions/authActions";
 
 const EditProductModal = () => {
   const { product } = useSelector((state) => state.editProductModalReducer);
   const { user } = useSelector((state) => state.authReducer);
+
+  // for handling all the single input fields
   const [input, setInput] = useState({
     title: product.title,
     desc: product.desc,
@@ -15,18 +19,107 @@ const EditProductModal = () => {
     max_quantity: product.max_quantity,
     product_category: product.product_category,
   });
+  // for the multiple select shipping options fields
   const [shippingOptions, setShippingOptions] = useState(
     product.shipping_options.map((option) => option._id) || []
   );
 
-  const [oldImages, setOldImages] = useState(product.images || []);
+  // for handling all the image stuffs
+  const [productImages, setProductImages] = useState(product.images || []);
+
+  const [responseSentToServer, setResponseSentToSever] = useState(false);
 
   const productCategories = useSelector((state) => state.getProductCategories);
   const dispatch = useDispatch();
 
+  // * for handling input changes
   function HandleInputChange(event) {
     const { name, value } = event.target;
     setInput((pre) => ({ ...pre, [name]: value }));
+  }
+
+  // * for saving the current changes in the DB
+  async function saveChanges() {
+    const { title, desc, price, max_quantity, product_category } = input;
+    setResponseSentToSever(true);
+
+    const shipping_options_separated_in_array = [];
+
+    // I have a id of the shipping option stored in the user model
+    // so I am just parsing it and separating all of them under an array
+    for (let i = 0; i < shippingOptions.length; i++) {
+      const parsedOption = user.shipping_options.find(
+        (option) => option._id === shippingOptions[i]
+      );
+
+      shipping_options_separated_in_array.push(parsedOption);
+    }
+
+    const formData = new FormData();
+
+    // appending all the images
+    productImages.map((image) => {
+      formData.append("assets", image.file || image.photoId);
+    });
+    formData.append("title", title);
+    formData.append("desc", desc);
+    formData.append("price", price);
+    formData.append("max_quantity", max_quantity);
+    formData.append("product_category", product_category);
+    formData.append(
+      "shipping_options",
+      JSON.stringify(shipping_options_separated_in_array)
+    );
+    formData.append("productId", product._id);
+
+    try {
+      const res = await fetch("/get_product/update_product", {
+        method: "POST",
+        body: formData,
+      });
+
+      const body = await res.json();
+
+      if (res.status === 200) {
+        dispatch(closeModal());
+        // dispatch(updateUser(body.user));
+        setResponseSentToSever(false);
+        toast.dark(body.message);
+      } else if (res.status === 500) {
+        toast.error(body.message);
+        setResponseSentToSever(false);
+      }
+    } catch (err) {
+      console.log(err);
+      setResponseSentToSever(false);
+      toast.error(err.message);
+    }
+  }
+
+  // * for validating all the input informations
+  function Validate() {
+    const { title, desc, price, max_quantity, product_category } = input;
+
+    const validations = {
+      allFields: title && desc && price && max_quantity && product_category,
+      oneShippingOption: shippingOptions.length > 0,
+      oneProductImage: productImages.length > 0,
+    };
+
+    const { allFields, oneShippingOption, oneProductImage } = validations;
+
+    if (!allFields) {
+      toast.error("Please fill all the fields properly");
+    } else if (!oneShippingOption) {
+      toast.error("You have to add one shipping option");
+    } else if (!oneProductImage) {
+      toast.error("Please upload at least one product image");
+    } else if (allFields && oneShippingOption && oneProductImage) {
+      toast.info("Processing...", {
+        hideProgressBar: true,
+      });
+      saveChanges();
+    }
   }
 
   useEffect(() => {
@@ -116,9 +209,11 @@ const EditProductModal = () => {
             <div className="single_field">
               <select
                 onChange={(event) =>
-                  Array.from(
-                    event.target.selectedOptions,
-                    (option) => option.value
+                  setShippingOptions(
+                    Array.from(
+                      event.target.selectedOptions,
+                      (option) => option.value
+                    )
                   )
                 }
                 multiple
@@ -138,7 +233,7 @@ const EditProductModal = () => {
             </div>
             <div className="single_field">
               <div className="image_container">
-                {oldImages.map((image) => {
+                {productImages.map((image) => {
                   return (
                     <div
                       className="single_image"
@@ -148,57 +243,62 @@ const EditProductModal = () => {
                         backgroundSize: "cover",
                         backgroundPosition: "center",
                       }}
-                    >
-                      <div className="remove_button">
-                        <Tooltip title="Remove this image">
-                          <IconButton
-                            onClick={() => {
-                              setOldImages(
-                                oldImages.filter((img) => img._id !== image._id)
-                              );
-                            }}
-                          >
-                            <CloseIcon />
-                          </IconButton>
-                        </Tooltip>
-                      </div>
-                    </div>
+                    ></div>
                   );
                 })}
               </div>
             </div>
 
+            {/* the user can remove all the old images by clicking this button */}
+            <div className="single_field">
+              <Button
+                onClick={() => setProductImages([])}
+                component="span"
+                variant="contained"
+                disabled={productImages.length <= 0}
+                color="secondary"
+              >
+                Remove Images
+              </Button>
+            </div>
+
+            {/* the file upload button and its functionalities */}
             <div className="single_field">
               <input
                 accept="image/png image/jpg image/jpeg"
                 id="contained-button-file"
                 multiple
-                disabled={oldImages.length >= 10}
+                disabled={
+                  productImages.length >= 10 || productImages.length > 0
+                }
                 type="file"
                 style={{ display: "none" }}
                 onChange={(event) => {
-                  if (!(event.target.files.length + oldImages.length > 10)) {
+                  // maximum product image count is 10, the user cannot add more than 10 images
+                  if (
+                    !(event.target.files.length + productImages.length > 10)
+                  ) {
                     const temp = [];
 
                     for (let i = 0; i < event.target.files.length; i++) {
-                      const imageUrl = URL.createObjectURL(
-                        event.target.files[i]
-                      );
                       temp.push({
+                        photoUrl: URL.createObjectURL(event.target.files[i]),
                         _id: Date.now().toString() + i,
-                        photoUrl: imageUrl,
+                        file: event.target.files[i],
                       });
                     }
 
-                    setOldImages((pre) => [...pre, ...temp]);
+                    setProductImages((pre) => [...pre, ...temp]);
                   } else {
-                    toast.error("You cannot add more than 10 images");
+                    toast.error("You cannot add upto 10 images");
                   }
                 }}
               />
               <label htmlFor="contained-button-file">
                 <Button
-                  disabled={oldImages.length >= 10}
+                  disabled={
+                    productImages.length >= 10 || productImages.length > 0
+                  }
                   variant="contained"
                   color="primary"
                   component="span"
@@ -209,7 +309,13 @@ const EditProductModal = () => {
             </div>
 
             <div className="single_field">
-              <Button variant="contained">Update Product</Button>
+              <Button
+                disabled={responseSentToServer}
+                variant="contained"
+                onClick={Validate}
+              >
+                Update Product
+              </Button>
             </div>
           </div>
         </div>

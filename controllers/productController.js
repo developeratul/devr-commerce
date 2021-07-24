@@ -33,7 +33,7 @@ module.exports = {
   },
 
   // * for uploading a product
-  async postProduct(req, res, next) {
+  postProduct: async function (req, res, next) {
     try {
       const pictureFiles = req.files;
 
@@ -43,7 +43,6 @@ module.exports = {
           folder: `devR-Commerce/products/${req.user.name}`,
         })
       );
-
       const imageResponses = await Promise.all(multiplePicturePromise);
 
       // separating each of the images into objects
@@ -134,7 +133,36 @@ module.exports = {
     try {
       const { productId, shipping_options } = req.body;
       const { title, desc, price, max_quantity, product_category } = req.body;
+      const pictureFiles = req.files;
 
+      const product = await Product.findOne({ _id: productId });
+      let allImagesSeparatedInObject = product.images;
+
+      // removing previous images
+      if (pictureFiles.length > 0) {
+        const removePrevImageRes = product.images.map((image) => {
+          cloudinary.uploader.destroy(image.photoId);
+        });
+        await Promise.all(removePrevImageRes);
+      }
+
+      // uploading new products
+      // map through images and create a promise array using cloudinary upload function
+      if (pictureFiles.length > 0) {
+        const multiplePicturePromise = pictureFiles.map((picture) =>
+          cloudinary.uploader.upload(picture.path, {
+            folder: `devR-Commerce/products/${req.user.name}`,
+          })
+        );
+        const imageResponses = await Promise.all(multiplePicturePromise);
+        // separating each of the images into objects
+        allImagesSeparatedInObject = imageResponses.map((img) => ({
+          photoId: img.public_id,
+          photoUrl: img.secure_url,
+        }));
+      }
+
+      // updating the product informations
       await Product.findById(productId, (err, product) => {
         if (err) {
           next(err);
@@ -145,10 +173,10 @@ module.exports = {
         product.price = price;
         product.max_quantity = max_quantity;
         product.product_category = product_category;
-        product.shipping_options = shipping_options;
+        product.shipping_options = JSON.parse(shipping_options);
+        product.images = allImagesSeparatedInObject;
 
         product.save();
-
         res.status(200).json({ message: "Product updated successfully" });
       });
     } catch (err) {

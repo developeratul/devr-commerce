@@ -1,3 +1,7 @@
+// This reducer is for controlling the Edit product modal
+// which will be rendered conditionally
+// I know this not the best or the write way to do that. But I just found that way
+
 const initialState = {
   modalShouldRender: false,
   product: {},

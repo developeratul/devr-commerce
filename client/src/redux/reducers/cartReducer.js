@@ -13,7 +13,6 @@ async function updateCartInDB(items) {
   }
 }
 
-// to state who will contain all the cart items
 const initialState = {
   responseEnded: false,
   cart_items: [],

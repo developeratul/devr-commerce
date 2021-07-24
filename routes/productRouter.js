@@ -30,6 +30,11 @@ router.post(
 router.delete("/delete_product", checkAuth, deleteProduct);
 
 // for updating a product
-router.post("/update_product", checkAuth, updateProduct);
+router.post(
+  "/update_product",
+  checkAuth,
+  multer.array("assets", 10),
+  updateProduct
+);
 
 module.exports = router;
