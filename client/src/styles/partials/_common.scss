@@ -176,6 +176,15 @@ nav {
             }
           }
         }
+
+        .no_image {
+          text-align: center;
+          padding: 20px 0;
+          h2 {
+            font-family: $font;
+            color: #aeb1b4;
+          }
+        }
       }
     }
   }

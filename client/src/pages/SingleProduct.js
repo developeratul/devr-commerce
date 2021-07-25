@@ -1,17 +1,22 @@
 import "../styles/SingleProduct/SingleProduct.css";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 // components
 import InlineLoader from "../components/InlineLoader";
 import ProductInfo from "../components/SingleProduct/ProductInfo";
 import ProductAuthorInfo from "../components/SingleProduct/ProductAuthorInfo";
+import EditProductModal from "../components/EditProductModal";
 
 const SingleProduct = () => {
   const [product, setProduct] = useState({});
   const [author, setAuthor] = useState({});
   const [loading, setLoading] = useState(true);
+  const { modalShouldRender } = useSelector(
+    (state) => state.editProductModalReducer
+  );
   const { id } = useParams();
   const history = useHistory();
 
@@ -55,6 +60,8 @@ const SingleProduct = () => {
 
   return (
     <div className="single_product_page">
+      {modalShouldRender && <EditProductModal />}
+
       {loading ? (
         <div className="loader_container">
           <InlineLoader />

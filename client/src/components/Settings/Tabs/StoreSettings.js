@@ -23,6 +23,7 @@ const StoreSettings = ({ TabPanel, value, theme, user }) => {
   );
 
   const [countryApi, setCountryApi] = useState([]);
+
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -83,27 +84,33 @@ const StoreSettings = ({ TabPanel, value, theme, user }) => {
     }
   }
 
-  // for saving current changes in the database
+  // * for saving current changes in the database
   async function SaveStoreInfo() {
-    try {
-      const res = await fetch("/get_user/update_store_information", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ shippingOptions }),
-      });
+    // checking if the shipping_options the user has just deleted are in use
+    // if yes he is unable to save changes till he removed the options from the product
+    let optionsAreInUse = true;
 
-      const body = await res.json();
+    for (let i = 0; i < user.products.length; i++) {}
 
-      if (res.status === 200) {
-        dispatch(updateUser(body.user));
-        history.push(`/profile/${user._id}`);
-        toast.dark(body.message);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    // try {
+    //   const res = await fetch("/get_user/update_store_information", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify({ shippingOptions }),
+    //   });
+
+    //   const body = await res.json();
+
+    //   if (res.status === 200) {
+    //     dispatch(updateUser(body.user));
+    //     history.push(`/profile/${user._id}`);
+    //     toast.dark(body.message);
+    //   }
+    // } catch (err) {
+    //   console.log(err);
+    // }
   }
 
   // for fetching country information from this api and add them in the select field

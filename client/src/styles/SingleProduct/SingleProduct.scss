@@ -40,11 +40,12 @@
           width: 60%;
           border-right: 1px solid $bgSecondary;
           h2 {
-            color: $themeColor;
+            color: #fff;
             margin-bottom: 20px;
           }
           p {
             white-space: pre-wrap;
+            color: #aeb1b4;
           }
           .desc {
             span {
@@ -63,6 +64,14 @@
 
         .product_actions {
           width: 40%;
+          .actions {
+            @include flex(flex-start, center, stretch);
+            .single_action {
+              button {
+                color: $themeColor;
+              }
+            }
+          }
         }
       }
     }

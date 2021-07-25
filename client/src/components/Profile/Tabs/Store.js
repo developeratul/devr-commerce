@@ -62,7 +62,8 @@ const Store = ({ TabPanel, value, theme, user }) => {
     dispatch(addToCart(product));
   }
 
-  // ! was getting an error when I was directly calling dispatch so that's whyI have separated it in another function
+  // ! was getting an error when I was directly calling dispatch so that's why I have
+  // ! separated it in another function
   function openModalByDispatching(product) {
     dispatch(openModal(product));
   }
@@ -110,6 +111,7 @@ const Store = ({ TabPanel, value, theme, user }) => {
               user.products.length ? (
                 <div className="store_container user_container">
                   {user.products.map((product) => {
+                    // checking if the item exists in the cart
                     const productExistsInCart = cart_items.find(
                       (item) => item._id === product._id
                     )

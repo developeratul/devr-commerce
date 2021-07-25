@@ -17,7 +17,7 @@ module.exports = {
         res.status(404).json({ message: "Product not found" });
       }
 
-      const product = await Product.findOne({ _id: id });
+      const product = await Product.findOne({ _id: id }).populate("user");
       const user = await User.findOne({ _id: product.user }).populate(
         "products"
       );

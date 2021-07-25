@@ -1,14 +1,21 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Navigation, Thumbs } from "swiper/core";
+
+import { useSelector } from "react-redux";
+
+// components
+import AuthorActions from "./Product_Actions/AuthorActions";
+import UserActions from "./Product_Actions/UserActions";
 
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/thumbs/thumbs.min.css";
 
-import SwiperCore, { Navigation, Thumbs } from "swiper/core";
-
 SwiperCore.use([Navigation, Thumbs]);
 
 const ProductInfo = ({ product }) => {
+  const { user } = useSelector((state) => state.authReducer);
+
   const thumbsSwiper = null;
 
   return (
@@ -23,7 +30,6 @@ const ProductInfo = ({ product }) => {
           navigation={true}
           thumbs={{ swiper: thumbsSwiper }}
           autoplay
-          loop
         >
           {product.images.map((image, index) => {
             return (
@@ -46,7 +52,15 @@ const ProductInfo = ({ product }) => {
           </p>
         </div>
 
-        <div className="product_actions"></div>
+        <div className="product_actions">
+          {user._id === product.user._id ? (
+            // options for the author
+            <AuthorActions product={product} />
+          ) : (
+            // options for the buyers
+            <UserActions product={product} />
+          )}
+        </div>
       </div>
     </div>
   );

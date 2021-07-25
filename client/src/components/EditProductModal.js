@@ -2,10 +2,10 @@ import { IconButton, Button } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useHistory } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../redux/actions/editProductModalActions";
-// import { updateUser } from "../redux/actions/authActions";
 
 const EditProductModal = () => {
   const { product } = useSelector((state) => state.editProductModalReducer);
@@ -31,6 +31,7 @@ const EditProductModal = () => {
 
   const productCategories = useSelector((state) => state.getProductCategories);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   // * for handling input changes
   function HandleInputChange(event) {
@@ -81,9 +82,9 @@ const EditProductModal = () => {
       const body = await res.json();
 
       if (res.status === 200) {
-        dispatch(closeModal());
-        // dispatch(updateUser(body.user));
         setResponseSentToSever(false);
+        dispatch(closeModal());
+        history.push("/");
         toast.dark(body.message);
       } else if (res.status === 500) {
         toast.error(body.message);
@@ -232,21 +233,27 @@ const EditProductModal = () => {
               </select>
             </div>
             <div className="single_field">
-              <div className="image_container">
-                {productImages.map((image) => {
-                  return (
-                    <div
-                      className="single_image"
-                      key={image._id}
-                      style={{
-                        background: `url(${image.photoUrl})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }}
-                    ></div>
-                  );
-                })}
-              </div>
+              {productImages.length > 0 ? (
+                <div className="image_container">
+                  {productImages.map((image) => {
+                    return (
+                      <div
+                        className="single_image"
+                        key={image._id}
+                        style={{
+                          background: `url(${image.photoUrl})`,
+                          backgroundSize: "cover",
+                          backgroundPosition: "center",
+                        }}
+                      ></div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="no_image">
+                  <h2>No Images</h2>
+                </div>
+              )}
             </div>
 
             {/* the user can remove all the old images by clicking this button */}
@@ -265,13 +272,13 @@ const EditProductModal = () => {
             {/* the file upload button and its functionalities */}
             <div className="single_field">
               <input
-                accept="image/png image/jpg image/jpeg"
                 id="contained-button-file"
-                multiple
                 disabled={
                   productImages.length >= 10 || productImages.length > 0
                 }
+                multiple
                 type="file"
+                accept="image/jpeg, image/png"
                 style={{ display: "none" }}
                 onChange={(event) => {
                   // maximum product image count is 10, the user cannot add more than 10 images

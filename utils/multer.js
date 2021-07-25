@@ -1,8 +1,6 @@
 const multer = require("multer");
 const path = require("path");
 
-// we will accept png jpg and jpeg file type format
-
 // Multer config
 module.exports = multer({
   storage: multer.diskStorage({}),
