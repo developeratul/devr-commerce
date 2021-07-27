@@ -41,6 +41,8 @@ const dataSchema = new mongoose.Schema({
       "DIY garden and pet",
     ],
   },
+
+  tags: { type: Array, required: true },
 });
 
 const Product = new mongoose.model("PRODUCT", dataSchema);

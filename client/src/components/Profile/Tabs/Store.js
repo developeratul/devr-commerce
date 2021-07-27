@@ -59,7 +59,23 @@ const Store = ({ TabPanel, value, theme, user }) => {
       toast.info("You have to login in order to perform this action");
     }
 
-    dispatch(addToCart(product));
+    // * for checking if the product can be shipped in the user's country
+    let canBeShipped = true;
+
+    // putting all the countries from the shipping_options in an array
+    const temp = [];
+    for (let i = 0; i < product.shipping_options.length; i++) {
+      temp.push(product.shipping_options[i].countries);
+    }
+    const shippingCountries = temp.join().split(",");
+
+    canBeShipped = shippingCountries.includes(authUser.user.country);
+
+    if (!canBeShipped) {
+      toast.error("This product can not be shipped in your country");
+    } else {
+      dispatch(addToCart(product));
+    }
   }
 
   // ! was getting an error when I was directly calling dispatch so that's why I have

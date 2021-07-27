@@ -245,7 +245,7 @@ const ProfileSideBar = ({ user }) => {
             )}
           </div>
 
-          <div className="platform_information_of_user">
+          {/* <div className="platform_information_of_user">
             <div className="single_information">
               {user.isSeller ? <span>Seller</span> : <span>Not a Seller</span>}
             </div>
@@ -254,7 +254,7 @@ const ProfileSideBar = ({ user }) => {
                 <span>DevR Verified</span>
               </div>
             )}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

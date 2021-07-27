@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import SwipeableViews from "react-swipeable-views";
+import { makeStyles } from "@material-ui/core/styles";
 import { useTheme } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -42,9 +43,17 @@ function a11yProps(index) {
   };
 }
 
+const useStyles = makeStyles(() => ({
+  root: {
+    flexGrow: 1,
+    width: "100%",
+  },
+}));
+
 const ProfileContentAndTabs = ({ user }) => {
   const [value, setValue] = useState(0);
   const theme = useTheme();
+  const classes = useStyles();
 
   // from the material-Ui
   const handleChange = (event, newValue) => {
@@ -56,24 +65,26 @@ const ProfileContentAndTabs = ({ user }) => {
 
   return (
     <div className="profile_content_and_tabs">
-      <div className="tab_and_appBar_and_tabs_container">
-        {/* the app bar */}
+      <div className={`tab_and_appBar_and_tabs_container ${classes.root}`}>
+        {/* the app bar with tabs */}
         <AppBar className="app_bar" position="sticky">
           <Tabs
             value={value}
             onChange={handleChange}
             indicatorColor="primary"
             variant="fullWidth"
-            aria-label="full width tabs example"
+            variant="scrollable"
+            scrollButtons="auto"
+            aria-label="scrollable auto tabs example"
           >
             <Tab label={user.isSeller ? "Store" : "Home"} {...a11yProps(0)} />
             <Tab label="Followers" {...a11yProps(1)} />
             <Tab label="Following" {...a11yProps(2)} />
-            <Tab label="Reviews" {...a11yProps(3)} />
+            <Tab label="Reviews" disabled={!user.isSeller} {...a11yProps(3)} />
           </Tabs>
         </AppBar>
 
-        {/* all the tabs will appear here */}
+        {/* all the tab contents will appear here */}
         <SwipeableViews
           axis={theme.direction === "rtl" ? "x-reverse" : "x"}
           index={value}
@@ -92,10 +103,6 @@ const ProfileContentAndTabs = ({ user }) => {
             theme={theme}
             value={value}
           />
-
-          <TabPanel value={value} index={3} dir={theme.direction}>
-            <h1>Hello world</h1>
-          </TabPanel>
         </SwipeableViews>
       </div>
     </div>

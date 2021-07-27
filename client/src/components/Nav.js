@@ -89,7 +89,7 @@ const Nav = () => {
   return (
     <nav>
       <h2>
-        <Link to="/">DevR-Commerce</Link>
+        <Link to="/">DVC</Link>
       </h2>
 
       <ul className="navLinks" ref={listNavRef}>

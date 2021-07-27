@@ -16,6 +16,7 @@ html {
 
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -36,7 +37,6 @@ button {
 
 button * {
   text-transform: capitalize !important;
-  font-family: Josefin Sans !important;
 }
 
 body {
@@ -1017,38 +1017,6 @@ nav .nav_active {
   fill: #75ef62;
 }
 
-.profile_page .profile_content_container .profile_side_bar .profile_user_info .common_user_information .platform_information_of_user {
-  margin-top: 30px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: stretch;
-          flex-direction: stretch;
-  background: #1a2634;
-  padding: 10px;
-  border-radius: 3px;
-}
-
-.profile_page .profile_content_container .profile_side_bar .profile_user_info .common_user_information .platform_information_of_user .single_information {
-  width: 50%;
-  margin: 5px 0px;
-  text-align: center;
-}
-
-.profile_page .profile_content_container .profile_side_bar .profile_user_info .common_user_information .platform_information_of_user .single_information span {
-  color: #00ff80;
-}
-
 .profile_page .profile_content_container .profile_content_and_tabs {
   width: 70vw;
   height: 100%;
@@ -1217,7 +1185,7 @@ nav .nav_active {
   width: 100%;
   text-align: center;
   border-collapse: collapse;
-  border-color: #7976fc;
+  border-color: #1a2634;
 }
 
 .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .store_product_container .some_seller_informations table td {

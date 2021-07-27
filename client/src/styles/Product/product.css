@@ -16,6 +16,7 @@ html {
 
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -36,7 +37,6 @@ button {
 
 button * {
   text-transform: capitalize !important;
-  font-family: Josefin Sans !important;
 }
 
 body {

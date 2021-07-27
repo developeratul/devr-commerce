@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useHistory } from "react-router-dom";
 
-import { Button, IconButton } from "@material-ui/core";
-import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
+import { Button } from "@material-ui/core";
+// import DeleteOutlinedIcon from "@material-ui/icons/DeleteOutlined";
 
 import { useDispatch } from "react-redux";
 import { updateUser } from "../../../redux/actions/authActions";
@@ -86,31 +86,25 @@ const StoreSettings = ({ TabPanel, value, theme, user }) => {
 
   // * for saving current changes in the database
   async function SaveStoreInfo() {
-    // checking if the shipping_options the user has just deleted are in use
-    // if yes he is unable to save changes till he removed the options from the product
-    let optionsAreInUse = true;
+    try {
+      const res = await fetch("/get_user/update_store_information", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ shippingOptions }),
+      });
 
-    for (let i = 0; i < user.products.length; i++) {}
+      const body = await res.json();
 
-    // try {
-    //   const res = await fetch("/get_user/update_store_information", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify({ shippingOptions }),
-    //   });
-
-    //   const body = await res.json();
-
-    //   if (res.status === 200) {
-    //     dispatch(updateUser(body.user));
-    //     history.push(`/profile/${user._id}`);
-    //     toast.dark(body.message);
-    //   }
-    // } catch (err) {
-    //   console.log(err);
-    // }
+      if (res.status === 200) {
+        dispatch(updateUser(body.user));
+        history.push(`/profile/${user._id}`);
+        toast.dark(body.message);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   // for fetching country information from this api and add them in the select field
@@ -197,7 +191,7 @@ const StoreSettings = ({ TabPanel, value, theme, user }) => {
                               })}
                             </p>
 
-                            <div className="actions">
+                            {/* <div className="actions">
                               <IconButton
                                 onClick={() =>
                                   setShippingOptions((pre) =>
@@ -209,7 +203,7 @@ const StoreSettings = ({ TabPanel, value, theme, user }) => {
                               >
                                 <DeleteOutlinedIcon />
                               </IconButton>
-                            </div>
+                            </div> */}
                           </div>
                         );
                       })

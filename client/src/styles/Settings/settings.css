@@ -16,6 +16,7 @@ html {
 
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -36,7 +37,6 @@ button {
 
 button * {
   text-transform: capitalize !important;
-  font-family: Josefin Sans !important;
 }
 
 body {
@@ -999,14 +999,6 @@ nav .nav_active {
   padding: 10px;
   height: 200px;
   overflow: scroll;
-}
-
-.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .add_shipping_option_section .previous_options .single_shipping_option .actions {
-  text-align: right;
-}
-
-.settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .add_shipping_option_section .previous_options .single_shipping_option .actions svg {
-  color: #7976fc;
 }
 
 .settings_page .settings_update_other_info .tab_panel_single_settings .fields_container .add_shipping_option_section .previous_options .single_shipping_option p span {

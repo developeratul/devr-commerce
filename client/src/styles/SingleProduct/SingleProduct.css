@@ -16,6 +16,7 @@ html {
 
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -36,7 +37,6 @@ button {
 
 button * {
   text-transform: capitalize !important;
-  font-family: Josefin Sans !important;
 }
 
 body {
@@ -853,6 +853,7 @@ nav .nav_active {
 
 .single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc {
   width: 60%;
+  overflow-y: hidden;
   border-right: 1px solid #1a2634;
 }
 

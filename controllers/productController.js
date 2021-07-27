@@ -60,6 +60,9 @@ module.exports = {
         shipping_options,
       } = req.body;
 
+      const tags = title.split(" ");
+      tags.push(product_category);
+
       // creating a new product instance
       const newProduct = new Product({
         title,
@@ -70,6 +73,7 @@ module.exports = {
         shipping_options: JSON.parse(shipping_options),
         user: req.user._id,
         images: allImagesSeparatedInObject,
+        tags,
       });
 
       // saving the product in my database

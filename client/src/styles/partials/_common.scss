@@ -17,6 +17,7 @@ html {
 
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: none;
@@ -32,7 +33,6 @@ button {
 
 button * {
   text-transform: capitalize !important;
-  font-family: $font !important;
 }
 
 body {

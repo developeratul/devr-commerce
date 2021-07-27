@@ -16,6 +16,7 @@ html {
 
 ::-webkit-scrollbar {
   width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -36,7 +37,6 @@ button {
 
 button * {
   text-transform: capitalize !important;
-  font-family: Josefin Sans !important;
 }
 
 body {
@@ -861,6 +861,96 @@ nav .nav_active {
   font-family: Josefin Sans;
 }
 
+.home_page .auth_user_view {
+  padding: 30px 0;
+  width: 95%;
+  margin: auto;
+}
+
+.home_page .auth_user_view .auth_header {
+  width: 100%;
+  background: #1a2634;
+  padding: 30px 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: stretch;
+          flex-direction: stretch;
+}
+
+.home_page .auth_user_view .auth_header .auth_info_container {
+  width: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: stretch;
+          flex-direction: stretch;
+}
+
+.home_page .auth_user_view .auth_header .auth_info_container .image_container {
+  margin-right: 20px;
+}
+
+.home_page .auth_user_view .auth_header .auth_info_container .desc_container h2 {
+  font-family: Josefin Sans;
+}
+
+.home_page .auth_user_view .auth_header .auth_info_container .desc_container h2 span {
+  color: #7976fc;
+}
+
+.home_page .auth_user_view .auth_header .options_container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: stretch;
+          flex-direction: stretch;
+}
+
+.home_page .auth_user_view .auth_header .options_container .single_option:first-child {
+  margin-right: 10px;
+}
+
+.home_page .auth_user_view .auth_header .options_container .single_option button,
+.home_page .auth_user_view .auth_header .options_container .single_option a {
+  text-transform: capitalize;
+  background: #7976fc;
+  color: #fff;
+  padding: 6px 20px;
+}
+
 @media screen and (max-width: 1024px) {
   .home_page .home_header .header_content_wrapper .header_img {
     width: 350px;
@@ -885,6 +975,40 @@ nav .nav_active {
     margin-bottom: 30px;
     width: 100%;
     max-width: 300px;
+  }
+  .home_page .auth_user_view .auth_header {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .home_page .auth_user_view .auth_header .auth_info_container {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
+  .home_page .auth_user_view .auth_header .auth_info_container .image_container {
+    margin-top: 10px;
+  }
+  .home_page .auth_user_view .auth_header .auth_info_container .desc_container h2 {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  .home_page .auth_user_view .auth_header .options_container {
+    width: 100%;
+    margin-top: 10px;
+  }
+  .home_page .auth_user_view .auth_header .options_container .single_option {
+    width: 100%;
+    margin: 5px 0;
+  }
+  .home_page .auth_user_view .auth_header .options_container .single_option:first-child {
+    margin-right: 0;
+  }
+  .home_page .auth_user_view .auth_header .options_container .single_option button,
+  .home_page .auth_user_view .auth_header .options_container .single_option a {
+    width: 100%;
   }
 }
 /*# sourceMappingURL=home.css.map */

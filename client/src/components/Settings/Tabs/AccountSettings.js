@@ -3,7 +3,7 @@ import { Button } from "@material-ui/core";
 import { toast } from "react-toastify";
 import validator from "validator";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../../redux/actions/authActions";
 
 const AccountSettings = ({ TabPanel, value, theme, user }) => {
@@ -13,6 +13,7 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
     phone: user.phone,
     about: user.about,
     country: user.country,
+    productCategory: user.productCategory,
 
     facebook: user.facebook,
     linkedIn: user.linkedIn,
@@ -24,6 +25,10 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
   });
   const [countryData, setCountryData] = useState([]);
 
+  const productCategoriesAvailable = useSelector(
+    (state) => state.getProductCategories
+  );
+
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -33,6 +38,7 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
     phone,
     about,
     country,
+    productCategory,
     showEmail,
     showPhone,
     facebook,
@@ -65,6 +71,7 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
           name,
           email,
           country,
+          productCategory,
           phone,
           showEmail,
           showPhone,
@@ -165,6 +172,25 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
                   {item.name}
                 </option>
               ))}
+            </select>
+          </div>
+
+          <div className="single_field">
+            <select
+              onChange={InputChange}
+              name="productCategory"
+              value={formData.productCategory}
+            >
+              <option value="Not specified yet" disabled>
+                Your Product Category
+              </option>
+              {productCategoriesAvailable.map((category, index) => {
+                return (
+                  <option value={category} key={index}>
+                    {category}
+                  </option>
+                );
+              })}
             </select>
           </div>
 

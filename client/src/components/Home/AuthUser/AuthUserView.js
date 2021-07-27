@@ -1,7 +1,9 @@
+import AuthHeader from "./AuthHeader";
+
 const AuthUserView = () => {
   return (
-    <div>
-      <h1>User is authenticated</h1>
+    <div className="auth_user_view">
+      <AuthHeader />
     </div>
   );
 };

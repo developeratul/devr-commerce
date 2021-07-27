@@ -33,6 +33,20 @@ const UserActions = ({ product }) => {
     setCanBeShipped(shippingCountries.includes(user.country));
   }
 
+  // * for adding an item into cart
+  const addIntoShoppingCart = () => {
+    if (isAuthenticated) {
+      if (!canBeShipped) {
+        toast.error("This product cannot be shipped in your country");
+      } else {
+        dispatch(addToCart(product));
+      }
+    } else {
+      history.push("/login");
+      toast.info("Please login to perform this action");
+    }
+  };
+
   useEffect(() => {
     checkAvailabilityInUsersCountry();
   }, []);
@@ -41,20 +55,7 @@ const UserActions = ({ product }) => {
     <div className="user_actions actions">
       <div className="single_action">
         {!existsInCart ? (
-          <IconButton
-            onClick={() => {
-              if (isAuthenticated) {
-                if (!canBeShipped) {
-                  toast.error("This product cannot be shipped in your country");
-                } else {
-                  dispatch(addToCart(product));
-                }
-              } else {
-                history.push("/login");
-                toast.info("Please login to perform this action");
-              }
-            }}
-          >
+          <IconButton onClick={addIntoShoppingCart}>
             <ShoppingCartOutlinedIcon />
           </IconButton>
         ) : (
