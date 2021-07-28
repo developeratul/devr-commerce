@@ -2,6 +2,14 @@ import { Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 
+// icons
+import FacebookIcon from "@material-ui/icons/Facebook";
+import LinkedInIcon from "@material-ui/icons/LinkedIn";
+import TwitterIcon from "@material-ui/icons/Twitter";
+import WebIcon from "@material-ui/icons/Web";
+import DraftsOutlinedIcon from "@material-ui/icons/DraftsOutlined";
+import PhoneEnabledOutlinedIcon from "@material-ui/icons/PhoneEnabledOutlined";
+
 // for styling the material-ui components
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -34,7 +42,81 @@ const ProductAuthorInfo = ({ author, currentProductId }) => {
         <p className="from">
           from: <span>{author.country}</span>
         </p>
-        <p>{author.about}</p>
+
+        {author.portfolio ||
+        author.facebook ||
+        author.linkedIn ||
+        author.twitter ? (
+          <div className="social_links_container">
+            {author.portfolio && (
+              <div className="single_link portfolio">
+                <a
+                  href={author.portfolio}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <WebIcon />
+                </a>
+              </div>
+            )}
+            {author.twitter && (
+              <div className="single_link twitter">
+                <a
+                  href={author.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <TwitterIcon />
+                </a>
+              </div>
+            )}
+            {author.facebook && (
+              <div className="single_link facebook">
+                <a
+                  href={author.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FacebookIcon />
+                </a>
+              </div>
+            )}
+            {author.linkedIn && (
+              <div className="single_link linkedIn">
+                <a
+                  href={author.linkedIn}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <LinkedInIcon />
+                </a>
+              </div>
+            )}
+          </div>
+        ) : null}
+
+        <p className="about">
+          {author.about ? author.about : <span>404 Bio not found</span>}
+        </p>
+
+        <div className="author_email_and_phone">
+          {author.showEmail && (
+            <p>
+              <span>
+                <DraftsOutlinedIcon />
+              </span>{" "}
+              {author.email}
+            </p>
+          )}
+          {author.showPhone && (
+            <p>
+              <span>
+                <PhoneEnabledOutlinedIcon />
+              </span>{" "}
+              {author.phone}
+            </p>
+          )}
+        </div>
 
         {author.products.length > 1 && (
           <div className="more_from_section">

@@ -153,8 +153,8 @@ const ProfileSideBar = ({ user }) => {
           </p>
 
           <div className="user_links">
-            <div className="single_link portfolio">
-              {user.portfolio && (
+            {user.portfolio && (
+              <div className="single_link portfolio">
                 <a
                   href={user.portfolio}
                   target="_blank"
@@ -162,10 +162,10 @@ const ProfileSideBar = ({ user }) => {
                 >
                   <WebIcon />
                 </a>
-              )}
-            </div>
-            <div className="single_link twitter">
-              {user.twitter && (
+              </div>
+            )}
+            {user.twitter && (
+              <div className="single_link twitter">
                 <a
                   href={user.twitter}
                   target="_blank"
@@ -173,10 +173,10 @@ const ProfileSideBar = ({ user }) => {
                 >
                   <TwitterIcon />
                 </a>
-              )}
-            </div>
-            <div className="single_link facebook">
-              {user.facebook && (
+              </div>
+            )}
+            {user.facebook && (
+              <div className="single_link facebook">
                 <a
                   href={user.facebook}
                   target="_blank"
@@ -184,10 +184,10 @@ const ProfileSideBar = ({ user }) => {
                 >
                   <FacebookIcon />
                 </a>
-              )}
-            </div>
-            <div className="single_link linkedIn">
-              {user.linkedIn && (
+              </div>
+            )}
+            {user.linkedIn && (
+              <div className="single_link linkedIn">
                 <a
                   href={user.linkedIn}
                   target="_blank"
@@ -195,8 +195,8 @@ const ProfileSideBar = ({ user }) => {
                 >
                   <LinkedInIcon />
                 </a>
-              )}
-            </div>
+              </div>
+            )}
           </div>
 
           <div className="follow_user_or_report_section">

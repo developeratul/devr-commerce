@@ -1,33 +1,15 @@
 import { Avatar, Button } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import { toast } from "react-toastify";
-import { logOutUser } from "../../../redux/actions/authActions";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+// hooks
+import useLogout from "../../../hooks/useLogout";
 
 const AuthHeader = () => {
   const { user } = useSelector((state) => state.authReducer);
-  const dispatch = useDispatch();
-  const history = useHistory();
 
-  async function LogOut() {
-    try {
-      const res = await fetch("/get_auth/logout", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          credentials: "include",
-        },
-      });
-
-      const body = await res.json();
-
-      if (res.status === 200) {
-        dispatch(logOutUser());
-        history.push("/login");
-        toast.dark(body.message);
-      }
-    } catch (err) {}
-  }
+  // the logout function
+  const LogOut = useLogout();
 
   return (
     <div className="auth_header">

@@ -34,7 +34,7 @@
       }
 
       .product_actions_and_desc {
-        @include flex(center, stretch, stretch);
+        @include flex(center, flex-start, stretch);
         padding: 10px;
         .product_desc {
           width: 60%;
@@ -65,11 +65,52 @@
 
         .product_actions {
           width: 40%;
-          .actions {
-            @include flex(flex-start, center, stretch);
-            .single_action {
-              button {
-                color: $themeColor;
+          .some_info_before_action {
+            padding: 10px;
+            .productAvailability {
+              p {
+                padding: 5px 0;
+                color: #aeb1b4;
+                @include flex(stretch, center, stretch);
+                &:first-child {
+                  padding-top: 0;
+                }
+                .unavailable {
+                  color: $warningColor;
+                  svg {
+                    fill: $themeColor;
+                    margin-right: 5px;
+                  }
+                }
+                .available {
+                  color: $successColor;
+                  svg {
+                    fill: $themeColor;
+                    margin-right: 5px;
+                  }
+                }
+              }
+            }
+
+            .charges {
+              p {
+                color: #aeb1b4;
+                span {
+                  color: $themeColor;
+                  font-family: $font;
+                }
+              }
+            }
+          }
+
+          .actions_wrapper {
+            width: 100%;
+            .actions {
+              @include flex(flex-start, center, stretch);
+              .single_action {
+                button {
+                  color: $themeColor;
+                }
               }
             }
           }
@@ -100,6 +141,52 @@
           margin-bottom: 10px;
           span {
             color: $successColor;
+          }
+        }
+        .about {
+          span {
+            display: block;
+            text-align: center;
+            color: $warningColor;
+          }
+        }
+
+        .author_email_and_phone {
+          margin: 20px 0;
+          p {
+            span {
+              color: $themeColor;
+              margin-right: 5px;
+            }
+          }
+        }
+
+        .social_links_container {
+          margin-bottom: 20px;
+          @include flex(center, center, stretch);
+          .single_link {
+            margin: 0px 5px;
+          }
+
+          .portfolio {
+            a {
+              color: #fff;
+            }
+          }
+          .facebook {
+            a {
+              color: #16a6fb;
+            }
+          }
+          .twitter {
+            a {
+              color: #009ded;
+            }
+          }
+          .linkedIn {
+            a {
+              color: #0a66c2;
+            }
           }
         }
 
@@ -214,6 +301,7 @@
           .product_desc {
             width: 100%;
             border-right: none;
+            margin-bottom: 30px;
           }
 
           .product_actions {

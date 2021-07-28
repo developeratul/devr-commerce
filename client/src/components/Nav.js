@@ -1,14 +1,16 @@
 import { useRef, useState } from "react";
-import { NavLink, Link, useHistory } from "react-router-dom";
-import { toast } from "react-toastify";
+import { NavLink, Link } from "react-router-dom";
 
-import { useDispatch, useSelector } from "react-redux";
-import { logOutUser } from "../redux/actions/authActions";
+import { useSelector } from "react-redux";
 
+// material-ui
 import { Avatar, IconButton, Menu, MenuItem } from "@material-ui/core";
 import Badge from "@material-ui/core/Badge";
 import ShoppingCartOutlinedIcon from "@material-ui/icons/ShoppingCartOutlined";
 import { makeStyles } from "@material-ui/core/styles";
+
+// hooks
+import useLogout from "../hooks/useLogout";
 import useTotalCartQuantity from "../hooks/useTotalCartQuantity";
 
 // for styling the material-ui components
@@ -31,8 +33,6 @@ const Nav = () => {
   const listNavRef = useRef();
 
   const { user, isAuthenticated } = useSelector((state) => state.authReducer);
-  const history = useHistory();
-  const dispatch = useDispatch();
 
   let total_cart_items = useTotalCartQuantity();
 
@@ -48,28 +48,7 @@ const Nav = () => {
   }
 
   // for logging out the authenticated user
-  async function logOut() {
-    try {
-      const res = await fetch("/get_auth/logout", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          credentials: "include",
-        },
-      });
-
-      const body = await res.json();
-
-      if (res.status === 200) {
-        dispatch(logOutUser());
-        history.push("/login");
-        toast.dark(body.message);
-      }
-    } catch (err) {
-      toast.error("You are not logged in how do you think about logout!");
-      console.log(err);
-    }
-  }
+  const logOut = useLogout();
 
   // from the material-ui
   const [anchorEl, setAnchorEl] = useState(null);
@@ -113,7 +92,7 @@ const Nav = () => {
               <NavLink to="/cart">
                 <IconButton color="secondary">
                   <Badge badgeContent={total_cart_items} color="secondary">
-                    <ShoppingCartOutlinedIcon className="icon" />
+                    <ShoppingCartOutlinedIcon />
                   </Badge>
                 </IconButton>
               </NavLink>

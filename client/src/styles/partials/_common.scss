@@ -79,10 +79,9 @@ nav {
       a {
         color: #fff;
         letter-spacing: 0.5px;
-      }
-
-      .icon {
-        color: #fff;
+        button {
+          color: #fff;
+        }
       }
     }
   }
@@ -223,6 +222,30 @@ nav {
         color: #fff;
         padding: 6px 20px;
       }
+    }
+  }
+}
+
+// server error view
+.server_error {
+  width: 400px;
+  max-width: 100%;
+  margin: 50px auto;
+  .image {
+    width: 300px;
+    margin: auto auto 20px auto;
+    img {
+      width: 100%;
+    }
+  }
+
+  .desc {
+    text-align: center;
+    h2 {
+      color: #ff1000;
+      font-weight: 100;
+      font-family: $font;
+      margin-bottom: 10px;
     }
   }
 }

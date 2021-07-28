@@ -117,7 +117,7 @@ nav .navLinks li a {
   letter-spacing: 0.5px;
 }
 
-nav .navLinks li .icon {
+nav .navLinks li a button {
   color: #fff;
 }
 
@@ -319,6 +319,32 @@ nav .nav_active {
   background: #7976fc;
   color: #fff;
   padding: 6px 20px;
+}
+
+.server_error {
+  width: 400px;
+  max-width: 100%;
+  margin: 50px auto;
+}
+
+.server_error .image {
+  width: 300px;
+  margin: auto auto 20px auto;
+}
+
+.server_error .image img {
+  width: 100%;
+}
+
+.server_error .desc {
+  text-align: center;
+}
+
+.server_error .desc h2 {
+  color: #ff1000;
+  font-weight: 100;
+  font-family: Josefin Sans;
+  margin-bottom: 10px;
 }
 
 .full_page_loader {

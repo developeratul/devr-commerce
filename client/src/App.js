@@ -22,9 +22,11 @@ import NotFound from "./pages/NotFound";
 import Settings from "./pages/Settings";
 import Product from "./pages/Product";
 import SingleProduct from "./pages/SingleProduct";
+import ServerError from "./pages/ServerError";
 
 const App = () => {
   const [responseEnded, setResponseEnded] = useState(false);
+  const [serverError, setServerError] = useState(false);
   const { user } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
 
@@ -56,6 +58,7 @@ const App = () => {
       }
     } catch (err) {
       dispatch(logOutUser());
+      setServerError(true);
     }
   }
 
@@ -75,9 +78,7 @@ const App = () => {
       if (res.status === 200) {
         dispatch(getPreviousCartItems(body));
       }
-    } catch (err) {
-      console.log(err);
-    }
+    } catch (err) {}
   }
 
   useEffect(() => {
@@ -91,46 +92,44 @@ const App = () => {
     };
   }, [user._id]);
 
+  // till the response is ended, a loader should be shown
+  if (!responseEnded) {
+    return <FullPageLoader />;
+  }
+
+  // if we have server side errors
+  else if (serverError) {
+    return <ServerError />;
+  }
+
   return (
-    <>
-      {/* till we don't get any response from the server, this loader should be rendered
-      instead of the routes */}
-      {!responseEnded ? (
-        <FullPageLoader />
-      ) : (
-        <Router>
-          <ToastContainer
-            position="top-center"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            limit={2}
-          />
-
-          <Nav />
-
-          {/* {user.isSeller && isAuthenticated && <EditProductModal />} */}
-
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
-            <Route path="/profile/:id" component={Profile} />
-            <Route path="/product/:id" component={SingleProduct} />
-            <Route path="/cart" component={Cart} />
-            <Route path="/settings" component={Settings} />
-            <Route path="/products" component={Product} />
-            <Route path="/notfound" component={NotFound} />
-            <Route path="*" component={NotFound} />
-          </Switch>
-        </Router>
-      )}
-    </>
+    <Router>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        limit={2}
+      />
+      <Nav />
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <Route path="/profile/:id" component={Profile} />
+        <Route path="/product/:id" component={SingleProduct} />
+        <Route path="/cart" component={Cart} />
+        <Route path="/settings" component={Settings} />
+        <Route path="/products" component={Product} />
+        <Route path="/notfound" component={NotFound} />
+        <Route path="*" component={NotFound} />
+      </Switch>
+    </Router>
   );
 };
 

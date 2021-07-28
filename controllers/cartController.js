@@ -29,7 +29,7 @@ module.exports = {
         allProducts.map((product) => cartItem._id === product._id)
       );
 
-      console.log(availableProducts);
+      // console.log(availableProducts);
 
       res.status(200).send(availableProducts);
     } catch (err) {
