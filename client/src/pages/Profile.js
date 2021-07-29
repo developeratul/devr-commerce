@@ -57,7 +57,10 @@ const Profile = () => {
     fetchProfileInfo(abortController);
     document.title = "Loading...";
 
-    return () => abortController.abort();
+    return () => {
+      setLoading(true);
+      abortController.abort();
+    };
   }, [id]);
 
   return (

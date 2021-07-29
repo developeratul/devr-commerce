@@ -39,6 +39,10 @@ button * {
   text-transform: capitalize !important;
 }
 
+button:disabled {
+  background: #373e41 !important;
+}
+
 body {
   background: #0d1219;
   color: #fff;

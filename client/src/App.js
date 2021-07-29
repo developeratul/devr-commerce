@@ -90,7 +90,7 @@ const App = () => {
     return () => {
       abortController.abort();
     };
-  }, [user._id]);
+  }, [user._id, serverError]);
 
   // till the response is ended, a loader should be shown
   if (!responseEnded) {

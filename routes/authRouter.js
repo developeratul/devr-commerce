@@ -8,6 +8,7 @@ const {
   checkAuthController,
   logOutUser,
   loginUser,
+  logoutOfAllDevices,
 } = require("../controllers/authController");
 
 // for registering a new user
@@ -21,5 +22,8 @@ router.get("/", checkAuth, checkAuthController);
 
 // for logging out a user
 router.get("/logout", checkAuth, logOutUser);
+
+// for logging out from all devices
+router.get("/logoutOfAllDevices", checkAuth, logoutOfAllDevices);
 
 module.exports = router;

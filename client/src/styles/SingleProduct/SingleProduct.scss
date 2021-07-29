@@ -35,9 +35,10 @@
 
       .product_actions_and_desc {
         @include flex(center, flex-start, stretch);
-        padding: 10px;
+        padding: 10px 0;
         .product_desc {
           width: 60%;
+          padding: 0 5px;
           overflow-y: hidden;
           border-right: 1px solid $bgSecondary;
           h2 {
@@ -61,10 +62,54 @@
               color: $successColor;
             }
           }
+
+          .review_section {
+            margin-top: 30px;
+            .review_section_title {
+              color: $themeColor;
+              font-family: $font;
+              margin-bottom: 10px;
+            }
+
+            .write_review_section {
+              width: 100%;
+              margin-bottom: 20px;
+              .single_field {
+                width: 100%;
+                margin: 5px 0;
+                textarea,
+                button,
+                select {
+                  width: 100%;
+                }
+                button {
+                  background: $themeColor;
+                  color: #fff;
+                  padding: 10px 0;
+                }
+                textarea,
+                select {
+                  resize: none;
+                  padding: 10px;
+                  border: 2px solid $bgSecondary;
+                  border-radius: 3px;
+                  background: $bgSecondary;
+                  color: #fff;
+                  &:focus {
+                    border-color: $themeColor;
+                  }
+                  &::placeholder {
+                    color: #fff;
+                  }
+                }
+              }
+            }
+          }
         }
 
         .product_actions {
           width: 40%;
+          padding: 0 5px;
           .some_info_before_action {
             padding: 10px;
             .productAvailability {
@@ -98,6 +143,15 @@
                 span {
                   color: $themeColor;
                   font-family: $font;
+                }
+              }
+            }
+
+            .rating {
+              p {
+                color: #aeb1b4;
+                span {
+                  color: $themeColor;
                 }
               }
             }
@@ -144,6 +198,7 @@
           }
         }
         .about {
+          white-space: pre-wrap;
           span {
             display: block;
             text-align: center;
@@ -215,9 +270,6 @@
               flex: 0.95;
               display: grid;
               justify-content: flex-start;
-              p {
-                color: $successColor;
-              }
               h2 {
                 font-size: 1.2rem;
                 text-align: left;

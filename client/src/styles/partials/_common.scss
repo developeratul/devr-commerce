@@ -35,6 +35,12 @@ button * {
   text-transform: capitalize !important;
 }
 
+button {
+  &:disabled {
+    background: rgb(55, 62, 65) !important;
+  }
+}
+
 body {
   background: $bgColor;
   color: #fff;

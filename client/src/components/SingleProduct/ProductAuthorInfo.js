@@ -138,7 +138,6 @@ const ProductAuthorInfo = ({ author, currentProductId }) => {
                         {product.title.length > 20 ? "..." : ""}
                       </Link>
                     </h2>
-                    <p>{product.price} $</p>
                   </div>
                 </div>
               );

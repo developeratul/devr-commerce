@@ -64,6 +64,9 @@ const dataSchema = new mongoose.Schema({
 
   shipping_options: [{ title: String, charge: Number, countries: Array }],
 
+  reviews: [{ type: mongoose.Types.ObjectId, ref: "REVIEW" }],
+  averageRating: { type: Number, default: 0 },
+
   // for storing the auth tokens
   tokens: [{ token: { type: String } }],
 });

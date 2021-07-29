@@ -20,7 +20,8 @@ module.exports = {
         const user = await User.findOne({ _id: id })
           .populate("products")
           .populate("followers")
-          .populate("followings");
+          .populate("followings")
+          .populate("reviews");
 
         // checking if the user exists
         if (user) {

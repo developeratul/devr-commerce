@@ -46,8 +46,7 @@
     flex: 2;
     height: 100%;
     overflow-x: hidden;
-    background: #0d121915;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
     .app_bar {
       background: $bgColor;
       color: #fff !important;
@@ -147,6 +146,17 @@
               }
             }
           }
+        }
+      }
+
+      .logout {
+        width: 90%;
+        text-align: center;
+        margin: 40px auto auto auto;
+        button {
+          background: $bgColor;
+          color: $themeColor;
+          padding: 10px 20px;
         }
       }
     }

@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { useHistory } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
-import { updateUser } from "../../../redux/actions/authActions";
+import { updateUser, logOutUser } from "../../../redux/actions/authActions";
 
 const SecuritySettings = ({ TabPanel, value, theme, user }) => {
   const [formData, setFormData] = useState({
@@ -44,6 +44,26 @@ const SecuritySettings = ({ TabPanel, value, theme, user }) => {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  // for logging out from all devices
+  async function logoutOfAllDevices() {
+    try {
+      const res = await fetch("/get_auth/logoutOfAllDevices", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const body = await res.json();
+
+      if (res.status === 200) {
+        dispatch(logOutUser());
+        history.push("/login");
+        toast.dark(body.message);
+      }
+    } catch (err) {}
   }
 
   // for validating the input information's
@@ -107,6 +127,13 @@ const SecuritySettings = ({ TabPanel, value, theme, user }) => {
               Update Password
             </Button>
           </div>
+        </div>
+
+        <div className="logout">
+          <h2 className="title">Remove access from all devices</h2>
+          <Button variant="contained" onClick={logoutOfAllDevices}>
+            Logout of all devices
+          </Button>
         </div>
       </TabPanel>
     </div>

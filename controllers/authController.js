@@ -27,9 +27,7 @@ module.exports = {
       } else {
         // saving the user information's and handling error
         await newUser.save().catch((err) => {
-          if (err.message) {
-            next(err.message);
-          } else {
+          if (err) {
             next(err);
           }
         });
@@ -122,6 +120,23 @@ module.exports = {
       });
     } catch (err) {
       res.send(err);
+    }
+  },
+
+  // * for logging out from all devices
+  logoutOfAllDevices: async function (req, res, next) {
+    try {
+      req.user.tokens = [];
+      res.clearCookie("auth");
+      req.user.save((err) => {
+        if (err) {
+          next(err);
+        } else {
+          res.status(200).json({ message: "Logged out from all devices" });
+        }
+      });
+    } catch (err) {
+      next(err);
     }
   },
 };

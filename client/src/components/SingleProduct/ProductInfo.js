@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 // icons
 import DoneIcon from "@material-ui/icons/Done";
 import ReportProblemOutlinedIcon from "@material-ui/icons/ReportProblemOutlined";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
 
 // hooks
 import useProductCanBeShipped from "../../hooks/useProductCanBeShipped";
@@ -13,6 +14,7 @@ import useProductCanBeShipped from "../../hooks/useProductCanBeShipped";
 // components
 import AuthorActions from "./Product_Actions/AuthorActions";
 import UserActions from "./Product_Actions/UserActions";
+import ReviewSection from "./ReviewSection";
 
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
@@ -21,7 +23,7 @@ import "swiper/components/thumbs/thumbs.min.css";
 SwiperCore.use([Navigation, Thumbs]);
 
 const ProductInfo = ({ product }) => {
-  const { user } = useSelector((state) => state.authReducer);
+  const { user, isAuthenticated } = useSelector((state) => state.authReducer);
   const { canBeShipped, shippingCharge, shippingCountry } =
     useProductCanBeShipped(product);
 
@@ -59,6 +61,9 @@ const ProductInfo = ({ product }) => {
           <p className="price">
             Price: <span>{product.price} $</span>
           </p>
+
+          {/* the review section for writing and reading reviews */}
+          <ReviewSection product={product} />
         </div>
 
         <div className="product_actions">
@@ -91,8 +96,19 @@ const ProductInfo = ({ product }) => {
               <p>
                 Shipping Charge: <span>{shippingCharge}</span>
               </p>
+              {isAuthenticated && (
+                <p>
+                  Shipping country: <span>{shippingCountry}</span>
+                </p>
+              )}
+            </div>
+            <div className="rating">
               <p>
-                Shipping country: <span>{shippingCountry}</span>
+                Rating:{" "}
+                <span>
+                  {!product.averageRating ? "N/A" : product.averageRating}{" "}
+                  <StarBorderIcon />
+                </span>
               </p>
             </div>
           </div>

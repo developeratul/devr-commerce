@@ -6,6 +6,7 @@ const { cloudinary } = require("../utils/cloudinary");
 // models
 const Product = require("../models/product");
 const User = require("../models/users");
+const Review = require("../models/review");
 
 module.exports = {
   // * for getting the informations of a single product according the id
@@ -17,16 +18,18 @@ module.exports = {
         res.status(404).json({ message: "Product not found" });
       }
 
-      const product = await Product.findOne({ _id: id }).populate("user");
+      const product = await Product.findOne({ _id: id })
+        .populate("user")
+        .populate("reviews");
       const user = await User.findOne({ _id: product.user }).populate(
         "products"
       );
 
       if (!product) {
         res.status(404).json({ message: "Product not found" });
+      } else {
+        res.status(200).json({ product, user });
       }
-
-      res.status(200).json({ product, user });
     } catch (err) {
       next(err);
     }
@@ -110,16 +113,26 @@ module.exports = {
       const multiplePicturePromise = allProductImageIdInArray.map((pictureId) =>
         cloudinary.uploader.destroy(pictureId)
       );
-
       await Promise.all(multiplePicturePromise);
 
+      // deleting the product
       await Product.findOneAndRemove({ _id: productId }, (err) => {
         if (err) {
           next(err);
         }
       });
 
+      // removing the product from the user schema
       await User.updateOne({ _id: userId }, { $pull: { products: productId } });
+      // removing the product oriented reviews from the user schema
+      await User.updateOne(
+        { _id: userId },
+        { $pull: { reviews: { $in: theProduct.reviews } } }
+      );
+      // removing all the product oriented reviews in from Review Schema
+      await Review.deleteMany({
+        _id: { $in: theProduct.reviews },
+      });
 
       const updatedUser = await User.findOne({ _id: userId });
 

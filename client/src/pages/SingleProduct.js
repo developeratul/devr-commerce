@@ -43,7 +43,8 @@ const SingleProduct = () => {
         toast.error(body.message);
       }
     } catch (err) {
-      console.log(err);
+      history.push("/notFound");
+      toast.error("Product Not Found");
     }
   }
 
@@ -54,24 +55,29 @@ const SingleProduct = () => {
     fetchProductData(abortController);
 
     return function () {
+      setLoading(true);
       abortController.abort();
     };
   }, [id]);
+
+  if (loading) {
+    return (
+      <div className="single_product_page">
+        <div className="loader_container">
+          <InlineLoader />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="single_product_page">
       {modalShouldRender && <EditProductModal />}
 
-      {loading ? (
-        <div className="loader_container">
-          <InlineLoader />
-        </div>
-      ) : (
-        <div className="product_page_content_container">
-          <ProductInfo product={product} />
-          <ProductAuthorInfo author={author} currentProductId={product._id} />
-        </div>
-      )}
+      <div className="product_page_content_container">
+        <ProductInfo product={product} />
+        <ProductAuthorInfo author={author} currentProductId={product._id} />
+      </div>
     </div>
   );
 };
