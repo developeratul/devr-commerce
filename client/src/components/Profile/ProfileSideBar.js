@@ -31,10 +31,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProfileSideBar = ({ user }) => {
+const ProfileSideBar = () => {
+  // the data of the user which was fetched
+  const user = useSelector((state) => state.profileReducer);
+  // the authenticated user who is visiting that page
+  const authUser = useSelector((state) => state.authReducer);
   const [isFollowing, setIsFollowing] = useState(false);
   const classes = useStyles();
-  const authUser = useSelector((state) => state.authReducer);
   const { isAuthenticated } = authUser;
   const history = useHistory();
   const dispatch = useDispatch();
@@ -70,6 +73,7 @@ const ProfileSideBar = ({ user }) => {
 
       if (res.status === 200) {
         setIsFollowing(true);
+        // updating the following list of the auth user
         dispatch(updateUser(body.user));
       }
     } catch (err) {
@@ -94,6 +98,7 @@ const ProfileSideBar = ({ user }) => {
 
       if (res.status === 200) {
         setIsFollowing(false);
+        // updating the following list of the auth user
         dispatch(updateUser(body.user));
       }
     } catch (err) {

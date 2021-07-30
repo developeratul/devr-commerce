@@ -869,9 +869,9 @@ nav .nav_active {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -webkit-box-orient: vertical;
@@ -912,80 +912,9 @@ nav .nav_active {
   color: #00ff80;
 }
 
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section {
-  margin-top: 30px;
-}
-
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .review_section_title {
-  color: #7976fc;
-  font-family: Josefin Sans;
-  margin-bottom: 10px;
-}
-
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section {
-  width: 100%;
-  margin-bottom: 20px;
-}
-
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field {
-  width: 100%;
-  margin: 5px 0;
-}
-
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field textarea,
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field button,
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field select {
-  width: 100%;
-}
-
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field button {
-  background: #7976fc;
-  color: #fff;
-  padding: 10px 0;
-}
-
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field textarea,
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field select {
-  resize: none;
-  padding: 10px;
-  border: 2px solid #1a2634;
-  border-radius: 3px;
-  background: #1a2634;
-  color: #fff;
-}
-
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field textarea:focus,
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field select:focus {
-  border-color: #7976fc;
-}
-
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field textarea::-webkit-input-placeholder,
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field select::-webkit-input-placeholder {
-  color: #fff;
-}
-
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field textarea:-ms-input-placeholder,
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field select:-ms-input-placeholder {
-  color: #fff;
-}
-
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field textarea::-ms-input-placeholder,
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field select::-ms-input-placeholder {
-  color: #fff;
-}
-
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field textarea::placeholder,
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_desc .review_section .write_review_section .single_field select::placeholder {
-  color: #fff;
-}
-
 .single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_actions {
   width: 40%;
   padding: 0 5px;
-}
-
-.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_actions .some_info_before_action {
-  padding: 10px;
 }
 
 .single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_actions .some_info_before_action .productAvailability p {
@@ -1071,6 +1000,75 @@ nav .nav_active {
 
 .single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_actions .actions_wrapper .actions .single_action button {
   color: #7976fc;
+}
+
+.single_product_page .product_page_content_container .product_info .review_section {
+  margin-top: 30px;
+  width: 100%;
+  padding: 0 5px;
+}
+
+.single_product_page .product_page_content_container .product_info .review_section .review_section_title {
+  color: #7976fc;
+  font-family: Josefin Sans;
+  margin-bottom: 10px;
+}
+
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field textarea,
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field button,
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field select {
+  width: 100%;
+}
+
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field button {
+  background: #7976fc;
+  color: #fff;
+  padding: 10px 0;
+}
+
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field textarea,
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field select {
+  resize: none;
+  padding: 10px;
+  border: 2px solid #1a2634;
+  border-radius: 3px;
+  background: #1a2634;
+  color: #fff;
+}
+
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field textarea:focus,
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field select:focus {
+  border-color: #7976fc;
+}
+
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field textarea::-webkit-input-placeholder,
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field select::-webkit-input-placeholder {
+  color: #fff;
+}
+
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field textarea:-ms-input-placeholder,
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field select:-ms-input-placeholder {
+  color: #fff;
+}
+
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field textarea::-ms-input-placeholder,
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field select::-ms-input-placeholder {
+  color: #fff;
+}
+
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field textarea::placeholder,
+.single_product_page .product_page_content_container .product_info .review_section .write_review_section .single_field select::placeholder {
+  color: #fff;
 }
 
 .single_product_page .product_page_content_container .product_author_info {
@@ -1314,19 +1312,20 @@ nav .nav_active {
   .single_product_page .product_page_content_container .product_author_info {
     width: 100%;
     height: auto;
+    border-top: 1px solid #00ff80;
     margin-top: 50px;
   }
   .single_product_page .product_page_content_container .product_author_info .author_info .more_from_section .single_product {
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-    -webkit-box-align: start;
-        -ms-flex-align: start;
-            align-items: flex-start;
-    -webkit-box-orient: vertical;
+    -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    width: 100%;
     padding: 10px 0px;
     border-bottom: 1px solid #7976fc;
   }
@@ -1334,7 +1333,7 @@ nav .nav_active {
     border-bottom: none;
   }
   .single_product_page .product_page_content_container .product_author_info .author_info .more_from_section .single_product .product_image {
-    width: 100%;
+    width: 70px;
   }
 }
 /*# sourceMappingURL=SingleProduct.css.map */

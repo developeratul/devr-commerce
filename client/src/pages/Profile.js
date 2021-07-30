@@ -2,16 +2,17 @@ import "../styles/Profile/Profile.css";
 import { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getProfile } from "../redux/actions/profileActions";
 
 // components
 import InlineLoader from "../components/InlineLoader";
 import ProfileSideBar from "../components/Profile/ProfileSideBar";
 import ProfileContentAndTabs from "../components/Profile/ProfileContentAndTabs";
 import EditProductModal from "../components/EditProductModal";
-import { useSelector } from "react-redux";
 
 const Profile = () => {
-  const [currentUser, setCurrentUser] = useState({});
   const [loading, setLoading] = useState(true);
 
   const { modalShouldRender } = useSelector(
@@ -20,6 +21,7 @@ const Profile = () => {
 
   const { id } = useParams();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   // for fetching the data of the user according to the id
   async function fetchProfileInfo(abortController) {
@@ -36,7 +38,7 @@ const Profile = () => {
 
       if (res.status === 201) {
         setLoading(false);
-        setCurrentUser(body);
+        dispatch(getProfile(body));
         document.title = `${body.name}'s Store`;
       } else if (res.status === 404) {
         history.push("/notFound");
@@ -73,8 +75,8 @@ const Profile = () => {
           </div>
         ) : (
           <div className="profile_content_container">
-            <ProfileSideBar user={currentUser} />
-            <ProfileContentAndTabs user={currentUser} />
+            <ProfileSideBar />
+            <ProfileContentAndTabs />
           </div>
         )}
       </div>

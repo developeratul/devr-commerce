@@ -16,7 +16,10 @@ import CheckIcon from "@material-ui/icons/Check";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 
-const Store = ({ TabPanel, value, theme, user }) => {
+const Store = ({ TabPanel, value, theme }) => {
+  // the user who's data was fetched
+  const user = useSelector((state) => state.profileReducer);
+  // the user who is visiting this page / the authenticated user
   const authUser = useSelector((state) => state.authReducer);
   const { cart_items } = useSelector((state) => state.cartReducer);
   const history = useHistory();

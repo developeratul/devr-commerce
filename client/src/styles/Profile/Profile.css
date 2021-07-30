@@ -1098,9 +1098,9 @@ nav .nav_active {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -webkit-box-orient: vertical;
@@ -1189,6 +1189,73 @@ nav .nav_active {
 
 .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_user .user_desc p span {
   color: #00ff80;
+}
+
+.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_review {
+  width: 460px;
+  padding: 10px;
+  border-radius: 5px;
+  background: #1a2634;
+  border: 2px solid #0d1219;
+  margin: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: stretch;
+          flex-direction: stretch;
+}
+
+.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_review .reviewer_image {
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  width: 50px;
+  margin-right: 10px;
+}
+
+.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_review .review_desc {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_review .review_desc h2 a {
+  font-family: Josefin Sans;
+  color: #7976fc;
+}
+
+.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_review .review_desc .reviewStar {
+  margin-top: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: stretch;
+          flex-direction: stretch;
+}
+
+.profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_review .review_desc .reviewStar span {
+  color: #00ff80;
+  margin-left: 10px;
 }
 
 .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .store_product_container .some_seller_informations {

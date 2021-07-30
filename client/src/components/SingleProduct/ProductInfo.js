@@ -14,15 +14,16 @@ import useProductCanBeShipped from "../../hooks/useProductCanBeShipped";
 // components
 import AuthorActions from "./Product_Actions/AuthorActions";
 import UserActions from "./Product_Actions/UserActions";
-import ReviewSection from "./ReviewSection";
 
 import "swiper/swiper.min.css";
 import "swiper/components/navigation/navigation.min.css";
 import "swiper/components/thumbs/thumbs.min.css";
+import ReviewSection from "./ReviewSection";
 
 SwiperCore.use([Navigation, Thumbs]);
 
-const ProductInfo = ({ product }) => {
+const ProductInfo = () => {
+  const product = useSelector((state) => state.singleProductReducer);
   const { user, isAuthenticated } = useSelector((state) => state.authReducer);
   const { canBeShipped, shippingCharge, shippingCountry } =
     useProductCanBeShipped(product);
@@ -31,6 +32,7 @@ const ProductInfo = ({ product }) => {
 
   return (
     <div className="product_info">
+      {/* the image slider at the top */}
       <div className="product_image_slider">
         <Swiper
           style={{
@@ -40,19 +42,20 @@ const ProductInfo = ({ product }) => {
           spaceBetween={10}
           navigation={true}
           thumbs={{ swiper: thumbsSwiper }}
-          autoplay
         >
           {product.images.map((image, index) => {
             return (
               <SwiperSlide key={index}>
-                <img src={image.photoUrl} />
+                <img src={image.photoUrl} al={product.title} />
               </SwiperSlide>
             );
           })}
         </Swiper>
       </div>
 
+      {/* actions and desc container */}
       <div className="product_actions_and_desc">
+        {/* desc */}
         <div className="product_desc">
           <h2>{product.title}</h2>
           <p className="desc">
@@ -61,11 +64,9 @@ const ProductInfo = ({ product }) => {
           <p className="price">
             Price: <span>{product.price} $</span>
           </p>
-
-          {/* the review section for writing and reading reviews */}
-          <ReviewSection product={product} />
         </div>
 
+        {/* actions */}
         <div className="product_actions">
           <div className="some_info_before_action">
             {/* showing up some availability informations */}
@@ -117,14 +118,17 @@ const ProductInfo = ({ product }) => {
           <div className="actions_wrapper">
             {user._id === product.user._id ? (
               // options for the author
-              <AuthorActions product={product} />
+              <AuthorActions />
             ) : (
               // options for the buyers
-              <UserActions product={product} />
+              <UserActions />
             )}
           </div>
         </div>
       </div>
+
+      {/* the review section */}
+      <ReviewSection />
     </div>
   );
 };

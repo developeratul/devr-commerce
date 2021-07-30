@@ -12,6 +12,8 @@ import Box from "@material-ui/core/Box";
 import Followers from "./Tabs/Followers";
 import Followings from "./Tabs/Followings";
 import Store from "./Tabs/Store";
+import Reviews from "./Tabs/Reviews";
+import { useSelector } from "react-redux";
 
 // all these functions are from the material-ui
 function TabPanel(props) {
@@ -50,7 +52,8 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const ProfileContentAndTabs = ({ user }) => {
+const ProfileContentAndTabs = () => {
+  const user = useSelector((state) => state.profileReducer);
   const [value, setValue] = useState(0);
   const theme = useTheme();
   const classes = useStyles();
@@ -77,6 +80,7 @@ const ProfileContentAndTabs = ({ user }) => {
             scrollButtons="auto"
             aria-label="scrollable auto tabs example"
           >
+            {/* <Tab label={user.isSeller ? "Store" : "Home"} {...a11yProps(0)} /> */}
             <Tab label={user.isSeller ? "Store" : "Home"} {...a11yProps(0)} />
             <Tab label="Followers" {...a11yProps(1)} />
             <Tab label="Following" {...a11yProps(2)} />
@@ -90,19 +94,10 @@ const ProfileContentAndTabs = ({ user }) => {
           index={value}
           onChangeIndex={handleChangeIndex}
         >
-          <Store TabPanel={TabPanel} user={user} theme={theme} value={value} />
-          <Followers
-            TabPanel={TabPanel}
-            user={user}
-            theme={theme}
-            value={value}
-          />
-          <Followings
-            TabPanel={TabPanel}
-            user={user}
-            theme={theme}
-            value={value}
-          />
+          <Store TabPanel={TabPanel} theme={theme} value={value} />
+          <Followers TabPanel={TabPanel} theme={theme} value={value} />
+          <Followings TabPanel={TabPanel} theme={theme} value={value} />
+          <Reviews TabPanel={TabPanel} theme={theme} value={value} />
         </SwipeableViews>
       </div>
     </div>

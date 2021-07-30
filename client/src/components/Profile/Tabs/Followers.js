@@ -1,5 +1,6 @@
 import { Avatar } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 // for styling the material-ui Avatar component
@@ -10,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Followers = ({ TabPanel, value, theme, user }) => {
+const Followers = ({ TabPanel, value, theme }) => {
+  const user = useSelector((state) => state.profileReducer);
   const classes = useStyles();
 
   return (

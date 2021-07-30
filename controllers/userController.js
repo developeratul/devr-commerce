@@ -18,10 +18,8 @@ module.exports = {
       // checking if the id is valid for mongoose query operation
       if (mongoose.Types.ObjectId.isValid(id)) {
         const user = await User.findOne({ _id: id })
-          .populate("products")
-          .populate("followers")
-          .populate("followings")
-          .populate("reviews");
+          .populate("products reviews followers followings")
+          .populate({ path: "reviews", populate: { path: "reviewer" } });
 
         // checking if the user exists
         if (user) {

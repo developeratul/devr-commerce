@@ -9,6 +9,7 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import WebIcon from "@material-ui/icons/Web";
 import DraftsOutlinedIcon from "@material-ui/icons/DraftsOutlined";
 import PhoneEnabledOutlinedIcon from "@material-ui/icons/PhoneEnabledOutlined";
+import { useSelector } from "react-redux";
 
 // for styling the material-ui components
 const useStyles = makeStyles((theme) => ({
@@ -18,7 +19,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ProductAuthorInfo = ({ author, currentProductId }) => {
+const ProductAuthorInfo = ({ author }) => {
+  const product = useSelector((state) => state.singleProductReducer);
+  const currentProductId = product._id;
   const authorProducts = author.products.filter(
     (product) => product._id !== currentProductId
   );

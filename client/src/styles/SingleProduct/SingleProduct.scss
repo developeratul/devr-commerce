@@ -10,6 +10,7 @@
   .product_page_content_container {
     @include flex(center, center, stretch);
     height: 100%;
+    // left content
     .product_info {
       height: 100%;
       width: 75%;
@@ -34,8 +35,10 @@
       }
 
       .product_actions_and_desc {
-        @include flex(center, flex-start, stretch);
+        @include flex(center, stretch, stretch);
         padding: 10px 0;
+
+        // product desc
         .product_desc {
           width: 60%;
           padding: 0 5px;
@@ -62,56 +65,13 @@
               color: $successColor;
             }
           }
-
-          .review_section {
-            margin-top: 30px;
-            .review_section_title {
-              color: $themeColor;
-              font-family: $font;
-              margin-bottom: 10px;
-            }
-
-            .write_review_section {
-              width: 100%;
-              margin-bottom: 20px;
-              .single_field {
-                width: 100%;
-                margin: 5px 0;
-                textarea,
-                button,
-                select {
-                  width: 100%;
-                }
-                button {
-                  background: $themeColor;
-                  color: #fff;
-                  padding: 10px 0;
-                }
-                textarea,
-                select {
-                  resize: none;
-                  padding: 10px;
-                  border: 2px solid $bgSecondary;
-                  border-radius: 3px;
-                  background: $bgSecondary;
-                  color: #fff;
-                  &:focus {
-                    border-color: $themeColor;
-                  }
-                  &::placeholder {
-                    color: #fff;
-                  }
-                }
-              }
-            }
-          }
         }
 
+        // product actions
         .product_actions {
           width: 40%;
           padding: 0 5px;
           .some_info_before_action {
-            padding: 10px;
             .productAvailability {
               p {
                 padding: 5px 0;
@@ -170,8 +130,55 @@
           }
         }
       }
+
+      // review section
+      .review_section {
+        margin-top: 30px;
+        width: 100%;
+        padding: 0 5px;
+        .review_section_title {
+          color: $themeColor;
+          font-family: $font;
+          margin-bottom: 10px;
+        }
+
+        .write_review_section {
+          width: 100%;
+          margin-bottom: 20px;
+          .single_field {
+            width: 100%;
+            margin: 5px 0;
+            textarea,
+            button,
+            select {
+              width: 100%;
+            }
+            button {
+              background: $themeColor;
+              color: #fff;
+              padding: 10px 0;
+            }
+            textarea,
+            select {
+              resize: none;
+              padding: 10px;
+              border: 2px solid $bgSecondary;
+              border-radius: 3px;
+              background: $bgSecondary;
+              color: #fff;
+              &:focus {
+                border-color: $themeColor;
+              }
+              &::placeholder {
+                color: #fff;
+              }
+            }
+          }
+        }
+      }
     }
 
+    // * right content
     .product_author_info {
       height: 100%;
       width: 25%;
@@ -365,20 +372,22 @@
       .product_author_info {
         width: 100%;
         height: auto;
+        border-top: 1px solid $successColor;
         margin-top: 50px;
         .author_info {
           .more_from_section {
             .single_product {
-              justify-content: center;
-              align-items: flex-start;
-              flex-direction: column;
+              flex-direction: row;
+              align-items: center;
+              justify-content: space-around;
+              width: 100%;
               padding: 10px 0px;
               border-bottom: 1px solid $themeColor;
               &:last-child {
                 border-bottom: none;
               }
               .product_image {
-                width: 100%;
+                width: 70px;
               }
             }
           }

@@ -203,7 +203,7 @@
           }
 
           .user_container {
-            @include flex(center, center, stretch);
+            @include flex(center, stretch, stretch);
 
             .single_product {
               width: 300px;
@@ -270,6 +270,41 @@
                 p {
                   span {
                     color: $successColor;
+                  }
+                }
+              }
+            }
+
+            .single_review {
+              width: 460px;
+              padding: 10px;
+              border-radius: 5px;
+              background: $bgSecondary;
+              border: 2px solid $bgColor;
+              margin: 5px;
+              @include flex(center, flex-start, stretch);
+              .reviewer_image {
+                display: grid;
+                place-items: center;
+                width: 50px;
+                margin-right: 10px;
+              }
+
+              .review_desc {
+                flex: 1;
+                h2 {
+                  a {
+                    font-family: $font;
+                    color: $themeColor;
+                  }
+                }
+
+                .reviewStar {
+                  margin-top: 5px;
+                  @include flex(flex-start, center, stretch);
+                  span {
+                    color: $successColor;
+                    margin-left: 10px;
                   }
                 }
               }

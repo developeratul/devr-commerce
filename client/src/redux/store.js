@@ -5,12 +5,16 @@ import authReducer from "./reducers/authReducer";
 import getProductCategories from "./reducers/productCategories";
 import editProductModalReducer from "./reducers/editProductModalReducer";
 import cartReducer from "./reducers/cartReducer";
+import singleProductReducer from "./reducers/singleProductReducer";
+import profileReducer from "./reducers/profileReducer";
 
 const rootReducer = {
   authReducer,
   getProductCategories,
   editProductModalReducer,
   cartReducer,
+  singleProductReducer,
+  profileReducer,
 };
 
 const store = createStore(

@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../redux/actions/editProductModalActions";
+import { getProductData } from "../redux/actions/singleProductActions";
 
 const EditProductModal = () => {
   const { product } = useSelector((state) => state.editProductModalReducer);
@@ -84,7 +85,8 @@ const EditProductModal = () => {
       if (res.status === 200) {
         setResponseSentToSever(false);
         dispatch(closeModal());
-        history.push("/");
+        dispatch(getProductData(body.product));
+        history.push(`/product/${body.product._id}`);
         toast.dark(body.message);
       } else if (res.status === 500) {
         toast.error(body.message);

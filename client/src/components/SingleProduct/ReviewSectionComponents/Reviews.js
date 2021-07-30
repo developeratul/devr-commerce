@@ -1,4 +1,8 @@
-const Reviews = ({ product }) => {
+import { useSelector } from "react-redux";
+
+const Reviews = () => {
+  const product = useSelector((state) => state.singleProductReducer);
+
   return (
     <div iv className="previous_reviews_section">
       <h2 className="review_section_title">

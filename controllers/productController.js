@@ -194,7 +194,9 @@ module.exports = {
         product.images = allImagesSeparatedInObject;
 
         product.save();
-        res.status(200).json({ message: "Product updated successfully" });
+        res
+          .status(200)
+          .json({ message: "Product updated successfully", product });
       });
     } catch (err) {
       next(err);

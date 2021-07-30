@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -10,7 +10,8 @@ import { IconButton } from "@material-ui/core";
 import { openModal } from "../../../redux/actions/editProductModalActions";
 import { updateUser } from "../../../redux/actions/authActions";
 
-const AuthorActions = ({ product }) => {
+const AuthorActions = () => {
+  const product = useSelector((state) => state.singleProductReducer);
   const dispatch = useDispatch();
   const history = useHistory();
 

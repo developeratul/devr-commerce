@@ -1,8 +1,10 @@
 import "../styles/SingleProduct/SingleProduct.css";
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+
+import { getProductData } from "../redux/actions/singleProductActions";
 
 // components
 import InlineLoader from "../components/InlineLoader";
@@ -11,7 +13,7 @@ import ProductAuthorInfo from "../components/SingleProduct/ProductAuthorInfo";
 import EditProductModal from "../components/EditProductModal";
 
 const SingleProduct = () => {
-  const [product, setProduct] = useState({});
+  const product = useSelector((state) => state.singleProductReducer);
   const [author, setAuthor] = useState({});
   const [loading, setLoading] = useState(true);
   const { modalShouldRender } = useSelector(
@@ -19,6 +21,7 @@ const SingleProduct = () => {
   );
   const { id } = useParams();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   // for fetching the informations of the product
   async function fetchProductData(abortController) {
@@ -34,7 +37,7 @@ const SingleProduct = () => {
       const body = await res.json();
 
       if (res.status === 200) {
-        setProduct(body.product);
+        dispatch(getProductData(body.product));
         setAuthor(body.user);
         setLoading(false);
         document.title = body.product.title;
@@ -72,11 +75,14 @@ const SingleProduct = () => {
 
   return (
     <div className="single_product_page">
+      {/* the modal to edit products */}
       {modalShouldRender && <EditProductModal />}
 
+      {/* the productInfo component is containing the product related actions and informations */}
+      {/* and the productAuthorInfo is containing informations about the product author */}
       <div className="product_page_content_container">
-        <ProductInfo product={product} />
-        <ProductAuthorInfo author={author} currentProductId={product._id} />
+        <ProductInfo />
+        <ProductAuthorInfo author={author} />
       </div>
     </div>
   );

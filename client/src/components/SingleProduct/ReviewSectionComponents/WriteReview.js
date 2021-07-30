@@ -3,10 +3,11 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-const WriteReview = ({ product }) => {
+const WriteReview = () => {
   const [review, setReview] = useState({ text: "", stars: "" });
   const [responseSentToServer, setResponseSentToServer] = useState(false);
   const { user } = useSelector((state) => state.authReducer);
+  const product = useSelector((state) => state.singleProductReducer);
 
   // for handling input change
   function HandleInputChange(event) {

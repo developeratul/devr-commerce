@@ -11,7 +11,8 @@ import useProductCanBeShipped from "../../../hooks/useProductCanBeShipped";
 // actions
 import { addToCart } from "../../../redux/actions/cartActions";
 
-const UserActions = ({ product }) => {
+const UserActions = () => {
+  const product = useSelector((state) => state.singleProductReducer);
   const { canBeShipped } = useProductCanBeShipped(product);
   const { isAuthenticated } = useSelector((state) => state.authReducer);
   const { cart_items } = useSelector((state) => state.cartReducer);
