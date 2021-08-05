@@ -39,13 +39,14 @@ const ProductInfo = () => {
             "--swiper-navigation-color": "#7976fc",
             "--swiper-pagination-color": "#7976fc",
           }}
+          className="swiper-container"
           spaceBetween={10}
           navigation={true}
           thumbs={{ swiper: thumbsSwiper }}
         >
           {product.images.map((image, index) => {
             return (
-              <SwiperSlide key={index}>
+              <SwiperSlide className="swiper-slide" key={index}>
                 <img src={image.photoUrl} al={product.title} />
               </SwiperSlide>
             );
@@ -80,18 +81,21 @@ const ProductInfo = () => {
                   </span>
                 )}
               </p>
-              <p>
-                {product.max_quantity > 0 ? (
+              {product.max_quantity > 0 ? (
+                <p>
                   <span className="available">
                     <DoneIcon />
-                    In Stock
                   </span>
-                ) : (
+                  In Stock
+                </p>
+              ) : (
+                <p>
                   <span className="unavailable">
-                    <ReportProblemOutlinedIcon /> Out of stock
+                    <ReportProblemOutlinedIcon />
                   </span>
-                )}
-              </p>
+                  Out of stock
+                </p>
+              )}
             </div>
             <div className="charges">
               <p>
@@ -106,8 +110,12 @@ const ProductInfo = () => {
             <div className="rating">
               <p>
                 Rating:{" "}
+                {!product.averageRating ? (
+                  <span>N/A</span>
+                ) : (
+                  <span>{product.averageRating}</span>
+                )}{" "}
                 <span>
-                  {!product.averageRating ? "N/A" : product.averageRating}{" "}
                   <StarBorderIcon />
                 </span>
               </p>

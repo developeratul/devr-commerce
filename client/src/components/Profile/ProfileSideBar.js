@@ -4,6 +4,7 @@ import { useHistory, Link } from "react-router-dom";
 
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import WarningIcon from "@material-ui/icons/Warning";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
 
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../../redux/actions/authActions";
@@ -153,6 +154,12 @@ const ProfileSideBar = () => {
       <div className="profile_user_info">
         <div className="profile_user_name_and_basic_info">
           <h2>{user.name}</h2>
+          <p className="rating">
+            5{" "}
+            <span>
+              <StarBorderIcon />
+            </span>
+          </p>
           <p>
             from: <span>{user.country}</span>
           </p>

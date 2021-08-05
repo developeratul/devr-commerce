@@ -60,6 +60,14 @@
               color: $successColor;
             }
           }
+          .rating {
+            margin: 10px 0;
+            @include flex(center, center, stretch);
+            span {
+              margin-left: 5px;
+              color: #ffff00;
+            }
+          }
 
           .follow_user_or_report_section {
             margin-top: 20px;
@@ -118,7 +126,7 @@
           width: 100%;
           .user_bio {
             white-space: pre-wrap;
-            color: #aeb1b4;
+            color: $gray;
             margin-bottom: 20px;
             .section_title {
               display: block;
@@ -197,7 +205,7 @@
             padding: 50px 0px;
             @include flex(center, center, stretch);
             h2 {
-              color: #aeb1b4;
+              color: $gray;
               font-family: $font;
             }
           }
@@ -211,6 +219,7 @@
               margin: 5px;
               background: $bgColor;
               border-radius: 3px;
+              box-shadow: 0 0 3px $themeColor;
               .product_image {
                 width: 100%;
                 height: 200px;
@@ -254,6 +263,7 @@
               background: #0d121962;
               backdrop-filter: blur(20px);
               border-radius: 3px;
+              border: 2px solid $bgSecondary;
               .user_img {
                 width: 150px;
                 margin: auto;

@@ -22,13 +22,16 @@
         margin-bottom: 30px;
         .swiper-container {
           width: 100%;
-          height: 500px;
           display: grid;
           align-items: center;
           background: $bgSecondary;
         }
-
+        .swiper-slide {
+          height: 500px;
+        }
         .swiper-slide img {
+          max-width: 100%;
+          max-height: 100%;
           display: block;
           margin: auto;
         }
@@ -50,7 +53,7 @@
           }
           p {
             white-space: pre-wrap;
-            color: #aeb1b4;
+            color: $gray;
           }
           .desc {
             span {
@@ -74,9 +77,9 @@
           .some_info_before_action {
             .productAvailability {
               p {
+                @include flex(stretch, stretch, stretch);
                 padding: 5px 0;
-                color: #aeb1b4;
-                @include flex(stretch, center, stretch);
+                color: $gray;
                 &:first-child {
                   padding-top: 0;
                 }
@@ -99,7 +102,7 @@
 
             .charges {
               p {
-                color: #aeb1b4;
+                color: $gray;
                 span {
                   color: $themeColor;
                   font-family: $font;
@@ -109,9 +112,11 @@
 
             .rating {
               p {
-                color: #aeb1b4;
+                color: $gray;
+                @include flex(stretch, center, stretch);
                 span {
                   color: $themeColor;
+                  margin-left: 5px;
                 }
               }
             }
@@ -144,7 +149,7 @@
 
         .write_review_section {
           width: 100%;
-          margin-bottom: 20px;
+          margin-bottom: 50px;
           .single_field {
             width: 100%;
             margin: 5px 0;
@@ -171,6 +176,81 @@
               }
               &::placeholder {
                 color: #fff;
+              }
+            }
+          }
+        }
+
+        .previous_reviews_section {
+          .no_message {
+            padding: 50px 0;
+            h2 {
+              text-align: center;
+              font-family: $font;
+              color: $gray;
+            }
+          }
+
+          .reviews_wrapper {
+            padding: 10px 0;
+            @include flex(flex-start, center, stretch);
+            .single_review {
+              width: 100%;
+              padding: 10px;
+              border-radius: 3px;
+              margin: 10px 0;
+              border-bottom: 1px solid $bgSecondary;
+              &:last-child {
+                border-bottom: none;
+              }
+              &:first-child {
+                margin-top: 0;
+              }
+              .single_review_header {
+                @include flex(space-between, center, stretch);
+                margin-bottom: 10px;
+                .review_user_infos {
+                  @include flex(flex-start, center, stretch);
+                  .reviewer_avatar_container {
+                    margin-right: 10px;
+                  }
+                  .reviewer_info {
+                    h2 {
+                      font-size: 1.2rem;
+                      margin-bottom: 5px;
+                      a {
+                        color: #fff;
+                      }
+                    }
+                    p {
+                      font-size: 0.8rem;
+                      color: $gray;
+                    }
+                  }
+                }
+                .review_controls {
+                  @include flex(center, center, stretch);
+                  .single_control {
+                    button {
+                      color: $themeColor;
+                    }
+                  }
+                }
+              }
+
+              .single_review_body {
+                p {
+                  color: rgb(228, 228, 228);
+                }
+                .review_stars {
+                  margin-top: 10px;
+                  @include flex(flex-start, center, stretch);
+                  span {
+                    color: $successColor;
+                    display: inline-block;
+                    margin-right: 10px;
+                  }
+                }
               }
             }
           }
@@ -342,14 +422,13 @@
         width: 100%;
         height: auto;
         .product_image_slider {
-          .swiper-container {
-            min-height: 300px;
-            height: 350px;
-            max-height: 500px;
+          .swiper-slide {
+            height: 300px;
           }
           .swiper-slide img {
             width: 100%;
-            object-fit: fill;
+            min-height: 300px;
+            object-fit: contain;
           }
         }
 

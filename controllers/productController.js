@@ -19,16 +19,13 @@ module.exports = {
       }
 
       const product = await Product.findOne({ _id: id })
-        .populate("user")
-        .populate("reviews");
-      const user = await User.findOne({ _id: product.user }).populate(
-        "products"
-      );
+        .populate({ path: "user", populate: { path: "products" } })
+        .populate({ path: "reviews", populate: { path: "reviewer" } });
 
       if (!product) {
         res.status(404).json({ message: "Product not found" });
       } else {
-        res.status(200).json({ product, user });
+        res.status(200).json({ product, user: product.user });
       }
     } catch (err) {
       next(err);

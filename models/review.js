@@ -5,6 +5,11 @@ const dataSchema = new mongoose.Schema({
   reviewStar: { type: Number, required: true },
   reviewer: { type: mongoose.Types.ObjectId, ref: "USER", required: true },
   product: { type: mongoose.Types.ObjectId, ref: "PRODUCT", required: true },
+  time: {
+    type: String,
+    required: true,
+    default: new Date().toLocaleDateString(),
+  },
 });
 
 const Review = new mongoose.model("REVIEW", dataSchema);

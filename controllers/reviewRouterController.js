@@ -17,16 +17,14 @@ module.exports = {
         product: productId,
       });
 
-      // saving the review and sending response
+      // saving the review
       newReview.save((err) => {
         if (err) {
           next(err);
         }
-
-        res.status(200).json({ message: "Review Posted" });
       });
 
-      // * pushing the review in the user and product schema
+      // pushing the review in the user and product schema
       // updating the user
       await User.updateOne(
         { _id: productAuthorId },
@@ -38,7 +36,7 @@ module.exports = {
         { $push: { reviews: newReview._id } }
       );
 
-      // * updating the product and user average rating
+      // updating the product and user average rating
       const theProduct = await Product.findOne({ _id: productId }).populate(
         "reviews"
       );
@@ -97,6 +95,43 @@ module.exports = {
         { _id: productAuthorId },
         { averageRating: getAuthorAverageRating() }
       );
+
+      const updatedProduct = await Product.findOne({ _id: productId })
+        .populate({ path: "user", populate: { path: "products" } })
+        .populate({ path: "reviews", populate: { path: "reviewer" } });
+
+      res
+        .status(200)
+        .json({ message: "Review Posted", product: updatedProduct });
+    } catch (err) {
+      next(err);
+    }
+  },
+
+  // * for deleting a review
+  deleteReview: async function (req, res, next) {
+    try {
+      const { reviewId, productId } = req.body;
+      const user = req.user;
+
+      // deleting the review
+      await Review.findOneAndRemove({ _id: reviewId });
+
+      // updating the product reviews
+      await Product.updateOne(
+        { _id: productId },
+        { $pull: { reviews: reviewId } }
+      );
+      const updatedProduct = await Product.findOne({ _id: productId })
+        .populate({ path: "user", populate: { path: "products" } })
+        .populate({ path: "reviews", populate: { path: "reviewer" } });
+
+      // updating the user
+      await User.updateOne({ _id: user._id }, { $pull: { reviews: reviewId } });
+
+      res
+        .status(200)
+        .json({ message: "Review Deleted", product: updatedProduct });
     } catch (err) {
       next(err);
     }

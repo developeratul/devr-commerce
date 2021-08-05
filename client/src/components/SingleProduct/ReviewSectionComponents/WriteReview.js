@@ -1,13 +1,15 @@
 import { Button } from "@material-ui/core";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { getProductData } from "../../../redux/actions/singleProductActions";
 
 const WriteReview = () => {
   const [review, setReview] = useState({ text: "", stars: "" });
   const [responseSentToServer, setResponseSentToServer] = useState(false);
   const { user } = useSelector((state) => state.authReducer);
   const product = useSelector((state) => state.singleProductReducer);
+  const dispatch = useDispatch();
 
   // for handling input change
   function HandleInputChange(event) {
@@ -36,6 +38,7 @@ const WriteReview = () => {
 
       if (res.status === 200) {
         setResponseSentToServer(false);
+        dispatch(getProductData(body.product));
         toast.dark(body.message);
         setReview({ text: "", stars: "" });
       }
