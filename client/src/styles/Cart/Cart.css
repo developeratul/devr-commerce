@@ -822,6 +822,7 @@ nav .nav_active {
 
 .cart_page .cart_content .cart_item_container .singleItem {
   width: 100%;
+  overflow: hidden;
   margin-bottom: 10px;
   padding: 10px;
   background: #1a2634;

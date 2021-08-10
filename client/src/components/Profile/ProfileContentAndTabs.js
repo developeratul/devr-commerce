@@ -7,13 +7,13 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
+import { useSelector } from "react-redux";
 
 // tabs
 import Followers from "./Tabs/Followers";
 import Followings from "./Tabs/Followings";
 import Store from "./Tabs/Store";
 import Reviews from "./Tabs/Reviews";
-import { useSelector } from "react-redux";
 
 // all these functions are from the material-ui
 function TabPanel(props) {

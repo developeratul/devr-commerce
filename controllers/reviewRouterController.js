@@ -98,7 +98,10 @@ module.exports = {
 
       const updatedProduct = await Product.findOne({ _id: productId })
         .populate({ path: "user", populate: { path: "products" } })
-        .populate({ path: "reviews", populate: { path: "reviewer" } });
+        .populate({
+          path: "reviews",
+          populate: { path: "reviewer", options: { sort: { uploadTime: -1 } } },
+        });
 
       res
         .status(200)
@@ -124,7 +127,10 @@ module.exports = {
       );
       const updatedProduct = await Product.findOne({ _id: productId })
         .populate({ path: "user", populate: { path: "products" } })
-        .populate({ path: "reviews", populate: { path: "reviewer" } });
+        .populate({
+          path: "reviews",
+          populate: { path: "reviewer", options: { sort: { uploadTime: -1 } } },
+        });
 
       // updating the user
       await User.updateOne({ _id: user._id }, { $pull: { reviews: reviewId } });

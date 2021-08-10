@@ -155,7 +155,7 @@ const ProfileSideBar = () => {
         <div className="profile_user_name_and_basic_info">
           <h2>{user.name}</h2>
           <p className="rating">
-            5{" "}
+            {user.averageRating}{" "}
             <span>
               <StarBorderIcon />
             </span>

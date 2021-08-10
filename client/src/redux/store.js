@@ -7,6 +7,7 @@ import editProductModalReducer from "./reducers/editProductModalReducer";
 import cartReducer from "./reducers/cartReducer";
 import singleProductReducer from "./reducers/singleProductReducer";
 import profileReducer from "./reducers/profileReducer";
+import productReducer from "./reducers/productReducer";
 
 const rootReducer = {
   authReducer,
@@ -15,6 +16,7 @@ const rootReducer = {
   cartReducer,
   singleProductReducer,
   profileReducer,
+  productReducer,
 };
 
 const store = createStore(

@@ -32,6 +32,18 @@ module.exports = {
     }
   },
 
+  // * for getting all the product informations
+  getAllProducts: async function (req, res, next) {
+    try {
+      const products = await Product.find({})
+        .populate({ path: "user" })
+        .sort({ uploadTimeInMl: -1 });
+      res.status(200).json({ products });
+    } catch (err) {
+      next(err);
+    }
+  },
+
   // * for uploading a product
   postProduct: async function (req, res, next) {
     try {

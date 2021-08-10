@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 // * this hook is being used to check if the product can be shipped in the auth user's country
+// * this is being used in the single product page only
 const useProductCanBeShipped = (product) => {
   const [canBeShipped, setCanBeShipped] = useState(true);
   const [shippingCharge, setShippingCharge] = useState(0);

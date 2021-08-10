@@ -12,7 +12,7 @@ import ProductInfo from "../components/SingleProduct/ProductInfo";
 import ProductAuthorInfo from "../components/SingleProduct/ProductAuthorInfo";
 import EditProductModal from "../components/EditProductModal";
 
-const SingleProduct = () => {
+function SingleProduct() {
   const product = useSelector((state) => state.singleProductReducer);
   const [author, setAuthor] = useState({});
   const [loading, setLoading] = useState(true);
@@ -86,6 +86,6 @@ const SingleProduct = () => {
       </div>
     </div>
   );
-};
+}
 
 export default SingleProduct;

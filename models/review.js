@@ -10,6 +10,7 @@ const dataSchema = new mongoose.Schema({
     required: true,
     default: new Date().toLocaleDateString(),
   },
+  uploadTime: { type: String, default: Date.now() },
 });
 
 const Review = new mongoose.model("REVIEW", dataSchema);

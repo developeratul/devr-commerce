@@ -1141,6 +1141,7 @@ nav .nav_active {
   border-radius: 3px;
   -webkit-box-shadow: 0 0 3px #7976fc;
           box-shadow: 0 0 3px #7976fc;
+  overflow: hidden;
 }
 
 .profile_page .profile_content_container .profile_content_and_tabs .tab_and_appBar_and_tabs_container .tab .user_container .single_product .product_image {

@@ -6,11 +6,10 @@ import { getProductData } from "../../../redux/actions/singleProductActions";
 
 // icons
 import StarIcon from "@material-ui/icons/Star";
-import EditIcon from "@material-ui/icons/Edit";
 import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 
 // this component is containing all the reviews of the product
-const Reviews = () => {
+function Reviews() {
   const product = useSelector((state) => state.singleProductReducer);
   const { user } = useSelector((state) => state.authReducer);
   const reviews = product.reviews;
@@ -76,11 +75,6 @@ const Reviews = () => {
                   {reviewer._id === user._id && (
                     <div className="review_controls">
                       <div className="single_control">
-                        <IconButton>
-                          <EditIcon />
-                        </IconButton>
-                      </div>
-                      <div className="single_control">
                         <IconButton onClick={() => deleteReview(review._id)}>
                           <DeleteOutlineIcon />
                         </IconButton>
@@ -110,6 +104,6 @@ const Reviews = () => {
       )}
     </div>
   );
-};
+}
 
 export default Reviews;

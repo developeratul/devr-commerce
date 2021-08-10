@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { getProductData } from "../../../redux/actions/singleProductActions";
 
-const WriteReview = () => {
+function WriteReview() {
   const [review, setReview] = useState({ text: "", stars: "" });
   const [responseSentToServer, setResponseSentToServer] = useState(false);
   const { user } = useSelector((state) => state.authReducer);
@@ -86,6 +86,6 @@ const WriteReview = () => {
       </div>
     </div>
   );
-};
+}
 
 export default WriteReview;

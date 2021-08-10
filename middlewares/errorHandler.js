@@ -1,6 +1,6 @@
 // 404 error handler
 function notFoundHandler(req, res, next) {
-  next("Your requested route was not found");
+  next({ message: "Your requested route was not found", status: 404 });
 }
 
 function errorHandler(err, req, res, next) {
@@ -8,9 +8,9 @@ function errorHandler(err, req, res, next) {
     next("There was an unexpected error");
   } else {
     if (err.message) {
-      res.status(err.code || 500).send(err.message);
+      res.status(err.status || 500).send(err.message);
     } else {
-      res.status(err.code || 500).send(err);
+      res.status(err.status || 500).send(err);
     }
   }
 }

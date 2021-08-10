@@ -10,6 +10,7 @@ const dataSchema = new mongoose.Schema({
     default: `${new Date().toLocaleDateString()} - ${new Date().toLocaleTimeString()}`,
   },
   uploadDate: { type: String, default: new Date().toLocaleDateString() },
+  uploadTimeInMl: { type: Number, default: Date.now() },
 
   images: [{ photoId: String, photoUrl: String }],
   price: { type: Number, required: true },

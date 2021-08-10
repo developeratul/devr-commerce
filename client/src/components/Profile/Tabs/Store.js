@@ -77,6 +77,8 @@ const Store = ({ TabPanel, value, theme }) => {
       // if the product cannot be shipped in the auth users country, he is unable to perform this action
       if (!canBeShipped) {
         toast.error("This product can not be shipped in your country");
+      } else if (product.max_quantity <= 0) {
+        toast.error("Out of stock");
       } else {
         dispatch(addToCart(product));
       }
