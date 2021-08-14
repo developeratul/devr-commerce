@@ -45,7 +45,7 @@ const dataSchema = new mongoose.Schema({
 
   tags: { type: Array, required: true },
   reviews: [{ type: mongoose.Types.ObjectId, ref: "REVIEW" }],
-  averageRating: { type: Number, default: 0 },
+  // averageRating: { type: Number, default: 0 },
 });
 
 const Product = new mongoose.model("PRODUCT", dataSchema);

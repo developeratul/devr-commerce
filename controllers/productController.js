@@ -36,7 +36,7 @@ module.exports = {
   getAllProducts: async function (req, res, next) {
     try {
       const products = await Product.find({})
-        .populate({ path: "user" })
+        .populate({ path: "user reviews" })
         .sort({ uploadTimeInMl: -1 });
       res.status(200).json({ products });
     } catch (err) {
@@ -72,8 +72,8 @@ module.exports = {
         shipping_options,
       } = req.body;
 
-      const tags = title.split(" ");
-      tags.push(product_category);
+      const tags = title.toLowerCase().split(" ");
+      tags.push(product_category.toLowerCase());
 
       // creating a new product instance
       const newProduct = new Product({

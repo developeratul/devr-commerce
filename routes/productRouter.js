@@ -14,6 +14,7 @@ const {
   updateProduct,
   getProduct,
   getAllProducts,
+  searchProduct,
 } = require("../controllers/productController");
 
 // for getting a single product data according to the id

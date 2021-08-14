@@ -40,7 +40,7 @@ function SingleProduct() {
         dispatch(getProductData(body.product));
         setAuthor(body.user);
         setLoading(false);
-        document.title = body.product.title;
+        document.title = `${body.user.name} on DevR Commerce - ${body.product.title}`;
       } else if (res.status === 404) {
         history.push("/notFound");
         toast.error(body.message);

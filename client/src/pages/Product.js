@@ -69,6 +69,8 @@ function Product() {
         toast.error("This product can not be shipped in your country");
       } else if (product.max_quantity <= 0) {
         toast.error("Out of stock");
+      } else if (product.user._id === user._id) {
+        toast.error("You cannot add your own products in cart");
       } else {
         dispatch(addToCart(product));
       }
@@ -95,6 +97,15 @@ function Product() {
     );
   }
 
+  function getAverage(ara) {
+    let total = 0;
+    for (let i = 0; i < ara.length; i++) {
+      total += ara[i];
+    }
+    const average = total / ara.length;
+    return ~~average;
+  }
+
   return (
     <div className="product_page">
       <div className="products_wrapper">
@@ -105,6 +116,13 @@ function Product() {
           )
             ? true
             : false;
+
+          // adding an average review field in the product object
+          product.averageRating = getAverage(
+            product.reviews
+              ? product.reviews.map((review) => review.reviewStar)
+              : []
+          );
 
           return (
             <div

@@ -2,6 +2,9 @@ import { Avatar, Tooltip, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory, Link } from "react-router-dom";
 
+// hooks
+import useGetAverage from "../../hooks/useGetAverage";
+
 import VerifiedUserIcon from "@material-ui/icons/VerifiedUser";
 import WarningIcon from "@material-ui/icons/Warning";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
@@ -42,6 +45,17 @@ const ProfileSideBar = () => {
   const { isAuthenticated } = authUser;
   const history = useHistory();
   const dispatch = useDispatch();
+
+  // putting an averageRating property in the user object
+  // it will contain the average rating of the user
+  const averageRating = useGetAverage(
+    user.reviews
+      ? user.reviews.map((review) => {
+          return review.reviewStar;
+        })
+      : []
+  );
+  user.averageRating = averageRating;
 
   // for checking the following status
   // if this guy is already followed
@@ -128,6 +142,8 @@ const ProfileSideBar = () => {
   useEffect(() => {
     checkFollowingStatus();
   }, [user]);
+
+  useEffect(() => {}, [user, user.reviews]);
 
   return (
     <div className="profile_side_bar">

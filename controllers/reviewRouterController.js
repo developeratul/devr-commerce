@@ -36,66 +36,7 @@ module.exports = {
         { $push: { reviews: newReview._id } }
       );
 
-      // updating the product and user average rating
-      const theProduct = await Product.findOne({ _id: productId }).populate(
-        "reviews"
-      );
-      const theUser = await User.findOne({ _id: productAuthorId }).populate(
-        "reviews"
-      );
-
-      // getting the average rating of the product
-      const getProductAverageRating = () => {
-        let averageRating = 0;
-        let temp = [];
-
-        if (theProduct.reviews.length > 0) {
-          for (let i = 0; i < theProduct.reviews.length; i++) {
-            temp.push(theProduct.reviews[i].reviewStar);
-          }
-        }
-
-        let total = 0;
-        for (let i = 0; i < temp.length; i++) {
-          total += temp[i];
-        }
-
-        averageRating = ~~(total / temp.length);
-
-        return averageRating;
-      };
-
-      // getting the average rating of the user
-      const getAuthorAverageRating = () => {
-        let averageRating = 0;
-        let temp = [];
-
-        if (theUser.reviews.length > 0) {
-          for (let i = 0; i < theUser.reviews.length; i++) {
-            temp.push(theUser.reviews[i].reviewStar);
-          }
-        }
-
-        let total = 0;
-        for (let i = 0; i < temp.length; i++) {
-          total += temp[i];
-        }
-
-        averageRating = ~~(total / temp.length);
-
-        return averageRating;
-      };
-
-      // updating and saving them in the database
-      await Product.updateOne(
-        { _id: productId },
-        { averageRating: getProductAverageRating() }
-      );
-      await User.updateOne(
-        { _id: productAuthorId },
-        { averageRating: getAuthorAverageRating() }
-      );
-
+      // the updated product with product, the author and it's reviews sorted by uploadTime
       const updatedProduct = await Product.findOne({ _id: productId })
         .populate({ path: "user", populate: { path: "products" } })
         .populate({

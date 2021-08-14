@@ -20,18 +20,51 @@ module.exports = {
     try {
       const userId = req.user._id;
 
+      // the authenticated user
       const user = await User.findOne({ _id: userId });
 
+      // his cart items
       const user_cart = user.cart_items;
+      // all products in my products collection
       const allProducts = await Product.find({});
 
-      const availableProducts = user_cart.filter((cartItem) =>
-        allProducts.map((product) => cartItem._id === product._id)
-      );
+      let user_cart_map = new Map([]);
 
-      // console.log(availableProducts);
+      // inserting all the cart items in the Map data structure
+      for (let i = 0; i < user_cart.length; i++) {
+        user_cart_map.set(user_cart[i]._id.toString(), user_cart[i]);
+      }
 
-      res.status(200).send(availableProducts);
+      let available_cart_items = [];
+
+      // getting the available cart items
+      for (let i = 0; i < allProducts.length; i++) {
+        available_cart_items.push(
+          user_cart_map.get(allProducts[i]._id.toString())
+        );
+      }
+
+      // if there is a falsy value, remove it!
+      if (
+        available_cart_items.includes(undefined) ||
+        available_cart_items.includes(null)
+      ) {
+        available_cart_items = available_cart_items.filter(
+          (item) => item !== undefined && item !== null
+        );
+      }
+
+      // update the cart_item field in the user document
+      // if the previous cart doesn't matches with the available_cart_items,
+      // it means the cart item is unavailable
+      if (available_cart_items.toString() !== user_cart.toString()) {
+        await User.updateOne(
+          { _id: userId },
+          { cart_items: available_cart_items }
+        );
+      }
+
+      res.status(200).send(available_cart_items);
     } catch (err) {
       next(err);
     }

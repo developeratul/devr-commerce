@@ -139,6 +139,98 @@
     }
   }
 
+  // the top bar
+  .top_bar {
+    margin-bottom: 30px;
+    @include flex(center, center, column);
+    .search_field {
+      width: 95%;
+      max-width: 500px;
+      @include flex(center, center, stretch);
+      position: relative;
+      input {
+        flex: 2;
+        padding: 10px;
+        border: 2px solid #fff;
+        border-radius: 3px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        &:focus {
+          border-color: $themeColor;
+        }
+      }
+      button {
+        flex: 0.5;
+        padding: 10px;
+        border-radius: 0;
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+        box-shadow: none;
+        background: $themeColor;
+        color: #fff;
+      }
+      .search_result_container {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        margin-top: 20px;
+        background: $bgColor;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 5px $themeColor;
+        z-index: 5;
+        display: none;
+        animation: slideAnimation 0.3s ease alternate both;
+        overflow-x: hidden;
+        max-height: 500px;
+        max-height: 70vh;
+        @keyframes slideAnimation {
+          from {
+            transform: scale(0.5);
+          }
+          to {
+            transform: scale(1);
+          }
+        }
+        .no_message {
+          padding: 50px 0;
+          text-align: center;
+          color: $gray;
+          font-family: $font;
+        }
+        .loader_container {
+          padding: 50px 0;
+          display: grid;
+          place-items: center;
+        }
+        .single_search_result {
+          width: 100%;
+          margin-bottom: 10px;
+          &:last-child {
+            margin-bottom: 0;
+          }
+          @include flex(center, center, stretch);
+          gap: 10px;
+          .result_img {
+            width: 100px;
+            img {
+              width: 100%;
+              border-radius: 3px;
+            }
+          }
+          .result_desc {
+            flex: 1;
+            overflow: hidden;
+            p > a {
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+
   .products_wrapper {
     @include flex(center, stretch, stretch);
     .single_product {

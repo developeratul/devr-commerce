@@ -10,6 +10,7 @@ import StarBorderIcon from "@material-ui/icons/StarBorder";
 
 // hooks
 import useProductCanBeShipped from "../../hooks/useProductCanBeShipped";
+import useGetAverage from "../../hooks/useGetAverage";
 
 // components
 import AuthorActions from "./Product_Actions/AuthorActions";
@@ -29,6 +30,11 @@ const ProductInfo = () => {
     useProductCanBeShipped(product);
 
   const thumbsSwiper = null;
+
+  const averageRatingOfTheProduct = useGetAverage(
+    product.reviews ? product.reviews.map((review) => review.reviewStar) : 0
+  );
+  product.averageRating = averageRatingOfTheProduct;
 
   return (
     <div className="product_info">

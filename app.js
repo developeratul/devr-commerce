@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 
 // middlewares
 const { notFoundHandler, errorHandler } = require("./middlewares/errorHandler");
+const checkAuth = require("./middlewares/checkAuth");
 
 // importing routes
 const authRouter = require("./routes/authRouter");
@@ -16,6 +17,7 @@ const userRouter = require("./routes/userRouter");
 const productRouter = require("./routes/productRouter");
 const cartRouter = require("./routes/cartRouter");
 const reviewRouter = require("./routes/reviewRouter");
+const checkoutRouter = require("./routes/checkoutRouter");
 
 const app = express();
 const port = process.env.PORT || 8000;
@@ -55,6 +57,8 @@ app.use("/get_product", productRouter);
 app.use("/get_cart", cartRouter);
 // for handling the review stuffs
 app.use("/get_review", reviewRouter);
+// for handling checkout
+app.use("/checkout", checkAuth, checkoutRouter);
 
 // for production
 if (process.env.NODE_ENV === "production") {
