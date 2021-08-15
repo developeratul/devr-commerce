@@ -10,11 +10,13 @@ import { Button } from "@material-ui/core";
 // hooks
 import useCartSubtotal from "../hooks/useCartSubtotal";
 
+// actions
 import {
   changeQuantity,
   emptyCart,
   removeItem,
 } from "../redux/actions/cartActions";
+
 import InlineLoader from "../components/InlineLoader";
 
 const Cart = () => {

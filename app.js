@@ -39,11 +39,7 @@ mongoose
   })
   .then(() => console.log("- Connected to database [MongoDB]"))
   .catch((err) => {
-    if (err.message) {
-      console.log(err.message);
-    } else {
-      console.log(err);
-    }
+    console.log(err.message ? err.message : err);
   });
 
 // * application routes

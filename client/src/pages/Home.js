@@ -7,12 +7,13 @@ import AuthUserView from "../components/Home/AuthUser/AuthUserView";
 import NotAuthUserView from "../components/Home/NoAuth/NotAuthUserView";
 
 const Home = () => {
-  const userInfo = useSelector((state) => state.authReducer);
-  const { user, isAuthenticated } = userInfo;
+  const { user, isAuthenticated } = useSelector((state) => state.authReducer);
 
   useEffect(() => {
-    document.title = "DevR Commerce / Home";
-  }, []);
+    document.title = isAuthenticated
+      ? `${user.name}'s Dashboard`
+      : "DevR Commerce / Home";
+  }, [isAuthenticated]);
 
   return (
     <div className="home_page">

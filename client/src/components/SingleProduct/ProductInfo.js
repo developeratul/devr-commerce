@@ -78,15 +78,19 @@ const ProductInfo = () => {
           <div className="some_info_before_action">
             {/* showing up some availability informations */}
             <div className="productAvailability">
-              <p>
-                {canBeShipped ? (
-                  <span className="available">Available is your country!</span>
-                ) : (
-                  <span className="unavailable">
-                    Unavailable in your country
-                  </span>
-                )}
-              </p>
+              {isAuthenticated && (
+                <p>
+                  {canBeShipped ? (
+                    <span className="available">
+                      Available is your country!
+                    </span>
+                  ) : (
+                    <span className="unavailable">
+                      Unavailable in your country
+                    </span>
+                  )}
+                </p>
+              )}
               {product.max_quantity > 0 ? (
                 <p>
                   <span className="available">
@@ -104,13 +108,15 @@ const ProductInfo = () => {
               )}
             </div>
             <div className="charges">
-              <p>
-                Shipping Charge: <span>{shippingCharge}</span>
-              </p>
               {isAuthenticated && (
-                <p>
-                  Shipping country: <span>{shippingCountry}</span>
-                </p>
+                <>
+                  <p>
+                    Shipping Charge: <span>{shippingCharge}</span>
+                  </p>
+                  <p>
+                    Shipping country: <span>{shippingCountry}</span>
+                  </p>
+                </>
               )}
             </div>
             <div className="rating">

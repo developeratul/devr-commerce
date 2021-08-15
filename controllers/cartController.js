@@ -54,15 +54,28 @@ module.exports = {
         );
       }
 
-      // update the cart_item field in the user document
-      // if the previous cart doesn't matches with the available_cart_items,
-      // it means the cart item is unavailable
-      if (available_cart_items.toString() !== user_cart.toString()) {
-        await User.updateOne(
-          { _id: userId },
-          { cart_items: available_cart_items }
-        );
+      // update the informations of the cart_items if the product is updated
+      for (let i = 0; i < allProducts.length; i++) {
+        const updated_items = available_cart_items.map((item) => {
+          if (item._id.toString() === allProducts[i]._id.toString()) {
+            item.title = allProducts[i].title;
+            item.price = allProducts[i].price;
+            item.max_quantity = allProducts[i].max_quantity;
+            item.shipping_options = allProducts[i].shipping_options;
+            item.total_price = allProducts[i].price * item.quantity;
+          }
+
+          return item;
+        });
+
+        available_cart_items = updated_items;
       }
+
+      // update the cart_item field in the user document
+      await User.updateOne(
+        { _id: userId },
+        { cart_items: available_cart_items }
+      );
 
       res.status(200).send(available_cart_items);
     } catch (err) {

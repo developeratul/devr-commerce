@@ -75,7 +75,7 @@ const Nav = () => {
         {/* universals */}
         <li>
           <NavLink activeClassName="nav_active" to="/" exact>
-            Home
+            {isAuthenticated ? "Dashboard" : "Home"}
           </NavLink>
         </li>
         <li>

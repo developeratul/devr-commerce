@@ -15,7 +15,7 @@ const useProductCanBeShipped = (product) => {
     // putting all the countries from the shipping_options in an array
     const temp = [];
     for (let i = 0; i < shipping_options.length; i++) {
-      temp.push(product.shipping_options[i].countries);
+      temp.push(shipping_options[i].countries);
     }
     const shippingCountries = temp.join().split(",");
 
@@ -26,8 +26,6 @@ const useProductCanBeShipped = (product) => {
     for (let i = 0; i < shipping_options.length; i++) {
       if (shipping_options[i].countries.includes(user.country)) {
         setShippingCharge(shipping_options[i].charge);
-      } else {
-        setShippingCharge("N/A");
       }
     }
 

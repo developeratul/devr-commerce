@@ -201,6 +201,7 @@ module.exports = {
         product.product_category = product_category;
         product.shipping_options = JSON.parse(shipping_options);
         product.images = allImagesSeparatedInObject;
+        product.tags = title.toLowerCase().split(" ");
 
         product.save();
         res
