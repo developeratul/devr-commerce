@@ -922,6 +922,10 @@ nav .nav_active {
   padding: 0 5px;
 }
 
+.single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_actions .some_info_before_action p {
+  padding: 5px 0;
+}
+
 .single_product_page .product_page_content_container .product_info .product_actions_and_desc .product_actions .some_info_before_action .productAvailability p {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -938,7 +942,6 @@ nav .nav_active {
   -webkit-box-direction: normal;
       -ms-flex-direction: stretch;
           flex-direction: stretch;
-  padding: 5px 0;
   color: #aeb1b4;
 }
 

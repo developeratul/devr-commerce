@@ -20,6 +20,7 @@ import DoneIcon from "@material-ui/icons/Done";
 import FloatingButton from "../components/Product/FloatingButton";
 import CreateProductModal from "../components/Product/CreateProductModal";
 import InlineLoader from "../components/InlineLoader";
+import SearchBar from "../components/Product/SearchBar";
 
 function Product() {
   const { isAuthenticated, user } = useSelector((state) => state.authReducer);
@@ -108,6 +109,8 @@ function Product() {
 
   return (
     <div className="product_page">
+      <SearchBar />
+
       <div className="products_wrapper">
         {products.map((product) => {
           // checking if the item exists in the cart
@@ -132,10 +135,9 @@ function Product() {
               }}
               key={product._id}
             >
-              <div
-                className="product_img"
-                style={{ background: `url(${product.images[0].photoUrl})` }}
-              />
+              <div className="product_img">
+                <img src={product.images[0].photoUrl} alt={product.title} />
+              </div>
               <div className="product_desc">
                 <h2 title={product.title}>
                   <Link to={`/product/${product._id}`}>

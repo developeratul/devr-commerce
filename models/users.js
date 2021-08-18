@@ -68,6 +68,9 @@ const dataSchema = new mongoose.Schema({
 
   // for storing the auth tokens
   tokens: [{ token: { type: String } }],
+
+  placed_orders: [],
+  completed_orders: [],
 });
 
 // hashing the password before saving

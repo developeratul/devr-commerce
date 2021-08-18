@@ -72,9 +72,6 @@ module.exports = {
         shipping_options,
       } = req.body;
 
-      const tags = title.toLowerCase().split(" ");
-      tags.push(product_category.toLowerCase());
-
       // creating a new product instance
       const newProduct = new Product({
         title,
@@ -85,7 +82,6 @@ module.exports = {
         shipping_options: JSON.parse(shipping_options),
         user: req.user._id,
         images: allImagesSeparatedInObject,
-        tags,
       });
 
       // saving the product in my database
@@ -201,7 +197,6 @@ module.exports = {
         product.product_category = product_category;
         product.shipping_options = JSON.parse(shipping_options);
         product.images = allImagesSeparatedInObject;
-        product.tags = title.toLowerCase().split(" ");
 
         product.save();
         res

@@ -143,14 +143,12 @@ const Store = ({ TabPanel, value, theme }) => {
 
                     return (
                       <div className="single_product" key={product._id}>
-                        <div
-                          className="product_image"
-                          style={{
-                            background: `url(${product.images[0].photoUrl})`,
-                            backgroundPosition: "center",
-                            backgroundSize: "cover",
-                          }}
-                        ></div>
+                        <div className="product_image">
+                          <img
+                            src={product.images[0].photoUrl}
+                            alt={product.title}
+                          />
+                        </div>
 
                         <div className="product_desc">
                           <Link

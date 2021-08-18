@@ -75,10 +75,12 @@
           width: 40%;
           padding: 0 5px;
           .some_info_before_action {
+            p {
+              padding: 5px 0;
+            }
             .productAvailability {
               p {
                 @include flex(stretch, stretch, stretch);
-                padding: 5px 0;
                 color: $gray;
                 &:first-child {
                   padding-top: 0;

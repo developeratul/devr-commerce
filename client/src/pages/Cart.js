@@ -45,6 +45,23 @@ const Cart = () => {
     dispatch(removeItem(item));
   }
 
+  async function checkout() {
+    try {
+      const res = await fetch("/checkout/checkout_and_place_order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ cart_items }),
+      });
+      const body = await res.json();
+
+      if (res.ok) {
+        window.location = body.url;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   useEffect(() => {
     document.title = `${config.applicationName} / Cart`;
   }, []);
@@ -121,8 +138,12 @@ const Cart = () => {
                           Remove All
                         </Button>
                       </div>
+
+                      {/* the checkout button */}
                       <div className="single_action_button">
-                        <Button variant="contained">Checkout</Button>
+                        <Button onClick={checkout} variant="contained">
+                          Checkout
+                        </Button>
                       </div>
                     </div>
 
