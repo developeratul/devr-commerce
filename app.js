@@ -29,10 +29,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // database connection
-const dbUrl =
-  process.env.NODE_ENV === "development"
-    ? "mongodb://localhost:27017/devr-commerce"
-    : process.env.DB;
+const env = process.env.NODE_ENV;
+const localDBUrl = "mongodb://localhost:27017/devr-commerce";
+const dbUrl = env === "development" ? localDBUrl : process.env.DB;
 mongoose
   .connect(dbUrl, {
     useNewUrlParser: true,
