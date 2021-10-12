@@ -9,6 +9,8 @@ import { IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import { Button } from "@material-ui/core";
 
+import productCategories from "../../data/productCategories";
+
 const CreateProductModal = ({ createProductModalRef, user }) => {
   // for handling all the inputs
   const [input, setInput] = useState({
@@ -24,7 +26,6 @@ const CreateProductModal = ({ createProductModalRef, user }) => {
   const [fileAra, setFileAra] = useState([]);
 
   const [previewFileObject, setPreviewFileObject] = useState([]);
-  const productCategories = useSelector((state) => state.getProductCategories);
   const history = useHistory();
 
   // handling the drop-zone drop
@@ -281,15 +282,9 @@ const CreateProductModal = ({ createProductModalRef, user }) => {
                   </h2>
                   <div className="image_container">
                     {previewFileObject.map((url, index) => (
-                      <div
-                        className="single_image"
-                        key={index}
-                        style={{
-                          background: `url(${url})`,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-                        }}
-                      ></div>
+                      <div className="single_image" key={index}>
+                        <img src={url} alt={url} />
+                      </div>
                     ))}
                   </div>
 

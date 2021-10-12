@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@material-ui/core";
 import { toast } from "react-toastify";
 import validator from "validator";
 import { useHistory } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updateUser } from "../../../redux/actions/authActions";
+
+import productCategoriesAvailable from "../../../data/productCategories";
 
 const AccountSettings = ({ TabPanel, value, theme, user }) => {
   const [formData, setFormData] = useState({
@@ -12,7 +14,6 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
     email: user.email,
     phone: user.phone,
     about: user.about,
-    country: user.country,
     productCategory: user.productCategory,
 
     facebook: user.facebook,
@@ -23,11 +24,6 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
     showEmail: user.showEmail && user.showEmail.toString(),
     showPhone: user.showPhone && user.showPhone.toString(),
   });
-  const [countryData, setCountryData] = useState([]);
-
-  const productCategoriesAvailable = useSelector(
-    (state) => state.getProductCategories
-  );
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -37,7 +33,6 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
     email,
     phone,
     about,
-    country,
     productCategory,
     showEmail,
     showPhone,
@@ -53,13 +48,6 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
     setFormData((pre) => ({ ...pre, [name]: value }));
   }
 
-  async function fetchCountryData() {
-    const res = await fetch("https://restcountries.eu/rest/v2/all");
-    const body = await res.json();
-
-    setCountryData(body);
-  }
-
   async function updateAccountInformation() {
     try {
       const res = await fetch("/get_user/update_account_information", {
@@ -70,7 +58,6 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
         body: JSON.stringify({
           name,
           email,
-          country,
           productCategory,
           phone,
           showEmail,
@@ -91,7 +78,7 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
         toast.dark(body.message);
       }
     } catch (err) {
-      console.log(err);
+      toast.error(err.message || err);
     }
   }
 
@@ -99,7 +86,7 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
   function Validate() {
     const validation = {
       nameLength: name.length <= 25,
-      allFields: name && email && country && phone,
+      allFields: name && email && phone,
       emailOk: validator.isEmail(email),
       about_length: about.length <= 500,
     };
@@ -117,10 +104,6 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
       updateAccountInformation(); // for registering a user in our database
     }
   }
-
-  useEffect(() => {
-    fetchCountryData();
-  }, []);
 
   return (
     <div className="account_settings tab_panel_single_settings">
@@ -156,23 +139,6 @@ const AccountSettings = ({ TabPanel, value, theme, user }) => {
               value={formData.phone}
               placeholder="Update phone"
             />
-          </div>
-
-          <div className="single_field">
-            <select
-              onChange={InputChange}
-              name="country"
-              value={formData.country}
-            >
-              <option value="" disabled>
-                Update Country
-              </option>
-              {countryData.map((item, index) => (
-                <option value={item.name} key={index}>
-                  {item.name}
-                </option>
-              ))}
-            </select>
           </div>
 
           <div className="single_field">

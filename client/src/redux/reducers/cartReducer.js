@@ -13,10 +13,7 @@ async function updateCartInDB(items) {
   }
 }
 
-const initialState = {
-  responseEnded: false,
-  cart_items: [],
-};
+const initialState = { responseEnded: false, cart_items: [], };
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {

@@ -54,7 +54,7 @@
     .create_product_modal_content_container {
       width: 100%;
       background: $bgSecondary;
-      padding: 30px 10px;
+      padding: 30px 20px;
       border-radius: 5px;
       box-shadow: 0 0 5px $themeColor;
       .title {
@@ -116,12 +116,17 @@
             font-family: $font;
           }
           .image_container {
-            @include flex(center, center, stretch);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-gap: 5px;
             .single_image {
-              width: 280px;
-              height: 300px;
-              margin: 5px;
               border-radius: 3px;
+              height: 250px;
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
             }
           }
           .remove_image_button {
@@ -139,97 +144,33 @@
     }
   }
 
-  .products_wrapper {
-    @include flex(center, stretch, stretch);
-    .single_product {
-      width: 400px;
-      min-height: 300px;
-      overflow: hidden;
-      border-radius: 5px;
-      background: $bgSecondary;
-      margin: 10px;
-      box-shadow: 0 0 5px rgb(24, 24, 24);
-      &:hover .product_img img {
-        transform: scale(1.1);
-      }
-      .product_img {
-        width: 100%;
-        height: 260px;
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: 0.2s;
-          transform-origin: bottom;
-        }
-      }
-      .product_desc {
-        padding: 10px;
-        h2 {
-          margin-bottom: 10px;
-          a {
-            color: #fff;
-            font-family: $font;
-            transition: 0.3s;
-            &:hover {
-              color: $themeColor;
-            }
-          }
-        }
-        .product_options {
-          @include flex(space-between, center, stretch);
-          .single_option {
-            @include flex(center, center, stretch);
-            .icon_container {
-              display: inline-block;
-              margin-right: 10px;
-              color: $successColor;
-            }
-            button {
-              color: $themeColor;
-            }
-          }
-        }
-
-        .product_author_details {
-          margin-bottom: 10px;
-          .author_name {
-            padding-bottom: 5px;
-            a {
-              color: $themeColor;
-            }
-          }
-          .upload_date {
-            color: $gray;
-            font-size: 0.9rem;
-          }
-        }
-      }
-    }
-  }
-
   .searchBar {
-    @include flex(center, center, stretch);
-    margin-bottom: 30px;
     width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(1fr, 1fr));
+    padding: 0 10px;
+    margin-bottom: 10px;
     .input_container {
-      width: 95%;
-      max-width: 600px;
       @include flex(center, center, stretch);
       position: relative;
       input {
-        flex: 2;
+        flex: 10;
         border-top-left-radius: 3px;
         border-bottom-left-radius: 3px;
         border: none;
         padding: 10px;
-        border: 2px solid #fff;
+        border: 2px solid $bgSecondary;
+        background: $bgSecondary;
+        color: #fff;
+        &::placeholder {
+          color: #fff;
+        }
         &:focus {
           border-color: $themeColor;
         }
       }
       button {
-        flex: 0.5;
+        flex: 1;
         background: $themeColor;
         color: #fff;
         padding: 10px;
@@ -239,19 +180,21 @@
 
       .search_results_container {
         position: absolute;
-        top: 100%;
         margin-top: 20px;
-        right: 0;
+        top: 100%;
+        left: 0;
+        margin: auto;
         width: 100%;
+        max-width: 550px;
         max-height: 400px;
         overflow-x: hidden;
         background: $bgColor;
         z-index: 3;
-        box-shadow: 0 0 5px $successColor;
         border-radius: 5px;
-        padding: 30px 10px;
+        padding: 50px 10px;
         animation: 0.3s openAnimation alternate;
         display: none;
+        box-shadow: 0 0 5px $themeColor;
         @keyframes openAnimation {
           from {
             transform: scale(0.8);
@@ -287,15 +230,21 @@
           align-items: center;
           .item_img {
             grid-column: 1 / 5;
+            @media screen and (max-width: 768px) {
+              display: none;
+            }
             img {
               width: 100%;
-              height: 140px;
+              height: 150px;
               object-fit: cover;
               border-radius: 3px;
             }
           }
           .item_desc {
             grid-column: 5 / -1;
+            @media screen and (max-width: 768px) {
+              grid-column: 1 / -1;
+            }
             .title {
               a {
                 color: #fff;
@@ -308,6 +257,80 @@
             .price {
               color: $successColor;
               margin-top: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .products_wrapper {
+    padding: 0 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    align-items: stretch;
+    justify-content: center;
+    grid-gap: 10px;
+    .single_product {
+      background: $bgColor;
+      border: 2px solid $bgSecondary;
+      overflow: hidden;
+      border-radius: 3px;
+      width: 100%;
+      &:hover .product_img {
+        transform: scale(1.1);
+      }
+      .product_img {
+        width: 100%;
+        height: 250px;
+        transition: 0.3s;
+        transform-origin: bottom;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      .product_desc {
+        padding: 10px;
+        h2 {
+          white-space: nowrap;
+          overflow: hidden;
+          margin-bottom: 5px;
+          &:hover a {
+            color: $themeColor;
+          }
+          a {
+            color: #fff;
+            transition: 0.3s;
+          }
+        }
+      }
+      .product_author_details {
+        margin-bottom: 5px;
+        .author_name {
+          font-family: $font;
+          a {
+            color: $themeColor;
+            padding-left: 5px;
+          }
+        }
+        .upload_date {
+          font-size: 0.8rem;
+          color: $gray;
+        }
+      }
+      .product_options {
+        @include flex(space-between, center, stretch);
+        .single_option {
+          @include flex(center, center, stretch);
+          button {
+            color: $themeColor;
+          }
+          .icon_container {
+            margin-right: 10px;
+            svg {
+              fill: $successColor;
             }
           }
         }
@@ -335,6 +358,10 @@
           }
         }
       }
+    }
+
+    .products_wrapper {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     }
   }
 }

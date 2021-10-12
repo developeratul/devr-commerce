@@ -2,7 +2,6 @@ import { combineReducers, createStore } from "redux";
 
 // reducers
 import authReducer from "./reducers/authReducer";
-import getProductCategories from "./reducers/productCategories";
 import editProductModalReducer from "./reducers/editProductModalReducer";
 import cartReducer from "./reducers/cartReducer";
 import singleProductReducer from "./reducers/singleProductReducer";
@@ -11,7 +10,6 @@ import productReducer from "./reducers/productReducer";
 
 const rootReducer = {
   authReducer,
-  getProductCategories,
   editProductModalReducer,
   cartReducer,
   singleProductReducer,

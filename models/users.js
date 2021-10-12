@@ -8,7 +8,7 @@ const dataSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   password: { type: String, required: true },
-  country: { type: String, required: true },
+  country: { type: Object, required: true },
   phone: { type: String, required: true },
   about: { type: String, default: "" },
 
@@ -28,7 +28,6 @@ const dataSchema = new mongoose.Schema({
   photoId: { type: String, default: "" },
 
   memberSince: { type: String, default: new Date().toLocaleDateString() },
-  totalSales: { type: Number, default: 0 },
 
   isSeller: { type: Boolean, required: true, enum: [true, false] },
   isVerified: { type: Boolean, enum: [true, false], default: false },
@@ -66,11 +65,10 @@ const dataSchema = new mongoose.Schema({
 
   reviews: [{ type: mongoose.Types.ObjectId, ref: "REVIEW" }],
 
+  orders: [{ type: mongoose.Schema.Types.ObjectId, ref: "order" }],
+
   // for storing the auth tokens
   tokens: [{ token: { type: String } }],
-
-  placed_orders: [],
-  completed_orders: [],
 });
 
 // hashing the password before saving

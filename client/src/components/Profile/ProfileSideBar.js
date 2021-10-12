@@ -143,8 +143,6 @@ const ProfileSideBar = () => {
     checkFollowingStatus();
   }, [user]);
 
-  useEffect(() => {}, [user, user.reviews]);
-
   return (
     <div className="profile_side_bar">
       <div className="profile_picture">
@@ -177,7 +175,7 @@ const ProfileSideBar = () => {
             </span>
           </p>
           <p>
-            from: <span>{user.country}</span>
+            from: <span>{user.country && user.country.country_name}</span>
           </p>
 
           <div className="user_links">

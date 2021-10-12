@@ -2,12 +2,13 @@ import { Button } from "@material-ui/core";
 import { SearchOutlined } from "@material-ui/icons";
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const SearchBar = () => {
   const [searchResults, setSearchResults] = useState([]);
   const { products } = useSelector((state) => state.productReducer);
   const searchResultContainerRef = useRef();
+  const history = useHistory();
 
   /**
    * @param {String} word
@@ -30,7 +31,7 @@ const SearchBar = () => {
 
     setTimeout(() => {
       searchResultContainer.style.display = "none";
-    }, 500);
+    }, 100);
   }
 
   return (
@@ -49,7 +50,11 @@ const SearchBar = () => {
           onFocus={showSearchResults}
           onBlur={hideSearchResults}
         />
-        <Button variant="contained">
+        <Button
+          onClick={() => history.push(`/product/${searchResults[0]._id}`)}
+          disabled={!searchResults.length}
+          variant="contained"
+        >
           <SearchOutlined />
         </Button>
 

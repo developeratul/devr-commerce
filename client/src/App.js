@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -11,6 +11,7 @@ import { getPreviousCartItems } from "./redux/actions/cartActions";
 // components
 import Nav from "./components/Nav";
 import FullPageLoader from "./components/FullPageLoader";
+import ServerError from "./pages/ServerError";
 
 // pages
 import Home from "./pages/Home";
@@ -22,7 +23,6 @@ import NotFound from "./pages/NotFound";
 import Settings from "./pages/Settings";
 import Product from "./pages/Product";
 import SingleProduct from "./pages/SingleProduct";
-import ServerError from "./pages/ServerError";
 
 const App = () => {
   const [responseEnded, setResponseEnded] = useState(false);
@@ -35,14 +35,8 @@ const App = () => {
     try {
       const res = await fetch("/get_auth", {
         method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          credentials: "include",
-          "Access-Control-Allow-Origin": "*",
-          Connection: "keep-alive",
-          "Keep-Alive": "timeout=5",
-        },
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
       });
 
       if (typeof res.status === "number") {
@@ -51,7 +45,7 @@ const App = () => {
 
       const body = await res.json();
 
-      if (res.status === 200) {
+      if (res.ok) {
         dispatch(logInUser(body));
       } else if (res.status === 401) {
         dispatch(logOutUser());
@@ -59,6 +53,7 @@ const App = () => {
     } catch (err) {
       dispatch(logOutUser());
       setServerError(true);
+      toast.error(err.message || err);
     }
   }
 
@@ -103,7 +98,7 @@ const App = () => {
   }
 
   return (
-    <Router>
+    <BrowserRouter>
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -114,7 +109,6 @@ const App = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        limit={2}
       />
       <Nav />
       <Switch>
@@ -129,7 +123,7 @@ const App = () => {
         <Route path="/notfound" component={NotFound} />
         <Route path="*" component={NotFound} />
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
 };
 

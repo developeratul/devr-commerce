@@ -132,6 +132,7 @@ function Product() {
               className="single_product"
               style={{
                 boxShadow: product.user._id === user._id && "0 0 5px #7976fc",
+                border: product.user._id === user._id && "none",
               }}
               key={product._id}
             >

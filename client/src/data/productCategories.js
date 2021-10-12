@@ -1,7 +1,3 @@
-// I have these limited product categories
-// from this reducer I am providing all my product categories to my whole app
-// these categories will be unchanged
-
 const productCategories = [
   "Tech",
   "Toys",
@@ -21,8 +17,4 @@ const productCategories = [
   "DIY garden and pet",
 ];
 
-const getProductCategories = (state = productCategories, action) => {
-  return state;
-};
-
-export default getProductCategories;
+export default productCategories;

@@ -23,13 +23,16 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 // app middlewares
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(cookieParser(process.env.COOKIE_SECRET));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 
 // database connection
-const dbUrl = process.env.DB;
+const dbUrl =
+  process.env.NODE_ENV === "development"
+    ? "mongodb://localhost:27017/devr-commerce"
+    : process.env.DB;
 mongoose
   .connect(dbUrl, {
     useNewUrlParser: true,
@@ -39,7 +42,7 @@ mongoose
   })
   .then(() => console.log("- Connected to database [MongoDB]"))
   .catch((err) => {
-    console.log(err.message ? err.message : err);
+    console.log(err.message || err);
   });
 
 // * application routes
@@ -57,14 +60,6 @@ app.use("/get_review", reviewRouter);
 app.use("/checkout", checkAuth, checkoutRouter);
 
 // for production
-if (process.env.NODE_ENV === "production") {
-  app.use((req, res, next) => {
-    if (req.header("x-forwarded-proto") !== "https")
-      res.redirect(`https://${req.header("host")}${req.url}`);
-    else next();
-  });
-}
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 

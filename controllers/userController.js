@@ -75,7 +75,6 @@ module.exports = {
         email,
         phone,
         about,
-        country,
         productCategory,
         showEmail,
         showPhone,
@@ -95,7 +94,6 @@ module.exports = {
         user.email = email;
         user.phone = phone;
         user.about = about;
-        user.country = country;
         user.productCategory = productCategory;
         user.showEmail = showEmail;
         user.showPhone = showPhone;

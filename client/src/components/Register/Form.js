@@ -13,12 +13,11 @@ const Form = () => {
     email: "",
     password: "",
     conPass: "",
-    country: "",
     phone: "",
     isSeller: "",
   });
+  const [country, setCountry] = useState("");
   const [responseSentToServer, setResponseSentToServer] = useState(false);
-  const [countryData, setCountryData] = useState([]);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -26,15 +25,13 @@ const Form = () => {
   const registerUser = async () => {
     setResponseSentToServer(true);
 
-    const { name, email, country, phone, password, isSeller } = formData;
+    const { name, email, phone, password, isSeller } = formData;
 
     try {
       const res = await fetch("/get_auth/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          credentials: "include",
-        },
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
         body: JSON.stringify({
           name,
           email,
@@ -62,13 +59,7 @@ const Form = () => {
         setResponseSentToServer(false);
       }
     } catch (err) {
-      console.log(err);
-
-      if (err.message) {
-        toast.error(err.message);
-      } else {
-        toast.error(err);
-      }
+      toast.error(err.message || err);
     }
   };
 
@@ -81,11 +72,11 @@ const Form = () => {
 
   // for validation input information's
   function Validate() {
-    const { name, email, password, conPass, country, phone } = formData;
+    const { name, email, password, conPass, phone } = formData;
     const validation = {
       passwordLength: password.length >= 8,
       nameLength: name.length <= 25,
-      allFields: name && email && password && conPass && country && phone,
+      allFields: name && email && password && conPass && phone,
       passwordMatched: password === conPass,
       emailOk: validator.isEmail(email),
     };
@@ -113,22 +104,25 @@ const Form = () => {
     }
   }
 
-  // for fetching the data of countries
-  const fetchCountryData = async () => {
+  // for fetching the location of the user
+  const fetchCountryData = async (abortController) => {
     try {
-      const res = await fetch("https://restcountries.eu/rest/v2/all");
-      const data = await res.json();
-
-      if (res.status === 200) {
-        setCountryData(data);
-      }
+      const endpoint = "https://geolocation-db.com/json/";
+      const apiKey = process.env.REACT_APP_GEOLOCATION_API_KEY;
+      const res = await fetch(`${endpoint}${apiKey}`, {
+        signal: abortController.signal,
+      });
+      const body = await res.json();
+      setCountry(body);
     } catch (err) {
-      console.log(err);
+      toast.error(err.message || err);
     }
   };
 
   useEffect(() => {
-    fetchCountryData();
+    const abortController = new AbortController();
+    fetchCountryData(abortController);
+    return () => abortController.abort();
   }, []);
 
   return (
@@ -175,26 +169,6 @@ const Form = () => {
               onChange={HandleInputChange}
               value={formData.conPass}
             />
-          </div>
-
-          <div className="single_field">
-            <select
-              name="country"
-              onChange={HandleInputChange}
-              value={formData.country}
-            >
-              <option disabled value="">
-                Select Country
-              </option>
-
-              {countryData.map((country, index) => {
-                return (
-                  <option key={index} value={country.name}>
-                    {country.name}
-                  </option>
-                );
-              })}
-            </select>
           </div>
 
           <div className="single_field">

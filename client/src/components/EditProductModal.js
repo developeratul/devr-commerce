@@ -8,6 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../redux/actions/editProductModalActions";
 import { getProductData } from "../redux/actions/singleProductActions";
 
+import productCategories from "../data/productCategories";
+
 const EditProductModal = () => {
   const { product } = useSelector((state) => state.editProductModalReducer);
   const { user } = useSelector((state) => state.authReducer);
@@ -30,7 +32,6 @@ const EditProductModal = () => {
 
   const [responseSentToServer, setResponseSentToSever] = useState(false);
 
-  const productCategories = useSelector((state) => state.getProductCategories);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -239,15 +240,9 @@ const EditProductModal = () => {
                 <div className="image_container">
                   {productImages.map((image) => {
                     return (
-                      <div
-                        className="single_image"
-                        key={image._id}
-                        style={{
-                          background: `url(${image.photoUrl})`,
-                          backgroundSize: "cover",
-                          backgroundPosition: "center",
-                        }}
-                      ></div>
+                      <div className="single_image" key={image._id}>
+                        <img src={image.photoUrl} alt={product.title} />
+                      </div>
                     );
                   })}
                 </div>

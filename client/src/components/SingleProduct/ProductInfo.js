@@ -79,25 +79,21 @@ const ProductInfo = () => {
             {/* showing up some availability informations */}
             <div className="productAvailability">
               {isAuthenticated && (
-                <p>
+                <div>
                   {canBeShipped ? (
-                    <span className="available">
-                      Available is your country!
-                    </span>
+                    <p className="available">Available in your country!</p>
                   ) : (
-                    <span className="unavailable">
-                      Unavailable in your country
-                    </span>
+                    <p className="unavailable">Unavailable in your country</p>
                   )}
-                </p>
+                </div>
               )}
               {product.max_quantity > 0 ? (
-                <p>
+                <div>
                   <span className="available">
                     <DoneIcon />
                   </span>
                   In Stock
-                </p>
+                </div>
               ) : (
                 <p>
                   <span className="unavailable">
@@ -111,7 +107,7 @@ const ProductInfo = () => {
               {isAuthenticated && (
                 <>
                   <p>
-                    Shipping Charge: <span>{shippingCharge}</span>
+                    Shipping Charge: <span>{shippingCharge} $</span>
                   </p>
                   <p>
                     Shipping country: <span>{shippingCountry}</span>

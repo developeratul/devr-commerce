@@ -9,7 +9,7 @@ import Box from "@material-ui/core/Box";
 
 import AccountSettings from "./Tabs/AccountSettings";
 import SecuritySettings from "./Tabs/SecuritySettings";
-import StoreSettings from "./Tabs/StoreSettings";
+// import StoreSettings from "./Tabs/StoreSettings";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -65,7 +65,7 @@ const UpdateOtherInfo = ({ user }) => {
         >
           <Tab label="Account" {...a11yProps(0)} />
           <Tab label="Security" {...a11yProps(1)} />
-          <Tab label="Store" {...a11yProps(2)} />
+          {/* <Tab label="Store" {...a11yProps(2)} /> */}
         </Tabs>
       </AppBar>
 
@@ -92,12 +92,12 @@ const UpdateOtherInfo = ({ user }) => {
         />
 
         {/* All the store settings will be here */}
-        <StoreSettings
+        {/* <StoreSettings
           user={user}
           TabPanel={TabPanel}
           theme={theme.direction}
           value={value}
-        />
+        /> */}
       </SwipeableViews>
     </div>
   );

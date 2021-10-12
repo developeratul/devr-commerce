@@ -34,8 +34,8 @@ router.post("/checkout_and_place_order", async (req, res, next) => {
           quantity: item.quantity,
         };
       }),
-      success_url: `${process.env.CLIENT_URL}/`,
-      cancel_url: `${process.env.CLIENT_URL}/cart`,
+      // success_url: `${process.env.CLIENT_URL}/`,
+      // cancel_url: `${process.env.CLIENT_URL}/cart`,
     });
 
     res.status(200).json({ url: checkoutSession.url });

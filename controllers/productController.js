@@ -49,10 +49,11 @@ module.exports = {
     try {
       const pictureFiles = req.files;
 
-      // map through images and create a promise array using cloudinary upload function
+      // map through images and create a promise array using cloudinary upload
+      // function
       const multiplePicturePromise = pictureFiles.map((picture) =>
         cloudinary.uploader.upload(picture.path, {
-          folder: `devR-Commerce/products/${req.user.name}`,
+          folder: `devR-Commerce/${req.user.name}/products`,
         })
       );
       const imageResponses = await Promise.all(multiplePicturePromise);
@@ -109,7 +110,8 @@ module.exports = {
 
       const theProduct = await Product.findOne({ _id: productId });
 
-      // putting all the product image id under an array so I can use this array to delete all these images
+      // putting all the product image id under an array so I can use this array
+      // to delete all these images
       const allProductImageIdInArray = theProduct.images.map(
         (singleImage) => singleImage.photoId
       );
@@ -169,7 +171,8 @@ module.exports = {
       }
 
       // uploading new products
-      // map through images and create a promise array using cloudinary upload function
+      // map through images and create a promise array using cloudinary upload
+      // function
       if (pictureFiles.length > 0) {
         const multiplePicturePromise = pictureFiles.map((picture) =>
           cloudinary.uploader.upload(picture.path, {
