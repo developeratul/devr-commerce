@@ -16,7 +16,7 @@ export default function App(props: ExtendedAppProps) {
   return (
     <CacheProvider value={emotionCache}>
       <ThemeProvider>
-        <CssBaseline />
+        <CssBaseline enableColorScheme />
         <Layout>
           <Component {...pageProps} />
         </Layout>

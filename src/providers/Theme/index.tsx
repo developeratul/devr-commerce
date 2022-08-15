@@ -1,24 +1,20 @@
 import { AppProps } from "@/types";
 import storage from "@/utils/storage";
 import type { PaletteMode, Theme } from "@mui/material";
-import { Box, createTheme, styled, ThemeProvider as MuiThemeProvider } from "@mui/material";
+import { createTheme, ThemeProvider as MuiThemeProvider } from "@mui/material";
 import { createContext, useMemo, useState } from "react";
 
 type InitialState = {
   toggleColorMode: () => void;
 };
 
-const AppContainer = styled(Box)({
-  width: "100vw",
-  height: "100vh",
-  overflow: "auto",
-});
 export const ColorModeContext = createContext<InitialState>({ toggleColorMode: () => null });
 export const darkTheme: Theme = createTheme({
   palette: {
     mode: "dark",
-    background: { default: "#0E0E10", paper: "#18181B" },
-    primary: { main: "#9246FF", dark: "#5C16C6", light: "#782CE8" },
+    background: { default: "#2A2C37", paper: "#14141B" },
+    primary: { main: "#ff79c6", dark: "#c94695", light: "#ffacf9" },
+    secondary: { main: "#50fa7b", dark: "#00c64c", light: "#8dffac" },
   },
   typography: { fontFamily: "Poppins" },
   components: {
@@ -59,11 +55,7 @@ export default function ThemeProvider(props: AppProps) {
 
   return (
     <ColorModeContext.Provider value={values}>
-      <MuiThemeProvider theme={theme}>
-        <AppContainer bgcolor="background.default" color="text.primary">
-          {children}
-        </AppContainer>
-      </MuiThemeProvider>
+      <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>
     </ColorModeContext.Provider>
   );
 }
