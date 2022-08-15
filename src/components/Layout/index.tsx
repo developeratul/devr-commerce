@@ -1,4 +1,5 @@
 import { AppProps } from "@/types";
+import Content from "./Content";
 import Footer from "./Footer";
 import Header from "./Header";
 
@@ -7,7 +8,7 @@ export default function Layout(props: AppProps) {
   return (
     <div>
       <Header />
-      {children}
+      <Content>{children}</Content>
       <Footer />
     </div>
   );

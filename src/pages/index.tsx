@@ -1,7 +1,19 @@
-export default function HomePage() {
+import { HeroSection } from "@/components";
+import client from "@/lib/commerce";
+import { GetServerSideProps, InferGetServerSidePropsType } from "next";
+
+export default function HomePage(props: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  console.log(props);
   return (
     <div>
-      <h1>Hello from DevR-Commerce</h1>
+      <HeroSection />
     </div>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const { data: products } = await client.products.list();
+  return {
+    props: { products },
+  };
+};
