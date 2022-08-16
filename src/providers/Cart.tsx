@@ -14,10 +14,10 @@ export default function CartProvider(props: CartProviderProps) {
   const { children } = props;
   const [cart, setCart] = useState<Cart | null>(null);
   const [loading, setLoading] = useState(true);
-  const retrieveCart = useCallback(async () => {
-    const cart = await CartService.retrieve();
-    setCart(cart);
-    setLoading(false);
+  const retrieveCart = useCallback(() => {
+    CartService.retrieve()
+      .then((cart) => setCart(cart))
+      .finally(() => setLoading(false));
   }, []);
   useEffect(() => {
     retrieveCart();
