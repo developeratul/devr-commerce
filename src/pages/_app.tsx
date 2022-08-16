@@ -1,4 +1,5 @@
 import { Layout } from "@/components";
+import CartProvider from "@/providers/Cart";
 import ThemeProvider from "@/providers/Theme";
 import createEmotionCache from "@/utils/createEmotionCache";
 import { CacheProvider, EmotionCache } from "@emotion/react";
@@ -17,9 +18,11 @@ export default function App(props: ExtendedAppProps) {
     <CacheProvider value={emotionCache}>
       <ThemeProvider>
         <CssBaseline enableColorScheme />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <CartProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </CartProvider>
       </ThemeProvider>
     </CacheProvider>
   );

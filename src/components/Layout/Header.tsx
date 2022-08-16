@@ -1,3 +1,4 @@
+import { useCartContext } from "@/providers/Cart";
 import { DarkMode, ShoppingCart } from "@mui/icons-material";
 import { AppBar, Badge, Box, IconButton, styled, Toolbar, Typography } from "@mui/material";
 
@@ -16,6 +17,7 @@ const LeftContent = styled(Box)({
   gap: 10,
 });
 export default function Header() {
+  const { cart } = useCartContext();
   return (
     <AppBar position="sticky">
       <StyledToolbar>
@@ -27,10 +29,9 @@ export default function Header() {
             <DarkMode />
           </IconButton>
         </LeftContent>
-
         <RightContent>
           <IconButton>
-            <Badge badgeContent={4} color="primary">
+            <Badge badgeContent={cart?.total_items} color="primary">
               <ShoppingCart />
             </Badge>
           </IconButton>
