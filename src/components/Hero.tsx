@@ -5,25 +5,49 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { Box, Button, Container, styled, Typography } from "@mui/material";
 import Image from "next/image";
 
-const FlexContainer = styled(Box)({
+const FlexContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
   minHeight: "90vh",
-});
-const LeftContent = styled(Box)({
-  width: "600px",
-});
-const RightContent = styled(Box)({});
+  padding: "50px 0",
+  gap: 5,
+  [theme.breakpoints.down("md")]: {
+    flexDirection: "column",
+  },
+}));
+const LeftContent = styled(Box)(({ theme }) => ({
+  width: "100%",
+  maxWidth: "600px",
+  [theme.breakpoints.down("md")]: {},
+  [theme.breakpoints.down("md")]: {
+    marginBottom: 50,
+  },
+}));
+const RightContent = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.down("lg")]: {
+    maxWidth: "500px",
+  },
+}));
 export default function Hero() {
   return (
     <Container maxWidth="xl">
       <FlexContainer>
         <LeftContent>
-          <Typography gutterBottom color="primary" variant="h2" component="h1">
+          <Typography
+            gutterBottom
+            color="primary"
+            sx={{ typography: { sm: "h4", xs: "h4", xl: "h2", md: "h2" } }}
+            component="h1"
+          >
             DevR Commerce
           </Typography>
-          <Typography gutterBottom variant="h6" component="p" paragraph>
+          <Typography
+            gutterBottom
+            sx={{ typography: { sm: "body1", xs: "body1", xl: "h6", md: "h6" } }}
+            component="p"
+            paragraph
+          >
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum voluptates magnam aperiam
             amet? Ea iusto repudiandae corporis, animi excepturi non nostrum cupiditate ad! Est,
             nostrum!
@@ -40,12 +64,12 @@ export default function Hero() {
               variant="contained"
               color="secondary"
             >
-              Start on github
+              Star on github
             </Button>
           </Flex>
         </LeftContent>
         <RightContent>
-          <Image src={HeroImage} />
+          <Image src={HeroImage} alt="Hero section illustration" />
         </RightContent>
       </FlexContainer>
     </Container>

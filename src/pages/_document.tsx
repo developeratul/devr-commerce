@@ -1,4 +1,4 @@
-import { darkTheme } from "@/providers/Theme";
+import { darkTheme } from "@/styles/darkTheme";
 import createEmotionCache from "@/utils/createEmotionCache";
 import createEmotionServer from "@emotion/server/create-instance";
 import Document, { Head, Html, Main, NextScript } from "next/document";
@@ -10,7 +10,6 @@ export default class CustomDocument extends Document {
       <Html lang="en" className="dark">
         <Head>
           <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
           <meta httpEquiv="X-UA-Compatible" content="IE=7" />
           <meta
             name="keywords"
