@@ -15,14 +15,10 @@ export default function SectionTitle(props: SectionTitleProps) {
   const { title, subtitle } = props;
   return (
     <SectionTitleContainer>
-      <Typography align="center" variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom>
         {title}
       </Typography>
-      {subtitle && (
-        <Typography align="center" color="text.secondary">
-          {subtitle}
-        </Typography>
-      )}
+      {subtitle && <Typography color="text.secondary">{subtitle}</Typography>}
     </SectionTitleContainer>
   );
 }

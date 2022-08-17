@@ -7,6 +7,12 @@ const Cart = {
   async retrieve() {
     return await client.cart.retrieve();
   },
+  async update(lineId: string, quantity: number) {
+    return await client.cart.update(lineId, { quantity });
+  },
+  async remove(lineId: string) {
+    return await client.cart.remove(lineId);
+  },
 };
 
 export default Cart;

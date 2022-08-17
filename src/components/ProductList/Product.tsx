@@ -1,3 +1,4 @@
+import { useCartDispatchContext } from "@/providers/Cart";
 import Cart from "@/services/cart";
 import { Product } from "@chec/commerce.js/types/product";
 import { ShoppingCart } from "@mui/icons-material";
@@ -13,16 +14,25 @@ type ProductProps = {
 };
 export default function SingleProduct(props: ProductProps) {
   const { product } = props;
+  const { setCart } = useCartDispatchContext();
   const [isAdding, setIsAdding] = useState(false);
-  const addToCart = (productId: string) => {
+
+  const addToCart = async (productId: string) => {
     setIsAdding(true);
-    Cart.add(productId).finally(() => setIsAdding(false));
+    try {
+      const { cart } = await Cart.add(productId);
+      setCart(cart);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsAdding(false);
+    }
   };
   return (
     <Card>
       <CardActionArea>
         <CardMedia
-          loading="lazy"
+          loading="eager"
           component="img"
           height="200"
           src={product.image?.url}

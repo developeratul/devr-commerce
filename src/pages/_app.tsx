@@ -1,4 +1,4 @@
-import { Layout } from "@/components";
+import { Layout, NextProgress } from "@/components";
 import CartProvider from "@/providers/Cart";
 import ThemeProvider from "@/providers/Theme";
 import createEmotionCache from "@/utils/createEmotionCache";
@@ -18,6 +18,7 @@ export default function App(props: ExtendedAppProps) {
     <CacheProvider value={emotionCache}>
       <ThemeProvider>
         <CssBaseline enableColorScheme />
+        <NextProgress />
         <CartProvider>
           <Layout>
             <Component {...pageProps} />

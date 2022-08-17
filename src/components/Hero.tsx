@@ -53,7 +53,12 @@ export default function Hero() {
             nostrum!
           </Typography>
           <Flex gap={2}>
-            <Button startIcon={<ArrowDownwardIcon />} variant="contained">
+            <Button
+              LinkComponent="a"
+              href="#get_started"
+              startIcon={<ArrowDownwardIcon />}
+              variant="contained"
+            >
               Get started
             </Button>
             <Button
@@ -69,7 +74,7 @@ export default function Hero() {
           </Flex>
         </LeftContent>
         <RightContent>
-          <Image src={HeroImage} alt="Hero section illustration" />
+          <Image src={HeroImage} alt="Hero section illustration" loading="eager" />
         </RightContent>
       </FlexContainer>
     </Container>

@@ -14,9 +14,12 @@ const ProductsSection = styled(Box)(({ theme }) => ({
 export function ProductList(props: ProductListProps) {
   const { products } = props;
   return (
-    <ProductsSection>
+    <ProductsSection id="get_started">
       <Container maxWidth="xl">
-        <SectionTitle title="Featured Products" />
+        <SectionTitle
+          title="Featured Products"
+          subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        />
         <Grid container columns={12} spacing={5}>
           {products.map((product) => (
             <Grid item key={product.id} xs={3}>
