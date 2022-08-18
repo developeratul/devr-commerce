@@ -35,3 +35,7 @@ export default function ThemeProvider(props: AppProps) {
   );
 }
 export const useColorModeContext = () => useContext(ColorModeContext);
+export const useTheme = () => {
+  const { currentMode } = useColorModeContext();
+  return currentMode === "light" ? lightTheme : darkTheme;
+};

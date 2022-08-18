@@ -1,4 +1,4 @@
-import { Layout, NextProgress } from "@/components";
+import { Layout, NextProgress, Toaster } from "@/components";
 import CartProvider from "@/providers/Cart";
 import ThemeProvider from "@/providers/Theme";
 import createEmotionCache from "@/utils/createEmotionCache";
@@ -19,6 +19,7 @@ export default function App(props: ExtendedAppProps) {
       <ThemeProvider>
         <CssBaseline enableColorScheme />
         <NextProgress />
+        <Toaster />
         <CartProvider>
           <Layout>
             <Component {...pageProps} />

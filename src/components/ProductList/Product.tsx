@@ -8,6 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 type ProductProps = {
   product: Product;
@@ -22,8 +23,8 @@ export default function SingleProduct(props: ProductProps) {
     try {
       const { cart } = await Cart.add(productId);
       setCart(cart);
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      toast.error(err?.message);
     } finally {
       setIsAdding(false);
     }

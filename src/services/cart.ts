@@ -13,6 +13,9 @@ const Cart = {
   async remove(lineId: string) {
     return await client.cart.remove(lineId);
   },
+  async empty() {
+    return await client.cart.empty();
+  },
 };
 
 export default Cart;

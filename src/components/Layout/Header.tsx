@@ -28,7 +28,9 @@ export default function Header() {
     <StyledAppBar position="sticky">
       <StyledToolbar>
         <LeftContent>
-          <Typography variant="h6">DevR Commerce</Typography>
+          <Typography variant="h6" color="text.primary">
+            DevR Commerce
+          </Typography>
           <IconButton color="primary" onClick={toggleColorMode}>
             {currentMode === "light" ? <DarkMode /> : <LightMode />}
           </IconButton>

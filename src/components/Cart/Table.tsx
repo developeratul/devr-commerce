@@ -63,7 +63,7 @@ export default function CartTable() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Description</StyledTableCell>
+            <StyledTableCell>Product Details</StyledTableCell>
             <StyledTableCell>Quantity</StyledTableCell>
             <StyledTableCell>Price</StyledTableCell>
           </TableRow>
