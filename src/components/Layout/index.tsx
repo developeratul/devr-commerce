@@ -1,8 +1,8 @@
+import { Header } from "@/features/Cart";
 import { AppProps } from "@/types";
 import { Box, styled } from "@mui/material";
 import Content from "./Content";
 import Footer from "./Footer";
-import Header from "./Header";
 
 const LayoutContainer = styled(Box)({
   display: "flex",

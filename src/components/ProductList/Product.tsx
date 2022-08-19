@@ -1,5 +1,4 @@
-import { useCartDispatchContext } from "@/providers/Cart";
-import Cart from "@/services/cart";
+import { CartService, useCartDispatchContext } from "@/features/Cart";
 import { Product } from "@chec/commerce.js/types/product";
 import { ShoppingCart } from "@mui/icons-material";
 import { CardActionArea, CardActions, IconButton } from "@mui/material";
@@ -21,7 +20,7 @@ export default function SingleProduct(props: ProductProps) {
   const addToCart = async (productId: string) => {
     setIsAdding(true);
     try {
-      const { cart } = await Cart.add(productId);
+      const { cart } = await CartService.add(productId);
       setCart(cart);
     } catch (err: any) {
       toast.error(err?.message);

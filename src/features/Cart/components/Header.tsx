@@ -1,21 +1,21 @@
-import { useCartStateContext } from "@/providers/Cart";
 import { useColorModeContext } from "@/providers/Theme";
 import { DarkMode, LightMode, ShoppingCart } from "@mui/icons-material";
-import { AppBar, Badge, Box, IconButton, styled, Toolbar, Typography } from "@mui/material";
+import * as Mui from "@mui/material";
 import Link from "next/link";
+import { useCartStateContext } from "../Provider";
 
-const StyledToolbar = styled(Toolbar)({
+const StyledToolbar = Mui.styled(Mui.Toolbar)({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
 });
-const StyledAppBar = styled(AppBar)(({ theme }) => ({
+const StyledAppBar = Mui.styled(Mui.AppBar)(({ theme }) => ({
   background: theme.palette.background.paper,
 }));
-const RightContent = styled(Box)({
+const RightContent = Mui.styled(Mui.Box)({
   ...StyledToolbar,
 });
-const LeftContent = styled(Box)({
+const LeftContent = Mui.styled(Mui.Box)({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
@@ -28,20 +28,20 @@ export default function Header() {
     <StyledAppBar position="sticky">
       <StyledToolbar>
         <LeftContent>
-          <Typography variant="h6" color="text.primary">
+          <Mui.Typography variant="h6" color="text.primary">
             DevR Commerce
-          </Typography>
-          <IconButton color="primary" onClick={toggleColorMode}>
+          </Mui.Typography>
+          <Mui.IconButton color="primary" onClick={toggleColorMode}>
             {currentMode === "light" ? <DarkMode /> : <LightMode />}
-          </IconButton>
+          </Mui.IconButton>
         </LeftContent>
         <RightContent>
           <Link passHref href="/cart">
-            <IconButton>
-              <Badge badgeContent={cart?.total_items} color="primary">
+            <Mui.IconButton>
+              <Mui.Badge badgeContent={cart?.total_items} color="primary">
                 <ShoppingCart />
-              </Badge>
-            </IconButton>
+              </Mui.Badge>
+            </Mui.IconButton>
           </Link>
         </RightContent>
       </StyledToolbar>

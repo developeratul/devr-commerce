@@ -1,52 +1,39 @@
 import { NoData } from "@/components";
-import { useCartDispatchContext, useCartStateContext } from "@/providers/Cart";
-import Cart from "@/services/cart";
 import { Flex } from "@/styles";
 import { Add, Delete, Remove } from "@mui/icons-material";
-import {
-  Box,
-  Button,
-  FormGroup,
-  styled,
-  Table,
-  TableBody,
-  TableCell,
-  tableCellClasses,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Typography,
-} from "@mui/material";
+import * as Mui from "@mui/material";
 import Image from "next/image";
+import { useCartDispatchContext, useCartStateContext } from "../Provider";
+import Service from "../service";
 
-const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
+const StyledTableContainer = Mui.styled(Mui.TableContainer)(({ theme }) => ({
   background: theme.palette.background.secondary,
   borderRadius: 5,
   boxShadow: theme.shadows[1],
 }));
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  [`&.${tableCellClasses.head}`]: {
+const StyledTableCell = Mui.styled(Mui.TableCell)(({ theme }) => ({
+  [`&.${Mui.tableCellClasses.head}`]: {
     backgroundColor: theme.palette.background.paper,
     color: theme.palette.primary.main,
   },
 }));
-const Quantity = styled(Typography)({ padding: "20px" });
+const Quantity = Mui.styled(Mui.Typography)({ padding: "20px" });
 
 export default function CartTable() {
   const { cart } = useCartStateContext();
   const { setCart } = useCartDispatchContext();
   const addQuantity = async (lineId: string, currentQty: number) => {
-    const { cart } = await Cart.update(lineId, (currentQty += 1));
+    const { cart } = await Service.update(lineId, (currentQty += 1));
     setCart(cart);
   };
   const subQuantity = async (lineId: string, currentQty: number) => {
     const updatedQty = (currentQty -= 1);
     if (updatedQty <= 0) {
-      const { cart } = await Cart.remove(lineId);
+      const { cart } = await Service.remove(lineId);
       setCart(cart);
       return;
     }
-    const { cart } = await Cart.update(lineId, updatedQty);
+    const { cart } = await Service.update(lineId, updatedQty);
     setCart(cart);
   };
   const removeFromCart = (lineId: string) => subQuantity(lineId, 0);
@@ -60,17 +47,17 @@ export default function CartTable() {
   }
   return (
     <StyledTableContainer>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
+      <Mui.Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Mui.TableHead>
+          <Mui.TableRow>
             <StyledTableCell>Product Details</StyledTableCell>
             <StyledTableCell>Quantity</StyledTableCell>
             <StyledTableCell>Price</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
+          </Mui.TableRow>
+        </Mui.TableHead>
+        <Mui.TableBody>
           {cart?.line_items.map((item) => (
-            <TableRow key={item.id}>
+            <Mui.TableRow key={item.id}>
               <StyledTableCell sx={{ minWidth: 600 }}>
                 <Flex gap={3}>
                   <Image
@@ -81,39 +68,45 @@ export default function CartTable() {
                     width={150}
                     height={150}
                   />
-                  <Box>
-                    <Typography variant="h6" gutterBottom maxWidth={400}>
+                  <Mui.Box>
+                    <Mui.Typography variant="h6" gutterBottom maxWidth={400}>
                       {item.name}
-                    </Typography>
-                    <Button
+                    </Mui.Typography>
+                    <Mui.Button
                       onClick={() => removeFromCart(item.id)}
                       color="error"
                       variant="outlined"
                       startIcon={<Delete />}
                     >
                       Remove
-                    </Button>
-                  </Box>
+                    </Mui.Button>
+                  </Mui.Box>
                 </Flex>
               </StyledTableCell>
               <StyledTableCell sx={{ minWidth: 250 }}>
-                <FormGroup row sx={{ display: "flex", alignItems: "center" }}>
-                  <Button variant="outlined" onClick={() => addQuantity(item.id, item.quantity)}>
+                <Mui.FormGroup row sx={{ display: "flex", alignItems: "center" }}>
+                  <Mui.Button
+                    variant="outlined"
+                    onClick={() => addQuantity(item.id, item.quantity)}
+                  >
                     <Add />
-                  </Button>
+                  </Mui.Button>
                   <Quantity>{item.quantity}</Quantity>
-                  <Button variant="outlined" onClick={() => subQuantity(item.id, item.quantity)}>
+                  <Mui.Button
+                    variant="outlined"
+                    onClick={() => subQuantity(item.id, item.quantity)}
+                  >
                     <Remove />
-                  </Button>
-                </FormGroup>
+                  </Mui.Button>
+                </Mui.FormGroup>
               </StyledTableCell>
               <StyledTableCell>
-                <Typography>{item.price.formatted_with_symbol}</Typography>
+                <Mui.Typography>{item.price.formatted_with_symbol}</Mui.Typography>
               </StyledTableCell>
-            </TableRow>
+            </Mui.TableRow>
           ))}
-        </TableBody>
-      </Table>
+        </Mui.TableBody>
+      </Mui.Table>
     </StyledTableContainer>
   );
 }

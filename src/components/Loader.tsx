@@ -1,9 +1,16 @@
-import { Backdrop, CircularProgress } from "@mui/material";
+import { Flex } from "@/styles";
+import { CircularProgress, styled } from "@mui/material";
 
+const LoaderContainer = styled(Flex)({
+  width: "100vw",
+  height: "100vh",
+  justifyContent: "center",
+  alignItems: "center",
+});
 export default function Loader() {
   return (
-    <Backdrop open>
+    <LoaderContainer>
       <CircularProgress />
-    </Backdrop>
+    </LoaderContainer>
   );
 }

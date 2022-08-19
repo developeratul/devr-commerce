@@ -1,6 +1,5 @@
 import { SectionTitle } from "@/components";
-import { CartTable, OrderSummary } from "@/components/Cart";
-import { useCartStateContext } from "@/providers/Cart";
+import { CartTable, OrderSummary, useCartStateContext } from "@/features/Cart";
 import { Box, styled } from "@mui/material";
 
 const CartContentWrapper = styled(Box)({
