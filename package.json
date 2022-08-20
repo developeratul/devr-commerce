@@ -20,7 +20,6 @@
     "nextjs-progressbar": "^0.0.14",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.34.2",
     "react-hot-toast": "^2.3.0"
   },
   "devDependencies": {

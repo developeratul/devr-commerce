@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import toast from "react-hot-toast";
 import Checkout from "./service";
-import { InitialState, Reducer } from "./types";
+import { DispatchState, FieldNames, InitialState, Reducer } from "./types";
 
 const initialState: InitialState = {
   isLoading: true,
@@ -13,7 +13,6 @@ const initialState: InitialState = {
   firstName: "",
   lastName: "",
   email: "",
-  shippingName: "",
   shippingStreet: "",
   shippingCity: "",
   shippingStateProvince: "",
@@ -31,7 +30,12 @@ const initialState: InitialState = {
 };
 
 const CheckoutStateContext = React.createContext<InitialState>(initialState);
-const CheckoutReducerContext = React.createContext(null);
+const CheckoutDispatchContext = React.createContext<DispatchState>({
+  setTokenAndShippingCountries: () => null,
+  setValue: () => null,
+  setShippingCountry: () => null,
+  setShippingSubDivision: () => null,
+});
 
 const reducer: Reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -46,6 +50,18 @@ const reducer: Reducer = (state = initialState, action) => {
         isLoading: false,
       };
     }
+    case "SET_LOADING_STATE": {
+      return {
+        ...state,
+        [action.payload.name]: { ...state[action.payload.name], isLoading: true },
+      };
+    }
+    case "LOAD_SUB_DIVISIONS": {
+      return { ...state, shippingSubdivisions: { data: action.payload.data, isLoading: false } };
+    }
+    case "LOAD_SHIPPING_OPTIONS": {
+      return { ...state, shippingOptions: { data: action.payload.data, isLoading: false } };
+    }
   }
 };
 
@@ -57,6 +73,37 @@ export function CheckoutProvider(props: AppProps) {
 
   const setTokenAndShippingCountries = (token: CheckoutToken, countries: {}) =>
     dispatch({ type: "SET_TOKEN_AND_SHIPPING_COUNTRIES", payload: { token, countries } });
+
+  const setValue = (name: FieldNames, value: string) =>
+    dispatch({ type: "SET_VALUE", payload: { name, value } });
+
+  const setLoadingState = (name: "shippingSubdivisions" | "shippingOptions") =>
+    dispatch({ type: "SET_LOADING_STATE", payload: { name } });
+
+  const setSubDivisions = (data: {}) => dispatch({ type: "LOAD_SUB_DIVISIONS", payload: { data } });
+  const setShippingOptions = (data: []) =>
+    dispatch({ type: "LOAD_SHIPPING_OPTIONS", payload: { data } });
+
+  const setShippingCountry = async (countryCode: string) => {
+    setValue("shippingCountry", countryCode);
+    setValue("shippingStateProvince", "");
+    setValue("shippingOption", "");
+    setLoadingState("shippingSubdivisions");
+    const subDivisions = await Checkout.getSubDivisions(countryCode);
+    setSubDivisions(subDivisions);
+  };
+
+  const setShippingSubDivision = async (stateProvince: string) => {
+    setValue("shippingStateProvince", stateProvince);
+    setValue("shippingOption", "");
+    setLoadingState("shippingOptions");
+    const shippingOptions = await Checkout.getShippingOptions(
+      state.checkoutToken?.id as string,
+      state.shippingCountry,
+      stateProvince
+    );
+    setShippingOptions(shippingOptions);
+  };
 
   const generateCheckoutToken = React.useCallback(async () => {
     try {
@@ -77,6 +124,13 @@ export function CheckoutProvider(props: AppProps) {
     generateCheckoutToken();
   }, [generateCheckoutToken]);
 
-  return <CheckoutStateContext.Provider value={state}>{children}</CheckoutStateContext.Provider>;
+  return (
+    <CheckoutDispatchContext.Provider
+      value={{ setTokenAndShippingCountries, setValue, setShippingCountry, setShippingSubDivision }}
+    >
+      <CheckoutStateContext.Provider value={state}>{children}</CheckoutStateContext.Provider>
+    </CheckoutDispatchContext.Provider>
+  );
 }
 export const useCheckoutStateContext = () => React.useContext(CheckoutStateContext);
+export const useCheckoutDispatchContext = () => React.useContext(CheckoutDispatchContext);

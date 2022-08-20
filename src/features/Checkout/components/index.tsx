@@ -49,7 +49,7 @@ export default function CheckoutForm() {
           </Step>
         ))}
       </StyledStepper>
-      <StepArea />
+      <StepArea nextStep={nextStep} prevStep={prevStep} />
     </CheckoutFormContainer>
   );
 }
