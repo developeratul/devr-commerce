@@ -63,6 +63,7 @@ export default function AddressForm(props: FormProps) {
   const { nextStep, prevStep } = props;
   const state = useCheckoutStateContext();
   const { setShippingCountry, setShippingSubDivision } = useCheckoutDispatchContext();
+  console.log(state.shippingOptions.isLoading);
   return (
     <AddressFormContainer>
       <Mui.Grid spacing={3} container>

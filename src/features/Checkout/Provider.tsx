@@ -88,7 +88,9 @@ export function CheckoutProvider(props: AppProps) {
     setValue("shippingCountry", countryCode);
     setValue("shippingStateProvince", "");
     setValue("shippingOption", "");
+    setShippingOptions([]);
     setLoadingState("shippingSubdivisions");
+    setLoadingState("shippingOptions");
     const subDivisions = await Checkout.getSubDivisions(countryCode);
     setSubDivisions(subDivisions);
   };
