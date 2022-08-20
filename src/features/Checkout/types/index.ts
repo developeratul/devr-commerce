@@ -4,6 +4,11 @@ import { ShippingMethod } from "@chec/commerce.js/types/shipping-method";
 import * as Mui from "@mui/material";
 import React from "react";
 
+type Error = {
+  field: string;
+  message: string;
+};
+
 export type InitialState = {
   isLoading: boolean;
   checkoutToken: CheckoutToken | null;
@@ -15,15 +20,11 @@ export type InitialState = {
   shippingStateProvince: string;
   shippingPostalZipCode: string;
   shippingCountry: string;
-  cardNum: string;
-  expMonth: string;
-  expYear: string;
-  ccv: string;
-  billingPostalZipcode: string;
   shippingCountries: {};
   shippingSubdivisions: { isLoading: boolean; data: {} };
   shippingOptions: { isLoading: boolean; data: ShippingMethod[] };
   shippingOption: string;
+  errors: Error[];
 };
 
 export type FieldNames =
@@ -42,14 +43,22 @@ export type Action =
   | { type: "SET_TOKEN_AND_SHIPPING_COUNTRIES"; payload: { token: CheckoutToken; countries: {} } }
   | { type: "SET_LOADING_STATE"; payload: { name: "shippingSubdivisions" | "shippingOptions" } }
   | { type: "LOAD_SUB_DIVISIONS"; payload: { data: {} } }
-  | { type: "LOAD_SHIPPING_OPTIONS"; payload: { data: [] } };
+  | { type: "LOAD_SHIPPING_OPTIONS"; payload: { data: [] } }
+  | { type: "THROW_ERROR"; payload: Error }
+  | { type: "REMOVE_ERROR"; payload: { field: string } };
 
 export type Reducer = React.Reducer<InitialState, Action>;
+export type Rule = {
+  field: FieldNames;
+  condition: boolean;
+  errorMessage: string;
+};
 export type DispatchState = {
   setTokenAndShippingCountries: (token: CheckoutToken, countries: {}) => void;
   setValue: (name: FieldNames, value: string) => void;
   setShippingCountry: (countryCode: string) => void;
   setShippingSubDivision: (stateProvince: string) => void;
+  validateInputs: (rules: Rule[]) => boolean;
 };
 
 export type InputProps = {

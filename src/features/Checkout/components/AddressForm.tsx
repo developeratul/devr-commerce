@@ -63,7 +63,9 @@ export default function AddressForm(props: FormProps) {
   const { nextStep, prevStep } = props;
   const state = useCheckoutStateContext();
   const { setShippingCountry, setShippingSubDivision } = useCheckoutDispatchContext();
-  console.log(state.shippingOptions.isLoading);
+  const handleClick = () => {
+    nextStep();
+  };
   return (
     <AddressFormContainer>
       <Mui.Grid spacing={3} container>
@@ -99,7 +101,13 @@ export default function AddressForm(props: FormProps) {
             label: `${option.description} - ${option.price.formatted_with_symbol}`,
           }))}
         />
-        <Button fullWidth sx={{ padding: 1.5 }} variant="contained">
+        <Button
+          type="submit"
+          onClick={handleClick}
+          fullWidth
+          sx={{ padding: 1.5 }}
+          variant="contained"
+        >
           Next
         </Button>
       </Mui.Grid>

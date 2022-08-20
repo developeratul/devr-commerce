@@ -5,7 +5,7 @@ import { useRouter } from "next/router";
 import React from "react";
 import toast from "react-hot-toast";
 import Checkout from "./service";
-import { DispatchState, FieldNames, InitialState, Reducer } from "./types";
+import { DispatchState, FieldNames, InitialState, Reducer, Rule } from "./types";
 
 const initialState: InitialState = {
   isLoading: true,
@@ -18,15 +18,11 @@ const initialState: InitialState = {
   shippingStateProvince: "",
   shippingPostalZipCode: "",
   shippingCountry: "",
-  cardNum: "",
-  expMonth: "",
-  expYear: "",
-  ccv: "",
-  billingPostalZipcode: "",
   shippingCountries: {},
   shippingSubdivisions: { isLoading: true, data: {} },
   shippingOptions: { isLoading: true, data: [] },
   shippingOption: "",
+  errors: [],
 };
 
 const CheckoutStateContext = React.createContext<InitialState>(initialState);
@@ -35,6 +31,7 @@ const CheckoutDispatchContext = React.createContext<DispatchState>({
   setValue: () => null,
   setShippingCountry: () => null,
   setShippingSubDivision: () => null,
+  validateInputs: () => false,
 });
 
 const reducer: Reducer = (state = initialState, action) => {
@@ -61,6 +58,17 @@ const reducer: Reducer = (state = initialState, action) => {
     }
     case "LOAD_SHIPPING_OPTIONS": {
       return { ...state, shippingOptions: { data: action.payload.data, isLoading: false } };
+    }
+    case "THROW_ERROR": {
+      const doesErrorExist = state.errors.find((error) => error.field === action.payload.field);
+      if (!doesErrorExist) {
+        return { ...state, errors: [...state.errors, action.payload] };
+      }
+    }
+    case "REMOVE_ERROR": {
+      console.log("call in remove error");
+      const errors = state.errors.filter((error) => error.field !== action.payload.field);
+      return { ...state, errors };
     }
   }
 };
@@ -107,6 +115,22 @@ export function CheckoutProvider(props: AppProps) {
     setShippingOptions(shippingOptions);
   };
 
+  const throwError = (field: string, message: string) =>
+    dispatch({ type: "THROW_ERROR", payload: { field, message } });
+  const removeError = (field: string) => dispatch({ type: "REMOVE_ERROR", payload: { field } });
+
+  const validateInputs = (rules: Rule[]) => {
+    rules.map((rule) => {
+      if (!rule.condition) {
+        console.log("rule violated");
+        throwError(rule.field, rule.errorMessage);
+      }
+    });
+
+    const isValidated = !!state.errors.length;
+    return isValidated;
+  };
+
   const generateCheckoutToken = React.useCallback(async () => {
     try {
       if (cart?.line_items.length) {
@@ -128,7 +152,13 @@ export function CheckoutProvider(props: AppProps) {
 
   return (
     <CheckoutDispatchContext.Provider
-      value={{ setTokenAndShippingCountries, setValue, setShippingCountry, setShippingSubDivision }}
+      value={{
+        setTokenAndShippingCountries,
+        setValue,
+        setShippingCountry,
+        setShippingSubDivision,
+        validateInputs,
+      }}
     >
       <CheckoutStateContext.Provider value={state}>{children}</CheckoutStateContext.Provider>
     </CheckoutDispatchContext.Provider>
