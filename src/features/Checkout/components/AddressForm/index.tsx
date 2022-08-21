@@ -1,8 +1,8 @@
 import * as Mui from "@mui/material";
 import { SelectChangeEvent } from "@mui/material";
 import { ChangeEvent, FormEvent } from "react";
-import { useCheckoutDispatchContext, useCheckoutStateContext } from "../Provider";
-import { ButtonProps, FieldNames, FormProps, InputProps, SelectProps } from "../types";
+import { useCheckoutDispatchContext, useCheckoutStateContext } from "../../Provider";
+import { ButtonProps, FieldNames, FormProps, InputProps, SelectProps } from "../../types";
 
 const Input = (props: InputProps) => {
   const { label, name } = props;

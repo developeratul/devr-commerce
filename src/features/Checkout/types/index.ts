@@ -1,4 +1,5 @@
 import { AppProps } from "@/types";
+import { CheckoutCaptureResponse } from "@chec/commerce.js/types/checkout-capture-response";
 import { CheckoutToken } from "@chec/commerce.js/types/checkout-token";
 import { ShippingMethod } from "@chec/commerce.js/types/shipping-method";
 import * as Mui from "@mui/material";
@@ -24,6 +25,7 @@ export type InitialState = {
   shippingSubdivisions: { isLoading: boolean; data: {} };
   shippingOptions: { isLoading: boolean; data: ShippingMethod[] };
   shippingOption: string;
+  order: CheckoutCaptureResponse | null;
   errors: Error[];
 };
 
@@ -36,7 +38,8 @@ export type FieldNames =
   | "shippingStateProvince"
   | "shippingPostalZipCode"
   | "shippingCountry"
-  | "shippingOption";
+  | "shippingOption"
+  | "order";
 
 export type Action =
   | { type: "SET_VALUE"; payload: { name: FieldNames; value: string } }
@@ -45,7 +48,8 @@ export type Action =
   | { type: "LOAD_SUB_DIVISIONS"; payload: { data: {} } }
   | { type: "LOAD_SHIPPING_OPTIONS"; payload: { data: [] } }
   | { type: "THROW_ERROR"; payload: Error }
-  | { type: "REMOVE_ERROR"; payload: { field: string } };
+  | { type: "REMOVE_ERROR"; payload: { field: string } }
+  | { type: "SET_ORDER"; payload: CheckoutCaptureResponse };
 
 export type Reducer = React.Reducer<InitialState, Action>;
 export type Rule = {
@@ -59,6 +63,7 @@ export type DispatchState = {
   setShippingCountry: (countryCode: string) => void;
   setShippingSubDivision: (stateProvince: string) => void;
   validateInputs: () => boolean;
+  setOrder: (order: CheckoutCaptureResponse) => void;
 };
 
 export type InputProps = {

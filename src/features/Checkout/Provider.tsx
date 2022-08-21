@@ -1,5 +1,6 @@
 import { useCartStateContext } from "@/features/Cart";
 import { AppProps } from "@/types";
+import { CheckoutCaptureResponse } from "@chec/commerce.js/types/checkout-capture-response";
 import { CheckoutToken } from "@chec/commerce.js/types/checkout-token";
 import { useRouter } from "next/router";
 import React from "react";
@@ -23,6 +24,7 @@ const initialState: InitialState = {
   shippingSubdivisions: { isLoading: true, data: {} },
   shippingOptions: { isLoading: true, data: [] },
   shippingOption: "",
+  order: null,
   errors: [],
 };
 
@@ -33,6 +35,7 @@ const CheckoutDispatchContext = React.createContext<DispatchState>({
   setShippingCountry: () => null,
   setShippingSubDivision: () => null,
   validateInputs: () => false,
+  setOrder: () => null,
 });
 
 const reducer: Reducer = (state = initialState, action) => {
@@ -71,6 +74,9 @@ const reducer: Reducer = (state = initialState, action) => {
       const errors = state.errors.filter((error) => error.field !== action.payload.field);
       return { ...state, errors };
     }
+    case "SET_ORDER": {
+      return { ...state, order: action.payload };
+    }
   }
 };
 
@@ -92,6 +98,9 @@ export function CheckoutProvider(props: AppProps) {
   const setSubDivisions = (data: {}) => dispatch({ type: "LOAD_SUB_DIVISIONS", payload: { data } });
   const setShippingOptions = (data: []) =>
     dispatch({ type: "LOAD_SHIPPING_OPTIONS", payload: { data } });
+
+  const setOrder = (order: CheckoutCaptureResponse) =>
+    dispatch({ type: "SET_ORDER", payload: order });
 
   const setShippingCountry = async (countryCode: string) => {
     setValue("shippingCountry", countryCode);
@@ -170,6 +179,7 @@ export function CheckoutProvider(props: AppProps) {
         setShippingCountry,
         setShippingSubDivision,
         validateInputs,
+        setOrder,
       }}
     >
       <CheckoutStateContext.Provider value={state}>{children}</CheckoutStateContext.Provider>

@@ -26,7 +26,7 @@ export function CartProvider(props: CartProviderProps) {
   const { children } = props;
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
-  const setCart = (payload: Cart) => dispatch({ type: "SET_CART", payload });
+  const setCart = (payload: Cart | null) => dispatch({ type: "SET_CART", payload });
 
   const getCart = React.useCallback(async () => {
     try {

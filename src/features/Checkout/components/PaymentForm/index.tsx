@@ -2,18 +2,20 @@ import { useTheme } from "@/providers/Theme";
 import { Flex } from "@/styles";
 import { CheckoutCapture } from "@chec/commerce.js/types/checkout-capture";
 import Button from "@mui/lab/LoadingButton";
-import { Alert, AlertTitle, Box, styled } from "@mui/material";
+import { Alert, AlertTitle, Box, Divider, styled, Typography } from "@mui/material";
 import { CardElement, Elements, ElementsConsumer } from "@stripe/react-stripe-js";
 import { loadStripe, Stripe, StripeElements, StripeElementStyle } from "@stripe/stripe-js";
 import { FormEvent, useState } from "react";
-import { useCheckoutStateContext } from "../Provider";
-import Checkout from "../service";
-import { FormProps } from "../types";
+import { useCheckoutDispatchContext, useCheckoutStateContext } from "../../Provider";
+import Checkout from "../../service";
+import { FormProps } from "../../types";
+import Review from "./Review";
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLIC_API_KEY);
 
 const CardElementContainer = styled(Box)({
   marginBottom: 30,
+  marginTop: 30,
 });
 const ButtonsContainer = styled(Flex)({
   justifyContent: "space-between",
@@ -24,6 +26,7 @@ export default function PaymentForm(props: FormProps) {
   const [isProcessing, setIsProcessing] = useState(false);
   const [checkoutError, setCheckoutError] = useState("");
   const state = useCheckoutStateContext();
+  const { setOrder } = useCheckoutDispatchContext();
   const theme = useTheme();
 
   const handleSubmit = async (
@@ -64,7 +67,8 @@ export default function PaymentForm(props: FormProps) {
         },
       };
 
-      await Checkout.captureCheckout(state.checkoutToken?.id as string, orderData);
+      const order = await Checkout.captureCheckout(state.checkoutToken?.id as string, orderData);
+      setOrder(order);
       nextStep();
     } catch (err: any) {
       setCheckoutError(err.message);
@@ -88,7 +92,12 @@ export default function PaymentForm(props: FormProps) {
       <ElementsConsumer>
         {({ elements, stripe }) => (
           <form onSubmit={(e) => handleSubmit(e, elements, stripe)}>
+            <Review />
+            <Divider />
             <CardElementContainer>
+              <Typography gutterBottom mb={3} variant="h6" color="primary">
+                Payment Method
+              </Typography>
               <CardElement onReady={(e) => e.focus()} options={{ style: cardElementStyles }} />
             </CardElementContainer>
             <ButtonsContainer>
