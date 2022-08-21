@@ -58,7 +58,7 @@ export type DispatchState = {
   setValue: (name: FieldNames, value: string) => void;
   setShippingCountry: (countryCode: string) => void;
   setShippingSubDivision: (stateProvince: string) => void;
-  validateInputs: (rules: Rule[]) => boolean;
+  validateInputs: () => boolean;
 };
 
 export type InputProps = {

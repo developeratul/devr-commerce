@@ -4,6 +4,7 @@ import { CheckoutToken } from "@chec/commerce.js/types/checkout-token";
 import { useRouter } from "next/router";
 import React from "react";
 import toast from "react-hot-toast";
+import validator from "validator";
 import Checkout from "./service";
 import { DispatchState, FieldNames, InitialState, Reducer, Rule } from "./types";
 
@@ -63,7 +64,7 @@ const reducer: Reducer = (state = initialState, action) => {
       const doesErrorExist = state.errors.find((error) => error.field === action.payload.field);
       if (!doesErrorExist) {
         return { ...state, errors: [...state.errors, action.payload] };
-      }
+      } else return state;
     }
     case "REMOVE_ERROR": {
       console.log("call in remove error");
@@ -117,17 +118,28 @@ export function CheckoutProvider(props: AppProps) {
 
   const throwError = (field: string, message: string) =>
     dispatch({ type: "THROW_ERROR", payload: { field, message } });
-  const removeError = (field: string) => dispatch({ type: "REMOVE_ERROR", payload: { field } });
+  const removeError = (field: FieldNames) => dispatch({ type: "REMOVE_ERROR", payload: { field } });
 
-  const validateInputs = (rules: Rule[]) => {
+  const validateInputs = () => {
+    let isValidated = true;
+
+    const rules: Rule[] = [
+      {
+        field: "email",
+        condition: validator.isEmail(state.email),
+        errorMessage: "Please enter a valid email",
+      },
+    ];
+
     rules.map((rule) => {
       if (!rule.condition) {
-        console.log("rule violated");
+        isValidated = false;
         throwError(rule.field, rule.errorMessage);
+      } else {
+        removeError("email");
       }
     });
 
-    const isValidated = !!state.errors.length;
     return isValidated;
   };
 

@@ -1,6 +1,6 @@
 import * as Mui from "@mui/material";
 import { SelectChangeEvent } from "@mui/material";
-import { ChangeEvent } from "react";
+import { ChangeEvent, FormEvent } from "react";
 import { useCheckoutDispatchContext, useCheckoutStateContext } from "../Provider";
 import { ButtonProps, FieldNames, FormProps, InputProps, SelectProps } from "../types";
 
@@ -10,17 +10,21 @@ const Input = (props: InputProps) => {
   const state = useCheckoutStateContext();
   const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
     setValue(e.target.name as FieldNames, e.target.value);
+  const isError = !!state.errors.find((error) => error.field === name);
+  const error = state.errors.find((error) => error.field === name);
   return (
     <Mui.Grid item xs={12} sm={6}>
-      <Mui.TextField
-        fullWidth
-        required
-        name={name}
-        label={label}
-        value={state[name]}
-        onChange={handleChange}
-        margin="dense"
-      />
+      <Mui.FormControl variant="outlined" fullWidth required error={isError} margin="dense">
+        <Mui.TextField
+          label={label}
+          required
+          error={isError}
+          name={name}
+          value={state[name]}
+          onChange={handleChange}
+        />
+        <Mui.FormHelperText>{error?.message}</Mui.FormHelperText>
+      </Mui.FormControl>
     </Mui.Grid>
   );
 };
@@ -60,14 +64,18 @@ const Button = (props: ButtonProps) => {
 
 const AddressFormContainer = Mui.styled(Mui.Box)({});
 export default function AddressForm(props: FormProps) {
-  const { nextStep, prevStep } = props;
+  const { nextStep } = props;
   const state = useCheckoutStateContext();
-  const { setShippingCountry, setShippingSubDivision } = useCheckoutDispatchContext();
-  const handleClick = () => {
-    nextStep();
+  const { setShippingCountry, setShippingSubDivision, validateInputs } =
+    useCheckoutDispatchContext();
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const isValidated = validateInputs();
+    isValidated && nextStep();
   };
   return (
-    <AddressFormContainer>
+    <AddressFormContainer component="form" onSubmit={handleSubmit}>
       <Mui.Grid spacing={3} container>
         <Input label="First Name" name="firstName" />
         <Input label="Last Name" name="lastName" />
@@ -101,13 +109,7 @@ export default function AddressForm(props: FormProps) {
             label: `${option.description} - ${option.price.formatted_with_symbol}`,
           }))}
         />
-        <Button
-          type="submit"
-          onClick={handleClick}
-          fullWidth
-          sx={{ padding: 1.5 }}
-          variant="contained"
-        >
+        <Button type="submit" fullWidth sx={{ padding: 1.5 }} variant="contained">
           Next
         </Button>
       </Mui.Grid>
