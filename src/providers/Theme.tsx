@@ -4,7 +4,9 @@ import { AppProps } from "@/types";
 import storage from "@/utils/storage";
 import type { PaletteMode } from "@mui/material";
 import { ThemeProvider as MuiThemeProvider } from "@mui/material";
-import { createContext, useContext, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
+
+const STORAGE_KEY = "color-mode";
 
 type InitialState = { toggleColorMode: () => void; currentMode: PaletteMode };
 export const ColorModeContext = createContext<InitialState>({
@@ -20,7 +22,7 @@ export default function ThemeProvider(props: AppProps) {
       toggleColorMode: () => {
         setMode((prevMode) => {
           const newMode = prevMode === "light" ? "dark" : "light";
-          storage.setItem("color-mode", newMode);
+          storage.setItem(STORAGE_KEY, newMode);
           return newMode;
         });
       },
@@ -28,6 +30,9 @@ export default function ThemeProvider(props: AppProps) {
     }),
     [mode]
   );
+  useEffect(() => {
+    setMode(storage.getItem(STORAGE_KEY) ?? "dark");
+  }, []);
   return (
     <ColorModeContext.Provider value={values}>
       <MuiThemeProvider theme={theme}>{children}</MuiThemeProvider>

@@ -28,9 +28,11 @@ export default function Header() {
     <StyledAppBar position="sticky">
       <StyledToolbar>
         <LeftContent>
-          <Mui.Typography variant="h6" color="text.primary">
-            DevR Commerce
-          </Mui.Typography>
+          <Link href="/" passHref scroll>
+            <Mui.Typography variant="h6" sx={{ cursor: "pointer" }} color="text.primary">
+              DevR Commerce
+            </Mui.Typography>
+          </Link>
           <Mui.IconButton color="primary" onClick={toggleColorMode}>
             {currentMode === "light" ? <DarkMode /> : <LightMode />}
           </Mui.IconButton>

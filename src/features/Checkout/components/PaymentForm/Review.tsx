@@ -23,11 +23,11 @@ export default function Review() {
             src={item.image?.url as string}
             alt={item.name}
             loading="eager"
-            width={75}
-            height={75}
+            width={70}
+            height={70}
             style={{ borderRadius: 2 }}
           />
-          <Mui.Box width="100%">
+          <Mui.Box flex={1} width="100%">
             <Mui.Typography gutterBottom noWrap>
               {item.name}
             </Mui.Typography>
