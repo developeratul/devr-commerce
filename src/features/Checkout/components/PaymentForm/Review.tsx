@@ -10,6 +10,14 @@ const ReviewContainer = Mui.styled(Mui.Box)({
   flexDirection: "column",
   gap: 20,
 });
+const ImageContainer = Mui.styled(Mui.Box)({
+  width: 75,
+  height: 75,
+  overflow: "hidden",
+  borderRadius: 2,
+  alignSelf: "flex-start",
+});
+const SingleReview = Mui.styled(Flex)(({ theme }) => ({}));
 export default function Review() {
   const { checkoutToken } = useCheckoutStateContext();
   return (
@@ -18,19 +26,18 @@ export default function Review() {
         Order Summary
       </Mui.Typography>
       {checkoutToken?.line_items.map((item) => (
-        <Flex key={item.id} gap={3} width="100%">
-          <Image
-            src={item.image?.url as string}
-            alt={item.name}
-            loading="eager"
-            width={70}
-            height={70}
-            style={{ borderRadius: 2 }}
-          />
-          <Mui.Box flex={1} width="100%">
-            <Mui.Typography gutterBottom noWrap>
-              {item.name}
-            </Mui.Typography>
+        <SingleReview key={item.id} gap={2}>
+          <ImageContainer>
+            <Image
+              src={item.image?.url as string}
+              alt={item.name}
+              loading="eager"
+              width="100%"
+              height="100%"
+            />
+          </ImageContainer>
+          <Mui.Box flex={1}>
+            <Mui.Typography gutterBottom>{item.name}</Mui.Typography>
             <Mui.Typography variant="body2" color="secondary" gutterBottom>
               {item.price.formatted_with_symbol}
             </Mui.Typography>
@@ -38,7 +45,7 @@ export default function Review() {
               Quantity: {item.quantity}
             </Mui.Typography>
           </Mui.Box>
-        </Flex>
+        </SingleReview>
       ))}
       <Flex justifyContent="space-between" alignItems="center">
         <Mui.Typography>Total:</Mui.Typography>

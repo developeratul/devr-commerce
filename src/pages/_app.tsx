@@ -1,4 +1,4 @@
-import { Layout, NextProgress, Toaster } from "@/components";
+import { Head, Layout, NextProgress, Toaster } from "@/components";
 import { CartProvider } from "@/features/Cart";
 import ThemeProvider from "@/providers/Theme";
 import createEmotionCache from "@/utils/createEmotionCache";
@@ -22,6 +22,7 @@ export default function App(props: ExtendedAppProps) {
         <Toaster />
         <CartProvider>
           <Layout>
+            <Head />
             <Component {...pageProps} />
           </Layout>
         </CartProvider>

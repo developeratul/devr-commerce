@@ -12,14 +12,20 @@ const steps = [
   { label: "Confirmation", component: Confirmation },
 ];
 
-const CheckoutFormContainer = styled(Paper)({
+const CheckoutFormContainer = styled(Paper)(({ theme }) => ({
   width: "100%",
   maxWidth: 700,
   padding: 50,
-});
-const StyledStepper = styled(Stepper)({
+  [theme.breakpoints.down("sm")]: {
+    padding: 30,
+  },
+}));
+const StyledStepper = styled(Stepper)(({ theme }) => ({
   marginBottom: 30,
-});
+  [theme.breakpoints.down("sm")]: {
+    display: "none",
+  },
+}));
 
 export default function CheckoutForm() {
   const [currentStep, setCurrentStep] = useState(0);

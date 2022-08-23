@@ -7,7 +7,7 @@ import React from "react";
 export default class CustomDocument extends Document {
   render() {
     return (
-      <Html lang="en" className="dark">
+      <Html lang="en">
         <Head>
           <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
           <meta httpEquiv="X-UA-Compatible" content="IE=7" />
@@ -20,7 +20,7 @@ export default class CustomDocument extends Document {
           <meta name="theme-color" content={darkTheme.palette.primary.main ?? "#000"} />
           <link rel="shortcut icon" href="/favicon.ico" />
         </Head>
-        <body className="dark:bg-main dark:text-gray-50 font-poppins">
+        <body>
           <Main />
           <NextScript />
         </body>

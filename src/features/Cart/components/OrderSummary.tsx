@@ -7,7 +7,6 @@ import Cart from "../service";
 
 const OrderSummaryContainer = Mui.styled(Mui.Paper)(({ theme }) => ({
   flex: 1,
-  width: "100%",
   maxWidth: 350,
   boxShadow: "none",
   padding: "50px 20px",

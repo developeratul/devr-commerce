@@ -22,7 +22,7 @@ export function ProductList(props: ProductListProps) {
         />
         <Grid container columns={12} spacing={5}>
           {products.map((product) => (
-            <Grid item key={product.id} xs={3}>
+            <Grid item key={product.id} xs={12} sm={6} md={4} lg={3}>
               <SingleProduct product={product} />
             </Grid>
           ))}

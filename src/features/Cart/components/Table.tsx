@@ -47,7 +47,7 @@ export default function CartTable() {
   }
   return (
     <StyledTableContainer>
-      <Mui.Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Mui.Table aria-label="Cart table">
         <Mui.TableHead>
           <Mui.TableRow>
             <StyledTableCell>Product Details</StyledTableCell>

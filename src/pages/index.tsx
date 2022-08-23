@@ -1,4 +1,4 @@
-import { HeroSection, ProductList } from "@/components";
+import { Head, HeroSection, ProductList } from "@/components";
 import client from "@/lib/commerce";
 import { GetServerSideProps, InferGetServerSidePropsType } from "next";
 
@@ -6,6 +6,7 @@ export default function HomePage(props: InferGetServerSidePropsType<typeof getSe
   const { products } = props;
   return (
     <div>
+      <Head title="Home" />
       <HeroSection />
       <ProductList products={products} />
     </div>
