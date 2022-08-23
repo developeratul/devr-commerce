@@ -20,16 +20,17 @@ const ImageContainer = Mui.styled(Mui.Box)({
 const SingleReview = Mui.styled(Flex)(({ theme }) => ({}));
 export default function Review() {
   const { checkoutToken } = useCheckoutStateContext();
+  console.log(checkoutToken?.line_items);
   return (
     <ReviewContainer>
       <Mui.Typography variant="h5" gutterBottom color="primary">
         Order Summary
       </Mui.Typography>
-      {checkoutToken?.line_items.map((item) => (
+      {checkoutToken?.line_items.map((item: any) => (
         <SingleReview key={item.id} gap={2}>
           <ImageContainer>
             <Image
-              src={item.image?.url as string}
+              src={item.image?.url}
               alt={item.name}
               loading="eager"
               width="100%"
