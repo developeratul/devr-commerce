@@ -6,15 +6,15 @@ import { Box, styled } from "@mui/material";
 const CartContentWrapper = styled(Flex)(({ theme }) => ({
   flex: 1,
 }));
-const CartItems = styled(Box)(({ theme }) => ({
+const CartItems = styled(Box)({
   flex: 1,
-  padding: "50px 30px",
-}));
+  overflowX: "auto"
+});
 export default function CartPage() {
   return (
-    <CartContentWrapper>
+    <CartContentWrapper flexDirection={{ xs: "column", lg: "row" }}>
       <Head title="Shopping Cart" />
-      <CartItems>
+      <CartItems padding={{ xs: 2, md: 5 }}>
         <SectionTitle
           title="Shopping Cart"
           subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit."

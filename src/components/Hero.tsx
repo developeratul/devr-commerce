@@ -9,8 +9,7 @@ const FlexContainer = styled(Box)(({ theme }) => ({
   display: "flex",
   justifyContent: "space-between",
   alignItems: "center",
-  minHeight: "90vh",
-  padding: "50px 0",
+  padding: "100px 0",
   gap: 5,
   [theme.breakpoints.down("md")]: {
     flexDirection: "column",
@@ -26,7 +25,7 @@ const LeftContent = styled(Box)(({ theme }) => ({
 }));
 const RightContent = styled(Box)(({ theme }) => ({
   [theme.breakpoints.down("lg")]: {
-    maxWidth: "500px",
+    maxWidth: "400px",
   },
 }));
 export default function Hero() {
@@ -37,7 +36,7 @@ export default function Hero() {
           <Typography
             gutterBottom
             color="primary"
-            sx={{ typography: { sm: "h4", xs: "h4", xl: "h2", md: "h2" } }}
+            sx={{ typography: { sm: "h4", xs: "h4", md: "h2" } }}
             component="h1"
           >
             DevR Commerce
@@ -73,8 +72,8 @@ export default function Hero() {
             </Button>
           </Flex>
         </LeftContent>
-        <RightContent>
-          <Image src={HeroImage} alt="Hero section illustration" loading="eager" />
+        <RightContent display={{ xs: "none", md: "block" }}>
+          <Image src={HeroImage} alt="Hero section illustration" loading="lazy" />
         </RightContent>
       </FlexContainer>
     </Container>
