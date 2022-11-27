@@ -25,7 +25,7 @@ export default function Footer() {
             LinkComponent="a"
             target="_blank"
             referrerPolicy="no-referrer"
-            href="https://github.com/ratul-devr"
+            href="https://github.com/developeratul"
           >
             <GitHub />
           </Mui.IconButton>
@@ -33,7 +33,7 @@ export default function Footer() {
             LinkComponent={"a"}
             target="_blank"
             referrerPolicy="no-referrer"
-            href="https://twitter.com/Ratul_devR"
+            href="https://twitter.com/developeratul"
           >
             <Twitter />
           </Mui.IconButton>

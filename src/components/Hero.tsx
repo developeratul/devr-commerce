@@ -18,7 +18,6 @@ const FlexContainer = styled(Box)(({ theme }) => ({
 const LeftContent = styled(Box)(({ theme }) => ({
   width: "100%",
   maxWidth: "600px",
-  [theme.breakpoints.down("md")]: {},
   [theme.breakpoints.down("md")]: {
     marginBottom: 50,
   },
@@ -73,7 +72,7 @@ export default function Hero() {
           </Flex>
         </LeftContent>
         <RightContent display={{ xs: "none", md: "block" }}>
-          <Image src={HeroImage} alt="Hero section illustration" loading="lazy" />
+          <Image src={HeroImage} alt="Hero section illustration" />
         </RightContent>
       </FlexContainer>
     </Container>
