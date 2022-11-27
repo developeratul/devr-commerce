@@ -20,9 +20,9 @@ export default function App(props: ExtendedAppProps) {
         <CssBaseline enableColorScheme />
         <NextProgress />
         <Toaster />
-        <Head />
         <CartProvider>
           <Layout>
+            <Head />
             <Component {...pageProps} />
           </Layout>
         </CartProvider>
